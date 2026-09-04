@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+/* ============================================================
+   AYRUS DESIGN SYSTEM — dark-first, purple accent
+   All pairs below were contrast-checked against WCAG 2.1 AA.
+   ============================================================ */
+@theme {
+  /* Surfaces */
+  --color-bg: #0a0a0a;
+  --color-bg-alt: #111111;
+  --color-surface: #141419;
+  --color-surface-2: #1c1c22;
+  --color-line: #26262e;        /* decorative dividers */
+  --color-line-strong: #6b6b78; /* control boundaries — 3.5:1 on surface */
+
+  /* Text — verified on --color-bg */
+  --color-ink: #f5f5f5;         /* 18.16:1  AAA */
+  --color-ink-muted: #a1a1aa;   /*  7.72:1  AAA */
+
+  /* Brand */
+  --color-brand: #cb6ce6;       /*  6.44:1 on bg — AA for text/links */
+  --color-brand-deep: #8e4fe0;  /*  4.83:1 vs white — AA when white sits on it */
+  --color-brand-soft: #e9b8f5;  /* 11.92:1 on bg — focus ring, chips */
+  --color-brand-ink: #0a0a0a;   /*  6.44:1 on brand — REQUIRED text color on purple fills */
+
+  --color-success: #4ade80;
+  --color-warn: #fbbf24;
+
+  /* Type */
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  /* Rhythm — density 5/10 (standard) */
+  --spacing-section: 5.5rem;
+
+  --radius-card: 1rem;
+  --radius-pill: 999px;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Keeps anchored headings clear of the sticky navbar so focus is never obscured */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Single, consistent focus treatment for every interactive control */
+  :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-brand-soft);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-brand);
+    color: var(--color-brand-ink);
+  }
+}
+
+@layer utilities {
+  .container-page {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    /* Gutters widen with the viewport */
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-page { padding-inline: 2rem; }
+  }
+
+  @media (min-width: 1280px) {
+    .container-page { padding-inline: 2.5rem; }
+  }
+
+  .text-gradient {
+    background: linear-gradient(100deg, #f5f5f5 0%, var(--color-brand-soft) 45%, var(--color-brand) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Glassmorphism card — opaque enough to keep 4.5:1 body text.
+     Deliberately no backdrop-filter: these cards sit on a flat dark
+     background, where blurring the backdrop is visually indistinguishable
+     but forces a compositing layer per card. Real backdrop blur is reserved
+     for the navbar, which actually overlaps scrolling content. */
+  .glass {
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+    border: 1px solid rgba(255, 255, 255, 0.09);
+  }
+
+  .glass-brand {
+    background: linear-gradient(160deg, rgba(203, 108, 230, 0.16), rgba(142, 79, 224, 0.05));
+    border: 1px solid rgba(203, 108, 230, 0.3);
+  }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .glow-brand {
+    box-shadow: 0 0 0 1px rgba(203, 108, 230, 0.28), 0 18px 60px -18px rgba(203, 108, 230, 0.55);
+  }
+}
+
+/* ============================================================
+   LOAD-IN (above the fold)
+   Pure CSS, so the hero — which contains the LCP element — never waits
+   for hydration to become visible. A JS-gated reveal here would push
+   LCP out past the 2.5s budget.
+   ============================================================ */
+@keyframes rise {
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+.rise {
+  animation: rise 0.55s var(--ease-out-soft) both;
+  animation-delay: var(--rise-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; }
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   Content is present in the server-rendered HTML and only the
+   opacity/transform is animated, so crawlers and no-JS visitors
+   always get the final state.
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition:
+    opacity 0.5s var(--ease-out-soft),
+    transform 0.5s var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* No-JS fallback lives in a <noscript><style> in app/layout.tsx, so it can
+   never desync the server and client markup the way a class swap would. */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 38s linear infinite;
+}
+
+/* Auto-scrolling logo strip must stop on hover and on focus */
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
