@@ -9,13 +9,13 @@
 export const site = {
   name: "Ayrus Digital Teknologi",
   shortName: "Ayrus",
-  url: "https://ayrusdigital.com",
+  url: "https://ayrusdigital.my.id",
   locale: "id_ID",
   founded: "2021",
   tagline: "Software house untuk UMKM Indonesia",
   description:
     "Ayrus Digital Teknologi membangun aplikasi custom untuk UMKM Indonesia — aplikasi laundry, website bisnis, dan sistem POS. Berdiri sejak 2021.",
-  email: "halo@ayrusdigital.com",
+  email: "muhammadsurya2812@gmail.com",
   phoneDisplay: "+62 857-1735-8096",
   whatsapp: "6285717358096",
   hours: "Setiap Hari, 09.00–18.00 WIB",
