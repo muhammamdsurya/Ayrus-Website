@@ -16,8 +16,8 @@ export const site = {
   description:
     "Ayrus Digital Teknologi membangun aplikasi custom untuk UMKM Indonesia — aplikasi laundry, website bisnis, dan sistem POS. Berdiri sejak 2021.",
   email: "muhammadsurya2812@gmail.com",
-  phoneDisplay: "+62 857-1735-8096",
-  whatsapp: "6285717358096",
+  phoneDisplay: "+62 819-3276-4494",
+  whatsapp: "6281932764494",
   hours: "Setiap Hari, 09.00–18.00 WIB",
   address: {
     street: "Jl. Raya Condet No. 21",
