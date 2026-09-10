@@ -69,7 +69,7 @@ export default function BlogIndex() {
           <Rise delay={120}>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">
               Panduan praktis yang kami tulis dari pengalaman mendampingi usaha kecil dan menengah
-              di Indonesia — tanpa jargon teknis yang tidak perlu.
+              di Indonesia tanpa jargon teknis yang tidak perlu.
             </p>
           </Rise>
         </div>

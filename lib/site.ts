@@ -35,7 +35,7 @@ export function waLink(message: string) {
 export const waMessages = {
   general: "Halo Ayrus, saya ingin konsultasi gratis soal kebutuhan aplikasi bisnis saya.",
   custom: "Halo Ayrus, saya ingin konsultasi soal pembuatan aplikasi custom.",
-  nectarpos: "Halo Ayrus, saya ingin mencoba demo NectarPOS untuk usaha saya.",
+  nectarpos: "Halo Ayrus, saya ingin mencoba demo KaselaPOS untuk usaha saya.",
 } as const;
 
 /**
@@ -45,7 +45,7 @@ export const waMessages = {
  */
 export const nav = [
   { label: "Layanan", href: "/#layanan", section: "layanan", match: "/layanan" },
-  { label: "NectarPOS", href: "/produk/nectarpos", match: "/produk/nectarpos" },
+  { label: "KaselaPOS", href: "/produk/nectarpos", match: "/produk/nectarpos" },
   { label: "Portofolio", href: "/#portofolio", section: "portofolio", match: "/portofolio" },
   { label: "Tentang Kami", href: "/#tentang", section: "tentang" },
   { label: "Artikel", href: "/blog", match: "/blog" },

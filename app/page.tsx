@@ -159,7 +159,7 @@ function Hero() {
                 <ArrowRight size={18} aria-hidden="true" />
               </ButtonLink>
               <ButtonLink href="/produk/nectarpos" variant="secondary" className="px-7">
-                Coba NectarPOS
+                Coba KaselaPOS
               </ButtonLink>
             </div>
           </Rise>
@@ -299,10 +299,10 @@ function NectarBanner() {
                   Produk kami
                 </span>
                 <h2 id="nectar-banner" className="mt-5 text-3xl font-extrabold sm:text-4xl">
-                  NectarPOS — kasir online, langsung dari browser
+                  KaselaPOS kasir online, langsung dari browser
                 </h2>
                 <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-muted">
-                  Kalau Anda belum butuh sistem custom, mulai saja dari NectarPOS. Sistem kasir
+                  Kalau Anda belum butuh sistem custom, mulai saja dari KaselaPOS. Sistem kasir
                   berlangganan yang bisa dipakai dari HP, tablet, atau laptop tanpa perlu install
                   apa pun.
                 </p>
@@ -318,7 +318,7 @@ function NectarBanner() {
 
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
                 <ButtonLink href="/produk/nectarpos" className="px-7 whitespace-nowrap">
-                  Lihat NectarPOS
+                  Lihat KaselaPOS
                   <ArrowRight size={18} aria-hidden="true" />
                 </ButtonLink>
                 <ButtonLink

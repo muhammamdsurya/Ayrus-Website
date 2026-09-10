@@ -540,7 +540,7 @@ export const services: ServiceDetail[] = [
     timeline: "5–8 minggu",
     intro: [
       "Aplikasi kasir siap pakai cocok untuk usaha yang alurnya standar. Begitu Anda punya aturan sendiri — paket bundling, harga khusus pelanggan langganan, deposit di muka, atau perhitungan komisi kasir — aplikasi jadi mulai terasa memaksa.",
-      "Sistem POS custom dibangun mengikuti alur outlet Anda dan tersambung langsung ke stok serta pembukuan. Kalau kebutuhan Anda masih umum, kami akan jujur menyarankan NectarPOS yang berlangganan — jauh lebih hemat untuk memulai.",
+      "Sistem POS custom dibangun mengikuti alur outlet Anda dan tersambung langsung ke stok serta pembukuan. Kalau kebutuhan Anda masih umum, kami akan jujur menyarankan KaselaPOS yang berlangganan — jauh lebih hemat untuk memulai.",
     ],
     forWho: [
       "Alur transaksi Anda punya aturan yang tidak ada di aplikasi kasir umum",
@@ -640,8 +640,8 @@ export const services: ServiceDetail[] = [
     ],
     faqs: [
       {
-        q: "Kapan sebaiknya memilih POS custom dan kapan NectarPOS?",
-        a: "Kalau kebutuhan Anda masih umum — catat penjualan, kelola stok, lihat laporan — NectarPOS jauh lebih hemat dan bisa dipakai hari ini juga. POS custom masuk akal ketika ada aturan khusus yang tidak bisa diakomodasi sistem siap pakai.",
+        q: "Kapan sebaiknya memilih POS custom dan kapan KaselaPOS?",
+        a: "Kalau kebutuhan Anda masih umum — catat penjualan, kelola stok, lihat laporan. KaselaPOS jauh lebih hemat dan bisa dipakai hari ini juga. POS custom masuk akal ketika ada aturan khusus yang tidak bisa diakomodasi sistem siap pakai.",
       },
       {
         q: "Apakah tetap bisa dipakai saat internet mati?",

@@ -42,7 +42,7 @@ export const caseStudies: CaseStudy[] = [
     duration: "8 minggu",
     serviceSlug: "custom-software",
     image: {
-      src: "/images/portofolio-laundry.jpg",
+      src: "/images/laundry.jpg",
       alt: "Petugas laundry memasukkan cucian ke dalam mesin cuci di sebuah gerai",
     },
     metaTitle: "Studi Kasus: Sistem Laundry Multi-Cabang — Laundry Bersih Wangi",
@@ -59,7 +59,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: "Harga per kilogram dan per satuan",
-        desc: "Sistem menghitung cuci kiloan, item satuan seperti bed cover, dan tarif ekspres dalam satu nota — termasuk harga khusus untuk pelanggan langganan.",
+        desc: "Sistem menghitung cuci kiloan, item satuan seperti bed cover, dan tarif ekspres dalam satu nota termasuk harga khusus untuk pelanggan langganan.",
       },
       {
         title: "Notifikasi WhatsApp otomatis",
@@ -98,14 +98,14 @@ export const caseStudies: CaseStudy[] = [
     duration: "6 minggu",
     serviceSlug: "sistem-pos",
     image: {
-      src: "/images/nectarpos-kafe.jpg",
+      src: "/images/pos-kafe.jpg",
       alt: "Barista mencatat pesanan lewat tablet kasir di meja bar kedai kopi",
     },
     metaTitle: "Studi Kasus: Sistem Kasir Kedai Kopi — Kopi Ruang Tengah",
     metaDescription:
       "Bagaimana Ayrus merancang antarmuka kasir yang memangkas waktu pelatihan staf baru dari beberapa hari menjadi satu hari di sebuah kedai kopi.",
     challenge: [
-      "Kedai ini punya perputaran staf paruh waktu yang tinggi. Setiap kali ada barista baru, pemilik harus mendampingi dua sampai tiga hari sampai kasirnya lancar — waktu yang sebenarnya dibutuhkan untuk mengurus hal lain.",
+      "Kedai ini punya perputaran staf paruh waktu yang tinggi. Setiap kali ada barista baru, pemilik harus mendampingi dua sampai tiga hari sampai kasirnya lancar waktu yang sebenarnya dibutuhkan untuk mengurus hal lain.",
       "Menu juga punya banyak varian: ukuran, jenis susu, level gula, dan tambahan. Di sistem lama semuanya diketik manual, jadi pesanan sering salah saat jam ramai.",
     ],
     solution: [
@@ -154,7 +154,7 @@ export const caseStudies: CaseStudy[] = [
     duration: "4 minggu",
     serviceSlug: "website",
     image: {
-      src: "/images/portofolio-bangunan.jpg",
+      src: "/images/kontraktor.png",
       alt: "Rak berisi berbagai material dan perkakas di dalam toko bangunan",
     },
     metaTitle: "Studi Kasus: Website Katalog Toko Bangunan — Maju Jaya",
@@ -210,14 +210,14 @@ export const caseStudies: CaseStudy[] = [
     duration: "7 minggu",
     serviceSlug: "sistem-pos",
     image: {
-      src: "/images/portofolio-apotek.jpg",
+      src: "/images/pharmacy.webp",
       alt: "Interior apotek modern dengan rak obat tertata rapi",
     },
     metaTitle: "Studi Kasus: Sistem Kasir Apotek dengan Kontrol Kedaluwarsa",
     metaDescription:
       "Bagaimana sistem kasir dengan pelacakan nomor batch dan tanggal kedaluwarsa menurunkan kerugian stok apotek hingga 75%.",
     challenge: [
-      "Obat dicatat hanya sampai level nama produk, bukan per batch. Akibatnya tanggal kedaluwarsa tidak terpantau dan baru ketahuan saat stok opname tiga bulanan — saat itu obatnya sudah tidak bisa dijual.",
+      "Obat dicatat hanya sampai level nama produk, bukan per batch. Akibatnya tanggal kedaluwarsa tidak terpantau dan baru ketahuan saat stok opname tiga bulanan saat itu obatnya sudah tidak bisa dijual.",
       "Petugas juga harus memisahkan penjualan obat bebas dan obat dengan resep secara manual untuk keperluan pelaporan.",
     ],
     solution: [
@@ -259,7 +259,7 @@ export const caseStudies: CaseStudy[] = [
     duration: "9 minggu",
     serviceSlug: "custom-software",
     image: {
-      src: "/images/portofolio-bengkel.jpg",
+      src: "/images/services.webp",
       alt: "Teknisi bengkel memeriksa mesin mobil menggunakan alat diagnostik",
     },
     metaTitle: "Studi Kasus: Sistem Antrean & Servis Bengkel — Bengkel Karya",
@@ -267,7 +267,7 @@ export const caseStudies: CaseStudy[] = [
       "Bagaimana sistem work order dengan pelacakan progres yang bisa dibuka pelanggan menurunkan telepon masuk hingga 70% di sebuah bengkel mobil.",
     challenge: [
       "Setiap kendaraan masuk dicatat di lembar kerja kertas yang berpindah tangan antar mekanik. Ketika pelanggan menelepon, resepsionis harus mencari lembarnya dulu, lalu bertanya ke mekanik yang menangani.",
-      "Estimasi biaya juga ditulis tangan, sehingga sering ada selisih antara yang dijanjikan di awal dan tagihan akhir — sumber keluhan yang paling sering muncul.",
+      "Estimasi biaya juga ditulis tangan, sehingga sering ada selisih antara yang dijanjikan di awal dan tagihan akhir sumber keluhan yang paling sering muncul.",
     ],
     solution: [
       {
@@ -308,7 +308,7 @@ export const caseStudies: CaseStudy[] = [
     duration: "7 minggu",
     serviceSlug: "aplikasi-keuangan",
     image: {
-      src: "/images/portofolio-warung.jpg",
+      src: "/images/warung.webp",
       alt: "Pemilik warung memasak pesanan di dapur rumah makan",
     },
     metaTitle: "Studi Kasus: Aplikasi Pembukuan Katering — Dapur Nusantara",

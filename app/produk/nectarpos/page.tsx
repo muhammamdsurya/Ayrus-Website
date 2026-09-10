@@ -28,9 +28,9 @@ import { FeatureCard } from "@/components/feature-card";
 import { site, waLink, waMessages } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "NectarPOS — Sistem Kasir Online Berbasis Web untuk UMKM",
+  title: "KaselaPOS Sistem Kasir Online Berbasis Web untuk UMKM",
   description:
-    "NectarPOS adalah aplikasi kasir online berbasis web. Kelola transaksi, stok, dan laporan penjualan real-time dari HP, tablet, atau laptop tanpa instalasi. Coba gratis 14 hari.",
+    "KaselaPOS adalah aplikasi kasir online berbasis web. Kelola transaksi, stok, dan laporan penjualan real-time dari HP, tablet, atau laptop tanpa instalasi. Coba gratis 14 hari.",
   keywords: [
     "sistem kasir online berbasis web",
     "aplikasi kasir online",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: `${site.url}/produk/nectarpos`,
-    title: "NectarPOS — Sistem Kasir Online Berbasis Web untuk UMKM",
+    title: "KaselaPOS — Sistem Kasir Online Berbasis Web untuk UMKM",
     description:
       "Kelola transaksi kasir Anda kapan saja, di mana saja — cukup dari browser. Coba gratis 14 hari.",
   },
@@ -77,7 +77,7 @@ const features = [
   {
     icon: BarChart3,
     title: "Laporan penjualan real-time",
-    desc: "Omzet, produk terlaris, dan jam tersibuk terlihat saat itu juga — bukan menunggu tutup buku.",
+    desc: "Omzet, produk terlaris, dan jam tersibuk terlihat saat itu juga bukan menunggu tutup buku.",
   },
   {
     icon: Store,
@@ -105,12 +105,12 @@ const features = [
 const gallery = [
   {
     src: "/images/nectarpos-kafe.jpg",
-    alt: "Barista mencatat pesanan lewat NectarPOS di tablet pada meja kasir kedai kopi",
+    alt: "Barista mencatat pesanan lewat KaselaPOS di tablet pada meja kasir kedai kopi",
     caption: "Kedai kopi — pesanan dicatat langsung dari tablet di meja bar",
   },
   {
     src: "/images/nectarpos-toko.jpg",
-    alt: "Kasir toko melayani pelanggan menggunakan NectarPOS di layar sentuh",
+    alt: "Kasir toko melayani pelanggan menggunakan KaselaPOS di layar sentuh",
     caption: "Toko ritel — kasir dan pelanggan berbagi satu layar saat konfirmasi",
   },
   {
@@ -130,7 +130,7 @@ const usage = [
     icon: UserPlus,
     step: "01",
     title: "Buat akun outlet",
-    desc: "Tim kami menyiapkan akun dan outlet pertama Anda. Anda cukup login dari browser — tidak ada yang perlu di-install.",
+    desc: "Tim kami menyiapkan akun dan outlet pertama Anda. Anda cukup login dari browser tidak ada yang perlu di-install.",
   },
   {
     icon: PackagePlus,
@@ -214,8 +214,8 @@ const plans = [
 
 const faqs = [
   {
-    q: "Apakah NectarPOS perlu di-install?",
-    a: "Tidak. NectarPOS berjalan sepenuhnya di browser. Cukup buka alamatnya dari HP, tablet, atau laptop lalu login — tidak ada aplikasi yang perlu di-install maupun di-update manual.",
+    q: "Apakah KaselaPOS perlu di-install?",
+    a: "Tidak. KaselaPOS berjalan sepenuhnya di browser. Cukup buka alamatnya dari HP, tablet, atau laptop lalu login — tidak ada aplikasi yang perlu di-install maupun di-update manual.",
   },
   {
     q: "Bagaimana kalau internet di outlet mati?",
@@ -234,8 +234,8 @@ const faqs = [
     a: "Bisa. Naik atau turun paket dapat dilakukan kapan saja, dan tagihannya disesuaikan secara prorata pada periode berikutnya.",
   },
   {
-    q: "Apa bedanya NectarPOS dengan sistem POS custom Ayrus?",
-    a: "NectarPOS adalah produk berlangganan siap pakai dengan fitur standar. Sistem POS custom dibangun khusus mengikuti alur bisnis Anda dengan model sekali bayar. Kalau kebutuhan Anda masih umum, NectarPOS biasanya paling masuk akal untuk memulai.",
+    q: "Apa bedanya KaselaPOS dengan sistem POS custom Ayrus?",
+    a: "KaselaPOS adalah produk berlangganan siap pakai dengan fitur standar. Sistem POS custom dibangun khusus mengikuti alur bisnis Anda dengan model sekali bayar. Kalau kebutuhan Anda masih umum, KaselaPOS biasanya paling masuk akal untuk memulai.",
   },
 ];
 
@@ -249,7 +249,7 @@ const testimonials = [
   },
   {
     quote:
-      "Staf baru saya bisa pakai NectarPOS di hari pertama tanpa perlu ditemani. Itu yang paling menghemat waktu saya.",
+      "Staf baru saya bisa pakai KaselaPOS di hari pertama tanpa perlu ditemani. Itu yang paling menghemat waktu saya.",
     name: "Dewi Lestari",
     role: "Pemilik, Dapur Nusantara",
     initials: "DL",
@@ -261,7 +261,7 @@ const testimonials = [
 const productSchema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "NectarPOS",
+  name: "KaselaPOS",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web browser",
   description:
@@ -305,7 +305,7 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       position: 3,
-      name: "NectarPOS",
+      name: "KaselaPOS",
       item: `${site.url}/produk/nectarpos`,
     },
   ],
@@ -357,7 +357,7 @@ function Hero() {
             <li aria-hidden="true">/</li>
             <li>
               <span aria-current="page" className="text-ink">
-                NectarPOS
+                KaselaPOS
               </span>
             </li>
           </ol>
@@ -367,15 +367,15 @@ function Hero() {
           <div>
             <Rise delay={60}>
               <h1 className="mt-6 text-[2.5rem] leading-[1.08] font-extrabold sm:text-5xl lg:text-[3.5rem]">
-                Kelola transaksi kasir Anda, kapan saja, di mana saja —{" "}
+                Kelola transaksi kasir Anda, kapan saja, di mana saja {" "}
                 <span className="text-gradient">cukup dari browser</span>
               </h1>
             </Rise>
 
             <Rise delay={120}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
-                NectarPOS adalah sistem kasir online untuk UMKM. Tidak perlu install, tidak perlu
-                beli mesin kasir khusus. Buka dari HP, tablet, atau laptop — laporan penjualan
+                KaselaPOS adalah sistem kasir online untuk UMKM. Tidak perlu install, tidak perlu
+                beli mesin kasir khusus. Buka dari HP, tablet, atau laptop laporan penjualan
                 langsung terlihat.
               </p>
             </Rise>
@@ -456,7 +456,7 @@ function Features() {
         <Reveal>
           <SectionHeading
             title="Semua yang dibutuhkan kasir harian Anda"
-            sub="Bukan daftar fitur panjang yang tidak terpakai — hanya yang memang dipakai setiap hari oleh outlet UMKM."
+            sub="Bukan daftar fitur panjang yang tidak terpakai, hanya yang memang dipakai setiap hari oleh outlet UMKM."
           />
         </Reveal>
 
@@ -480,8 +480,8 @@ function Gallery() {
       <div className="container-page">
         <Reveal>
           <SectionHeading
-            title="NectarPOS di meja kasir sungguhan"
-            sub="Satu sistem yang sama menyesuaikan diri dengan kedai kopi, toko ritel, maupun gerai layanan — cukup dibuka dari perangkat yang sudah Anda punya."
+            title="KaselaPOS di meja kasir sungguhan"
+            sub="Satu sistem yang sama menyesuaikan diri dengan kedai kopi, toko ritel, maupun gerai layanan cukup dibuka dari perangkat yang sudah Anda punya."
             id="galeri"
           />
         </Reveal>
@@ -574,7 +574,7 @@ function WhyWeb() {
         <Reveal>
           <SectionHeading
             title="Dibanding aplikasi desktop dan mesin kasir khusus"
-            sub="Sistem kasir lama mengikat Anda pada satu perangkat di satu tempat. NectarPOS tidak."
+            sub="Sistem kasir lama mengikat Anda pada satu perangkat di satu tempat. KaselaPOS tidak."
           />
         </Reveal>
 
@@ -582,7 +582,7 @@ function WhyWeb() {
           <div className="mt-12 overflow-x-auto">
             <table className="w-full min-w-[560px] border-separate border-spacing-0 text-left">
               <caption className="sr-only">
-                Perbandingan sistem kasir berbasis web NectarPOS dengan aplikasi kasir desktop
+                Perbandingan sistem kasir berbasis web KaselaPOS dengan aplikasi kasir desktop
               </caption>
               <thead>
                 <tr>
@@ -593,7 +593,7 @@ function WhyWeb() {
                     scope="col"
                     className="pb-4 text-center text-sm font-bold text-brand"
                   >
-                    NectarPOS (web)
+                    KaselaPOS (web)
                   </th>
                   <th
                     scope="col"
@@ -700,7 +700,7 @@ function Pricing() {
 
                 <ButtonLink
                   href={waLink(
-                    `Halo Ayrus, saya tertarik dengan NectarPOS paket ${plan.name}. Boleh dijelaskan lebih lanjut?`,
+                    `Halo Ayrus, saya tertarik dengan KaselaPOS paket ${plan.name}. Boleh dijelaskan lebih lanjut?`,
                   )}
                   external
                   variant={plan.featured ? "primary" : "secondary"}
@@ -826,10 +826,10 @@ function DemoCta() {
             />
             <div className="relative mx-auto max-w-2xl">
               <h2 className="text-3xl font-extrabold sm:text-[2.75rem] sm:leading-[1.12]">
-                Coba NectarPOS gratis 14 hari
+                Coba KaselaPOS gratis 14 hari
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-                Tim kami akan membantu menyiapkan produk, harga, dan akun kasir Anda — supaya di
+                Tim kami akan membantu menyiapkan produk, harga, dan akun kasir Anda supaya di
                 hari pertama sistemnya sudah siap dipakai berjualan.
               </p>
 
@@ -839,7 +839,7 @@ function DemoCta() {
                   <ArrowRight size={18} aria-hidden="true" />
                 </ButtonLink>
                 <ButtonLink
-                  href={`mailto:${site.email}?subject=Demo NectarPOS`}
+                  href={`mailto:${site.email}?subject=Demo KaselaPOS`}
                   external
                   variant="secondary"
                   className="px-7"
