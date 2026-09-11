@@ -52,6 +52,37 @@ export function ButtonLink({
   );
 }
 
+/* ---------------------------------------------------------------
+   Nav link — same internal/external split as ButtonLink, but unstyled
+   so each nav list keeps its own classes. Lets `nav` mix routes with
+   off-site destinations (KaselaPOS) without every list re-branching.
+   --------------------------------------------------------------- */
+
+export function NavLink({
+  href,
+  external = false,
+  children,
+  ...rest
+}: {
+  href: string;
+  external?: boolean;
+  children: ReactNode;
+} & Omit<ComponentPropsWithoutRef<"a">, "href">) {
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} {...rest}>
+      {children}
+    </Link>
+  );
+}
+
 /* --------------------------------------------------------------- */
 
 export function Eyebrow({ children }: { children: ReactNode }) {

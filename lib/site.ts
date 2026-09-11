@@ -28,6 +28,13 @@ export const site = {
   },
 } as const;
 
+/**
+ * KaselaPOS lives on its own subdomain, not on this site. Menu entries and the
+ * homepage CTAs point straight at the app; /produk/nectarpos stays as the
+ * marketing/SEO page reached from search and the sitemap.
+ */
+export const kaselaposUrl = "https://kaselapos.ayrusdigital.my.id/";
+
 export function waLink(message: string) {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
 }
@@ -42,10 +49,12 @@ export const waMessages = {
  * `section` marks a homepage anchor the navbar scroll-spies.
  * `match` marks a route prefix that should light the same item up
  * (e.g. /layanan/website keeps "Layanan" active).
+ * `external` marks an off-site destination: rendered as a plain anchor that
+ * opens in a new tab, and never marked `aria-current` since it leaves the site.
  */
 export const nav = [
   { label: "Layanan", href: "/#layanan", section: "layanan", match: "/layanan" },
-  { label: "KaselaPOS", href: "/produk/nectarpos", match: "/produk/nectarpos" },
+  { label: "KaselaPOS", href: kaselaposUrl, external: true },
   { label: "Portofolio", href: "/#portofolio", section: "portofolio", match: "/portofolio" },
   { label: "Tentang Kami", href: "/#tentang", section: "tentang" },
   { label: "Artikel", href: "/blog", match: "/blog" },

@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/produk/nectarpos" },
   openGraph: {
     type: "website",
-    url: `${site.url}/produk/nectarpos`,
+    url: `https://kaselapos.ayrusdigital.my.id/`,
     title: "KaselaPOS — Sistem Kasir Online Berbasis Web untuk UMKM",
     description:
       "Kelola transaksi kasir Anda kapan saja, di mana saja — cukup dari browser. Coba gratis 14 hari.",
@@ -104,7 +104,7 @@ const features = [
 /** Sample images. Stock photography standing in for real product shots. */
 const gallery = [
   {
-    src: "/images/nectarpos-kafe.jpg",
+    src: "/images/layanan-pos.jpg",
     alt: "Barista mencatat pesanan lewat KaselaPOS di tablet pada meja kasir kedai kopi",
     caption: "Kedai kopi — pesanan dicatat langsung dari tablet di meja bar",
   },
@@ -180,7 +180,7 @@ const plans = [
   },
   {
     name: "Pro",
-    price: "249rb",
+    price: "199rb",
     period: "/bulan",
     desc: "Untuk usaha yang sudah punya beberapa cabang dan tim.",
     features: [

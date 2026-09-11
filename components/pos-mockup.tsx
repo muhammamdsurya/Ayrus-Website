@@ -1,5 +1,5 @@
 /**
- * NectarPOS dashboard mockup.
+ * KaselaPOS dashboard mockup.
  * Pure markup instead of a raster screenshot: crisp at any DPI, themeable,
  * and it costs no image bytes on the LCP path. Decorative — hidden from AT,
  * with the meaning carried by the surrounding copy.
@@ -25,7 +25,7 @@ export function PosMockup({ className = "" }: { className?: string }) {
             <i className="h-2.5 w-2.5 rounded-full bg-white/20" />
           </span>
           <span className="ml-2 flex-1 truncate rounded-md bg-black/40 px-3 py-1.5 text-[11px] text-ink-muted">
-            app.nectarpos.id/dashboard
+            kaselapos.ayrusdigital.my.id/dashboard
           </span>
         </div>
 

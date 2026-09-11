@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 import { nav, site, waLink, waMessages } from "@/lib/site";
 import { services } from "@/lib/services";
+import { NavLink } from "./ui";
 
 
 export function Footer() {
@@ -35,12 +36,13 @@ export function Footer() {
           <ul className="mt-4 space-y-1">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link
+                <NavLink
                   href={item.href}
+                  external={"external" in item}
                   className="inline-flex min-h-9 items-center text-sm text-ink-muted transition-colors duration-200 hover:text-brand"
                 >
                   {item.label}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </ul>

@@ -21,7 +21,7 @@ import { FeatureCard } from "@/components/feature-card";
 import { services } from "@/lib/services";
 import { articles } from "@/lib/articles";
 import { caseStudies } from "@/lib/portfolio";
-import { site, waLink, waMessages } from "@/lib/site";
+import { kaselaposUrl, site, waLink, waMessages } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Jasa Pembuatan Aplikasi Custom untuk UMKM | Ayrus Digital Teknologi",
@@ -158,7 +158,7 @@ function Hero() {
                 Konsultasi Gratis
                 <ArrowRight size={18} aria-hidden="true" />
               </ButtonLink>
-              <ButtonLink href="/produk/nectarpos" variant="secondary" className="px-7">
+              <ButtonLink href={kaselaposUrl} external variant="secondary" className="px-7">
                 Coba KaselaPOS
               </ButtonLink>
             </div>
@@ -317,7 +317,7 @@ function NectarBanner() {
               </div>
 
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-                <ButtonLink href="/produk/nectarpos" className="px-7 whitespace-nowrap">
+                <ButtonLink href={kaselaposUrl} external className="px-7 whitespace-nowrap">
                   Lihat KaselaPOS
                   <ArrowRight size={18} aria-hidden="true" />
                 </ButtonLink>

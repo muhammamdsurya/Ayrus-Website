@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { nav, navSections, site, waLink, waMessages } from "@/lib/site";
-import { ButtonLink } from "./ui";
+import { ButtonLink, NavLink } from "./ui";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -73,6 +73,7 @@ export function Navbar() {
   useEffect(() => setOpen(false), [pathname]);
 
   const isActive = (item: (typeof nav)[number]) => {
+    if ("external" in item) return false;
     const match = "match" in item ? item.match : undefined;
     if (match && (pathname === match || pathname.startsWith(`${match}/`))) return true;
     const sec = "section" in item ? item.section : undefined;
@@ -105,8 +106,9 @@ export function Navbar() {
               const active = isActive(item);
               return (
                 <li key={item.href}>
-                  <Link
+                  <NavLink
                     href={item.href}
+                    external={"external" in item}
                     aria-current={active ? "page" : undefined}
                     className={`relative inline-flex min-h-11 items-center rounded-full px-4 text-[15px] transition-colors duration-200 ${
                       active
@@ -123,7 +125,7 @@ export function Navbar() {
                         active ? "opacity-100" : "opacity-0"
                       }`}
                     />
-                  </Link>
+                  </NavLink>
                 </li>
               );
             })}
@@ -160,8 +162,9 @@ export function Navbar() {
               const active = isActive(item);
               return (
                 <li key={item.href}>
-                  <Link
+                  <NavLink
                     href={item.href}
+                    external={"external" in item}
                     aria-current={active ? "page" : undefined}
                     onClick={() => setOpen(false)}
                     className={`flex min-h-12 items-center gap-2.5 border-b border-white/6 text-[15px] transition-colors duration-200 ${
@@ -175,7 +178,7 @@ export function Navbar() {
                       }`}
                     />
                     {item.label}
-                  </Link>
+                  </NavLink>
                 </li>
               );
             })}
