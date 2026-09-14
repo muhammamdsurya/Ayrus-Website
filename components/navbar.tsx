@@ -211,6 +211,10 @@ function Logo() {
       width={36}
       height={36}
       priority
+      /* This mark is the LCP element on mobile. `priority` alone emits the
+         preload but no priority hint, so the request still competes with the
+         rest of the head; fetchPriority lifts it explicitly. */
+      fetchPriority="high"
       className="h-9 w-9 shrink-0 object-contain"
     />
   );

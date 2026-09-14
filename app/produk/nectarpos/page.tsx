@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/produk/nectarpos" },
   openGraph: {
     type: "website",
-    url: `https://kaselapos.ayrusdigital.my.id/`,
+    url: `https://kaselapos.ayrusdigital.my.id/produk/nectarpos`,
     title: "KaselaPOS — Sistem Kasir Online Berbasis Web untuk UMKM",
     description:
       "Kelola transaksi kasir Anda kapan saja, di mana saja — cukup dari browser. Coba gratis 14 hari.",

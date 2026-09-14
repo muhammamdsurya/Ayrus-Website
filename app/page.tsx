@@ -201,16 +201,16 @@ function TrustBar() {
       <div className="container-page">
         <dl className="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
           {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 60}>
-              <div className="text-center lg:text-left">
-                <dt className="sr-only">{s.label}</dt>
-                <dd>
-                  <span className="font-display block text-3xl font-extrabold text-brand sm:text-4xl">
-                    {s.value}
-                  </span>
-                  <span className="mt-1 block text-sm text-ink-muted">{s.label}</span>
-                </dd>
-              </div>
+            /* One <div> wrapper max between <dl> and its <dt>/<dd> pair — the
+               HTML spec allows a single grouping div, not a nested pair. */
+            <Reveal key={s.label} delay={i * 60} className="text-center lg:text-left">
+              <dt className="sr-only">{s.label}</dt>
+              <dd>
+                <span className="font-display block text-3xl font-extrabold text-brand sm:text-4xl">
+                  {s.value}
+                </span>
+                <span className="mt-1 block text-sm text-ink-muted">{s.label}</span>
+              </dd>
             </Reveal>
           ))}
         </dl>
@@ -227,7 +227,7 @@ function TrustBar() {
               <li
                 key={c + i}
                 aria-hidden={i >= clients.length}
-                className="font-display shrink-0 text-base font-bold whitespace-nowrap text-ink-muted/70 sm:text-lg"
+                className="font-display shrink-0 text-base font-bold whitespace-nowrap text-ink-muted sm:text-lg"
               >
                 {c}
               </li>

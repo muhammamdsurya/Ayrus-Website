@@ -56,7 +56,6 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
 
@@ -167,6 +166,9 @@
     opacity 0.5s var(--ease-out-soft),
     transform 0.5s var(--ease-out-soft);
   transition-delay: var(--reveal-delay, 0ms);
+  /* Promoted while pending and released once revealed. Without this the layer
+     is created at the moment the transition starts, which lands the paint in
+     the same task as the reveal and measurably raises Total Blocking Time. */
   will-change: opacity, transform;
 }
 
@@ -200,8 +202,15 @@
   to { transform: translateX(-50%); }
 }
 
+.marquee {
+  /* Isolate the strip so its layout and paint never invalidate the rest of
+     the page while it runs. */
+  contain: layout paint;
+}
+
 .marquee-track {
   animation: marquee 38s linear infinite;
+  will-change: transform;
 }
 
 /* Auto-scrolling logo strip must stop on hover and on focus */
@@ -211,5 +220,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none; }
+  .marquee-track { animation: none; will-change: auto; }
 }

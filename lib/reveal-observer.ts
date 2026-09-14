@@ -1,8 +1,10 @@
 /**
  * Shared scroll-reveal controller.
  *
- * One IntersectionObserver and one scroll listener serve every <Reveal> on the
- * page, instead of ~40 of each.
+ * One IntersectionObserver, one scroll listener and one DOM scan serve every
+ * <Reveal> on the page. <Reveal> renders entirely on the server, so none of the
+ * ~40 revealed blocks costs a client component or a hydration boundary; this
+ * module is the only JavaScript the effect needs.
  *
  * Two safety nets, because the failure mode here is content that is invisible
  * forever on a lead-generation site:
@@ -25,6 +27,11 @@ let observer: IntersectionObserver | null = null;
 let pending: Set<HTMLElement> | null = null;
 let frame = 0;
 let sawCallback = false;
+let failsafe: ReturnType<typeof setTimeout> | null = null;
+
+function reduced() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
 
 function show(el: HTMLElement) {
   el.dataset.shown = "true";
@@ -35,12 +42,18 @@ function show(el: HTMLElement) {
 /** Reveal anything whose top edge has already reached the bottom of the viewport. */
 function sweep() {
   frame = 0;
-  if (!pending) return;
+  if (!pending || pending.size === 0) return;
 
   const limit = window.innerHeight * 0.92;
-  for (const el of [...pending]) {
-    if (el.getBoundingClientRect().top <= limit) show(el);
+
+  // Every rect is read before anything is shown. Interleaving the reads with
+  // show(), which writes to dataset and so invalidates layout, would force a
+  // synchronous reflow on each of the ~40 elements instead of none.
+  const reached: HTMLElement[] = [];
+  for (const el of pending) {
+    if (el.getBoundingClientRect().top <= limit) reached.push(el);
   }
+  for (const el of reached) show(el);
 }
 
 function onScroll() {
@@ -71,24 +84,47 @@ function setup() {
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll, { passive: true });
 
-  setTimeout(revealAll, FAILSAFE_MS);
+  failsafe = setTimeout(revealAll, FAILSAFE_MS);
 }
 
-/** Register an element for reveal; returns an unregister function. */
-export function observeReveal(el: HTMLElement): () => void {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    el.dataset.shown = "true";
-    return () => {};
+/**
+ * Register every not-yet-revealed element in the document.
+ *
+ * Safe to call repeatedly: re-observing an element the observer already holds
+ * is a no-op, and revealed elements are excluded by the attribute selector.
+ * Call it after a navigation, when a new page's markup has been committed.
+ */
+export function scanReveal() {
+  const els = document.querySelectorAll<HTMLElement>(".reveal:not([data-shown])");
+  if (els.length === 0) return;
+
+  if (reduced()) {
+    for (const el of els) el.dataset.shown = "true";
+    return;
   }
 
   if (!pending || !observer) setup();
 
-  pending!.add(el);
-  observer!.observe(el);
+  for (const el of els) {
+    pending!.add(el);
+    observer!.observe(el);
+  }
   onScroll();
+}
+
+/** Start the controller for this session; returns a teardown function. */
+export function startReveal(): () => void {
+  scanReveal();
 
   return () => {
-    pending?.delete(el);
-    observer?.unobserve(el);
+    if (failsafe) clearTimeout(failsafe);
+    if (frame) cancelAnimationFrame(frame);
+    window.removeEventListener("scroll", onScroll);
+    window.removeEventListener("resize", onScroll);
+    observer?.disconnect();
+    observer = null;
+    pending = null;
+    frame = 0;
+    failsafe = null;
   };
 }

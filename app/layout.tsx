@@ -3,6 +3,7 @@ import { Sora, Plus_Jakarta_Sans } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
+import { RevealController } from "@/components/reveal-controller";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -119,6 +120,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="konten-utama">{children}</main>
         <Footer />
         <WhatsAppFab />
+        <RevealController />
       </body>
     </html>
   );

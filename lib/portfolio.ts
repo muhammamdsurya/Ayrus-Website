@@ -42,7 +42,7 @@ export const caseStudies: CaseStudy[] = [
     duration: "8 minggu",
     serviceSlug: "custom-software",
     image: {
-      src: "/images/laundry.jpg",
+      src: "/images/laundry.webp",
       alt: "Petugas laundry memasukkan cucian ke dalam mesin cuci di sebuah gerai",
     },
     metaTitle: "Studi Kasus: Sistem Laundry Multi-Cabang — Laundry Bersih Wangi",
@@ -154,7 +154,7 @@ export const caseStudies: CaseStudy[] = [
     duration: "4 minggu",
     serviceSlug: "website",
     image: {
-      src: "/images/kontraktor.png",
+      src: "/images/kontraktor.webp",
       alt: "Rak berisi berbagai material dan perkakas di dalam toko bangunan",
     },
     metaTitle: "Studi Kasus: Website Katalog Toko Bangunan — Maju Jaya",
