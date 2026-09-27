@@ -1,10 +1,17 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import { waLink, waMessages } from "@/lib/site";
 
-/** Floating WhatsApp CTA, present on every page (PRD §5.7). */
+/**
+ * Floating WhatsApp CTA, present on every page (PRD §5.7). The message is
+ * tagged with the current path so each chat can be traced to its page.
+ */
 export function WhatsAppFab() {
+  const pathname = usePathname();
   return (
     <a
-      href={waLink(waMessages.general)}
+      href={waLink(waMessages.general, `halaman ${pathname}`)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Hubungi Ayrus lewat WhatsApp"

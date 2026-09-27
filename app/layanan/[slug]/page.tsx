@@ -6,10 +6,12 @@ import { ArrowRight, ArrowUpRight, CheckCircle2, Clock, Tag, Wallet } from "luci
 import { Reveal } from "@/components/reveal";
 import { ProcessFlow } from "@/components/process-flow";
 import { FeatureCard } from "@/components/feature-card";
+import { FaqList, faqSchema } from "@/components/faq";
 import { Rise } from "@/components/rise";
 import { ButtonLink, Card, Eyebrow, SectionHeading } from "@/components/ui";
 import { getService, services } from "@/lib/services";
-import { site, waLink } from "@/lib/site";
+import { getPricing } from "@/lib/pricing";
+import { businessId, site, waLink } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -25,7 +27,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   const url = `${site.url}/layanan/${s.slug}`;
   return {
-    title: s.metaTitle,
+    title: { absolute: s.metaTitle },
     description: s.metaDescription,
     keywords: [...s.keywords],
     alternates: { canonical: `/layanan/${s.slug}` },
@@ -53,23 +55,31 @@ export default async function ServicePage({ params }: Params) {
   const others = services.filter((o) => o.slug !== s.slug);
   const wa = waLink(
     `Halo Ayrus, saya ingin konsultasi soal layanan ${s.title}. Boleh dijelaskan lebih lanjut?`,
+    `halaman ${s.title}`,
   );
+  const tiers = getPricing(s.slug)?.tiers ?? [];
 
   const schema = [
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      name: s.title,
-      serviceType: s.category,
+      name: s.h1,
+      serviceType: s.title,
       description: s.metaDescription,
       url: `${site.url}/layanan/${s.slug}`,
       areaServed: { "@type": "Country", name: "Indonesia" },
-      provider: { "@type": "Organization", name: site.name, url: site.url },
-      offers: {
+      provider: { "@id": businessId },
+      offers: tiers.map((t) => ({
         "@type": "Offer",
-        priceCurrency: "IDR",
-        description: `Mulai dari ${s.priceFrom}, model pembayaran sekali bayar`,
-      },
+        name: t.name,
+        description: t.desc,
+        priceSpecification: {
+          "@type": "PriceSpecification",
+          priceCurrency: "IDR",
+          minPrice: t.min * 1_000_000,
+          ...(t.max === null ? {} : { maxPrice: t.max * 1_000_000 }),
+        },
+      })),
     },
     {
       "@context": "https://schema.org",
@@ -85,15 +95,7 @@ export default async function ServicePage({ params }: Params) {
         },
       ],
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: s.faqs.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    },
+    faqSchema(s.faqs),
   ];
 
   return (
@@ -151,7 +153,7 @@ export default async function ServicePage({ params }: Params) {
 
               <Rise delay={60}>
                 <h1 className="mt-6 text-[2.25rem] leading-[1.1] font-extrabold sm:text-5xl">
-                  {s.title}
+                  {s.h1}
                 </h1>
               </Rise>
 
@@ -183,8 +185,8 @@ export default async function ServicePage({ params }: Params) {
                     Konsultasi Gratis
                     <ArrowRight size={18} aria-hidden="true" />
                   </ButtonLink>
-                  <ButtonLink href="#alur" variant="secondary" className="px-7">
-                    Lihat Alur Pengerjaan
+                  <ButtonLink href={`/harga#${s.slug}`} variant="secondary" className="px-7">
+                    Lihat Rincian Harga
                   </ButtonLink>
                 </div>
               </Rise>
@@ -339,34 +341,7 @@ export default async function ServicePage({ params }: Params) {
             <SectionHeading eyebrow="FAQ" title="Pertanyaan yang sering diajukan" />
           </Reveal>
 
-          <div className="mx-auto mt-12 max-w-3xl space-y-3">
-            {s.faqs.map((f, i) => (
-              <Reveal key={f.q} delay={i * 50}>
-                <details className="glass group rounded-[var(--radius-card)] px-6 open:border-brand/30">
-                  <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold [&::-webkit-details-marker]:hidden">
-                    {f.q}
-                    <span
-                      aria-hidden="true"
-                      className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-white/15 text-brand transition-transform duration-300 group-open:rotate-45"
-                    >
-                      <svg
-                        width="13"
-                        height="13"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2.5"
-                        strokeLinecap="round"
-                      >
-                        <path d="M12 5v14M5 12h14" />
-                      </svg>
-                    </span>
-                  </summary>
-                  <p className="pb-5 leading-relaxed text-ink-muted">{f.a}</p>
-                </details>
-              </Reveal>
-            ))}
-          </div>
+          <FaqList faqs={s.faqs} />
         </div>
       </section>
 

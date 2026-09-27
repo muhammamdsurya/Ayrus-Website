@@ -19,14 +19,16 @@ import { ServiceCard } from "@/components/service-card";
 import { ProcessFlow } from "@/components/process-flow";
 import { FeatureCard } from "@/components/feature-card";
 import { services } from "@/lib/services";
+import { solutions } from "@/lib/solutions";
 import { articles } from "@/lib/articles";
 import { caseStudies } from "@/lib/portfolio";
 import { kaselaposUrl, site, waLink, waMessages } from "@/lib/site";
 
+// Title/og come from the root layout defaults. "Jasa pembuatan aplikasi custom"
+// is left to /layanan/custom-software so the two pages don't compete for it.
 export const metadata: Metadata = {
-  title: "Jasa Pembuatan Aplikasi Custom untuk UMKM | Ayrus Digital Teknologi",
   description:
-    "Ayrus Digital Teknologi membangun aplikasi keuangan, website bisnis, dan sistem POS custom untuk UMKM Indonesia. Sekali bayar, tanpa biaya bulanan. Konsultasi gratis.",
+    "Software house di Jakarta Timur untuk UMKM: aplikasi kasir (POS), aplikasi keuangan, dan website custom. Aplikasi custom sekali bayar, source code milik Anda. Konsultasi gratis via WhatsApp.",
   alternates: { canonical: "/" },
 };
 
@@ -141,14 +143,16 @@ function Hero() {
 
           <Rise delay={60}>
             <h1 className="mt-6 text-[2.5rem] leading-[1.08] font-extrabold sm:text-6xl lg:text-[4rem]">
-              Aplikasi custom yang <span className="text-gradient">tumbuh bersama</span> usaha Anda
+              Aplikasi kasir, keuangan &amp; website{" "}
+              <span className="text-gradient">custom untuk UMKM</span>
             </h1>
           </Rise>
 
           <Rise delay={120}>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
-              Kami membangun aplikasi keuangan, website bisnis, dan sistem kasir yang mengikuti cara
-              kerja UMKM Anda. Sekali bayar, source code jadi milik Anda.
+              Ayrus Digital adalah software house di Jakarta Timur yang membangun aplikasi kasir,
+              aplikasi keuangan, dan website yang mengikuti cara kerja UMKM Anda. Sekali bayar,
+              source code jadi milik Anda.
             </p>
           </Rise>
 
@@ -166,7 +170,11 @@ function Hero() {
 
           <Rise delay={240}>
             <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2.5 text-sm text-ink-muted">
-              {["Tanpa biaya bulanan", "Garansi bug", "Source code diserahkan"].map((t) => (
+              {[
+                "Aplikasi custom: sekali bayar",
+                "KaselaPOS: mulai Rp 99 ribu/bulan",
+                "Source code diserahkan",
+              ].map((t) => (
                 <li key={t} className="flex items-center gap-2">
                   <CheckCircle2 size={16} className="text-brand" aria-hidden="true" />
                   {t}
@@ -262,6 +270,27 @@ function Services() {
 
         <Reveal delay={120}>
           <p className="mt-10 text-center text-ink-muted">
+            Solusi per jenis usaha:{" "}
+            {solutions.map((so, i) => (
+              <span key={so.slug}>
+                {i > 0 ? " · " : null}
+                <Link
+                  href={`/solusi/${so.slug}`}
+                  className="font-semibold text-brand underline decoration-brand/40 underline-offset-4 transition-colors hover:text-brand-soft"
+                >
+                  {so.shortTitle}
+                </Link>
+              </span>
+            ))}
+            {" · "}
+            <Link
+              href="/harga"
+              className="font-semibold text-brand underline decoration-brand/40 underline-offset-4 transition-colors hover:text-brand-soft"
+            >
+              Daftar harga
+            </Link>
+          </p>
+          <p className="mt-4 text-center text-ink-muted">
             Butuh sesuatu yang belum disebut di atas?{" "}
             <a
               href={waLink(waMessages.custom)}

@@ -3,6 +3,13 @@
  * lists the CMS as a later workstream). Body is a small block union rather than
  * an HTML string so the renderer keeps full control of typography and never has
  * to use dangerouslySetInnerHTML.
+ *
+ * Text in p/ul/ol/callout blocks may contain `[label](/path)` links.
+ *
+ * SEO checklist per article: target keyword in title, first 100 words and slug;
+ * one real number from an Ayrus project; an in-text link to the money page in
+ * the first third; a comparison table where the reader is choosing; a `cta`
+ * message that names the article's topic.
  */
 
 export type Block =
@@ -29,6 +36,8 @@ export type Article = {
   body: Block[];
   /** Slug of a service to cross-link at the end of the article. */
   relatedService: string;
+  /** Closing WhatsApp button; `message` should name the article's topic. */
+  cta: { label: string; message: string };
 };
 
 export const articles: Article[] = [
@@ -54,7 +63,7 @@ export const articles: Article[] = [
       },
       {
         t: "p",
-        text: "Berikut tujuh hal yang sebaiknya Anda cek sebelum memutuskan memakai sistem POS tertentu untuk usaha laundry Anda.",
+        text: "Berikut tujuh hal yang sebaiknya Anda cek sebelum memutuskan memakai sistem POS tertentu untuk usaha laundry Anda. Contoh nyatanya bisa Anda lihat di [aplikasi laundry multi cabang](/solusi/aplikasi-laundry) yang kami bangun untuk Laundry Bersih Wangi.",
       },
 
       { t: "h2", text: "1. Apakah alurnya mengenal status cucian?" },
@@ -125,7 +134,7 @@ export const articles: Article[] = [
       { t: "h2", text: "6. Apakah bisa tumbuh bersama usaha Anda?" },
       {
         t: "p",
-        text: "Kalau Anda berencana membuka cabang kedua dalam satu-dua tahun, pastikan sistemnya mendukung multi-outlet sejak awal. Memindahkan data dari sistem yang tidak mendukungnya jauh lebih mahal daripada memilih yang tepat sejak awal.",
+        text: "Kalau Anda berencana membuka cabang kedua dalam satu-dua tahun, pastikan sistemnya mendukung multi-outlet sejak awal. Memindahkan data dari sistem yang tidak mendukungnya jauh lebih mahal daripada memilih yang tepat sejak awal. Di [Laundry Bersih Wangi](/portofolio/laundry-bersih-wangi), menyatukan tiga cabang dalam satu sistem menurunkan selisih kas hingga 90%.",
       },
 
       { t: "h2", text: "7. Berapa total biayanya dalam tiga tahun?" },
@@ -135,7 +144,7 @@ export const articles: Article[] = [
       },
       {
         t: "p",
-        text: "Sistem berlangganan biasanya paling masuk akal untuk memulai karena biaya awalnya kecil. Sistem custom mulai menarik ketika kebutuhan Anda tidak lagi standar, atau ketika total langganan tiga tahun sudah melampaui biaya membangun sendiri.",
+        text: "Sistem berlangganan seperti [KaselaPOS](/produk/kaselapos) biasanya paling masuk akal untuk memulai karena biaya awalnya kecil. [Sistem kasir custom](/layanan/sistem-pos) mulai menarik ketika kebutuhan Anda tidak lagi standar, atau ketika total langganan tiga tahun sudah melampaui biaya membangun sendiri.",
       },
 
       { t: "h2", text: "Ringkasnya" },
@@ -148,6 +157,10 @@ export const articles: Article[] = [
         text: "Uji dengan satu pertanyaan sederhana: setelah sistem ini dipakai, apakah masih ada catatan manual yang tersisa?",
       },
     ],
+    cta: {
+      label: "Konsultasi Aplikasi Laundry",
+      message: "Halo Ayrus, saya punya usaha laundry dan ingin konsultasi aplikasi laundry.",
+    },
   },
 
   {
@@ -179,7 +192,7 @@ export const articles: Article[] = [
       { t: "h2", text: "Biaya pertama: selisih yang tidak pernah ketemu" },
       {
         t: "p",
-        text: "Pada usaha dengan omzet Rp 100 juta per bulan, selisih kas 1–2% adalah hal yang umum ketika pencatatan dilakukan manual. Itu setara Rp 1–2 juta setiap bulan yang hilang tanpa jejak.",
+        text: "Pada usaha dengan omzet Rp 100 juta per bulan, selisih kas 1–2% adalah hal yang umum ketika pencatatan dilakukan manual. Itu setara Rp 1–2 juta setiap bulan yang hilang tanpa jejak. Di salah satu [klien laundry kami](/portofolio/laundry-bersih-wangi), selisih kas turun 90% setelah pencatatan pindah ke sistem kasir digital.",
       },
       {
         t: "p",
@@ -234,9 +247,13 @@ export const articles: Article[] = [
       },
       {
         t: "p",
-        text: "Tidak perlu langsung membangun sistem custom. Mulai dari sistem berlangganan yang bisa dipakai hari itu juga, lalu pertimbangkan sistem khusus setelah kebutuhan Anda benar-benar melampaui yang tersedia di pasaran.",
+        text: "Tidak perlu langsung membangun sistem custom. Mulai dari sistem berlangganan seperti [KaselaPOS](/produk/kaselapos) yang bisa dipakai hari itu juga, lalu pertimbangkan sistem khusus setelah kebutuhan Anda benar-benar melampaui yang tersedia di pasaran.",
       },
     ],
+    cta: {
+      label: "Coba KaselaPOS 14 Hari",
+      message: "Halo Ayrus, saya ingin mencoba KaselaPOS untuk mulai pakai kasir digital.",
+    },
   },
 
   {
@@ -262,7 +279,7 @@ export const articles: Article[] = [
     body: [
       {
         t: "p",
-        text: "Sebagai software house, kami punya kepentingan jelas untuk menyarankan software custom. Justru karena itu, artikel ini kami tulis sejujur mungkin: untuk sebagian besar UMKM, aplikasi siap pakai adalah pilihan yang lebih tepat — setidaknya di awal.",
+        text: "Sebagai software house yang menawarkan [jasa pembuatan aplikasi custom](/layanan/custom-software), kami punya kepentingan jelas untuk menyarankan software custom. Justru karena itu, artikel ini kami tulis sejujur mungkin: untuk sebagian besar UMKM, aplikasi siap pakai adalah pilihan yang lebih tepat — setidaknya di awal.",
       },
 
       { t: "h2", text: "Software siap pakai: cepat dan murah untuk memulai" },
@@ -315,7 +332,7 @@ export const articles: Article[] = [
       { t: "h2", text: "Jalan tengah yang sering paling masuk akal" },
       {
         t: "p",
-        text: "Anda tidak harus memilih salah satu untuk seluruh bisnis. Banyak klien kami memakai aplikasi siap pakai untuk kebutuhan umum seperti kasir, lalu membangun sistem khusus hanya untuk bagian yang benar-benar unik.",
+        text: "Anda tidak harus memilih salah satu untuk seluruh bisnis. Banyak klien kami memakai aplikasi siap pakai untuk kebutuhan umum seperti kasir ([KaselaPOS](/produk/kaselapos), misalnya), lalu membangun sistem khusus hanya untuk bagian yang benar-benar unik.",
       },
       {
         t: "p",
@@ -328,6 +345,11 @@ export const articles: Article[] = [
         text: "Pilih software siap pakai sampai keterbatasannya benar-benar merugikan Anda. Saat itu terjadi, Anda sudah tahu persis fitur apa yang perlu dibangun — dan itu justru membuat proyek custom Anda jauh lebih murah.",
       },
     ],
+    cta: {
+      label: "Tanya Mana yang Cocok",
+      message:
+        "Halo Ayrus, saya ingin tahu mana yang cocok untuk usaha saya: aplikasi siap pakai atau custom.",
+    },
   },
 ];
 

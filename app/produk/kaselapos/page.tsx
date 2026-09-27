@@ -25,26 +25,31 @@ import { Rise } from "@/components/rise";
 import { ButtonLink, Card, Eyebrow, SectionHeading } from "@/components/ui";
 import { PosMockup } from "@/components/pos-mockup";
 import { FeatureCard } from "@/components/feature-card";
-import { site, waLink, waMessages } from "@/lib/site";
+import { FaqList, faqSchema } from "@/components/faq";
+import { businessId, site, waLink, waMessages } from "@/lib/site";
+
+const title = "KaselaPOS – Aplikasi Kasir Online yang Tetap Jalan Saat Internet Mati";
+const description =
+  "KaselaPOS: aplikasi kasir offline berbasis web untuk warung, cafe, dan UMKM. Tanpa install, tetap jalan saat internet mati, QRIS & multi-outlet. Mulai Rp 99 ribu/bulan, coba gratis 14 hari.";
 
 export const metadata: Metadata = {
-  title: "KaselaPOS Sistem Kasir Online Berbasis Web untuk UMKM",
-  description:
-    "KaselaPOS adalah aplikasi kasir online berbasis web. Kelola transaksi, stok, dan laporan penjualan real-time dari HP, tablet, atau laptop tanpa instalasi. Coba gratis 14 hari.",
+  title: { absolute: title },
+  description,
   keywords: [
-    "sistem kasir online berbasis web",
-    "aplikasi kasir online",
-    "software kasir cloud",
-    "aplikasi POS subscription",
-    "sistem kasir laundry",
+    "aplikasi kasir offline berbasis web",
+    "aplikasi kasir tanpa install",
+    "aplikasi kasir online murah",
+    "aplikasi kasir warung",
+    "aplikasi kasir cafe",
+    "aplikasi kasir QRIS",
+    "aplikasi kasir multi cabang",
   ],
-  alternates: { canonical: "/produk/nectarpos" },
+  alternates: { canonical: "/produk/kaselapos" },
   openGraph: {
     type: "website",
-    url: `https://kaselapos.ayrusdigital.my.id/produk/nectarpos`,
-    title: "KaselaPOS — Sistem Kasir Online Berbasis Web untuk UMKM",
-    description:
-      "Kelola transaksi kasir Anda kapan saja, di mana saja — cukup dari browser. Coba gratis 14 hari.",
+    url: `${site.url}/produk/kaselapos`,
+    title,
+    description,
   },
 };
 
@@ -107,11 +112,6 @@ const gallery = [
     src: "/images/layanan-pos.jpg",
     alt: "Barista mencatat pesanan lewat KaselaPOS di tablet pada meja kasir kedai kopi",
     caption: "Kedai kopi — pesanan dicatat langsung dari tablet di meja bar",
-  },
-  {
-    src: "/images/nectarpos-toko.jpg",
-    alt: "Kasir toko melayani pelanggan menggunakan KaselaPOS di layar sentuh",
-    caption: "Toko ritel — kasir dan pelanggan berbagi satu layar saat konfirmasi",
   },
   {
     src: "/images/nectarpos-pembayaran.jpg",
@@ -264,36 +264,19 @@ const productSchema = {
   name: "KaselaPOS",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web browser",
-  description:
-    "Sistem kasir (POS) online berbasis web untuk UMKM Indonesia. Kelola transaksi, stok, dan laporan penjualan real-time dari perangkat apa pun.",
-  url: `${site.url}/produk/nectarpos`,
-  publisher: { "@type": "Organization", name: site.name, url: site.url },
-  offers: [
-    {
+  description,
+  url: `${site.url}/produk/kaselapos`,
+  publisher: { "@id": businessId },
+  // Built from `plans` so the structured data can't drift from the visible prices.
+  offers: plans
+    .filter((p) => p.price !== "Custom")
+    .map((p) => ({
       "@type": "Offer",
-      name: "Basic",
-      price: "99000",
+      name: p.name,
+      price: String(parseInt(p.price, 10) * 1000),
       priceCurrency: "IDR",
       category: "subscription",
-    },
-    {
-      "@type": "Offer",
-      name: "Pro",
-      price: "249000",
-      priceCurrency: "IDR",
-      category: "subscription",
-    },
-  ],
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((f) => ({
-    "@type": "Question",
-    name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
-  })),
+    })),
 };
 
 const breadcrumbSchema = {
@@ -301,25 +284,19 @@ const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Beranda", item: site.url },
-    { "@type": "ListItem", position: 2, name: "Produk", item: `${site.url}/produk` },
-    {
-      "@type": "ListItem",
-      position: 3,
-      name: "KaselaPOS",
-      item: `${site.url}/produk/nectarpos`,
-    },
+    { "@type": "ListItem", position: 2, name: "KaselaPOS", item: `${site.url}/produk/kaselapos` },
   ],
 };
 
 /* ---------------------------------- page ---------------------------------- */
 
-export default function NectarPosPage() {
+export default function KaselaPosPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([productSchema, faqSchema, breadcrumbSchema]),
+          __html: JSON.stringify([productSchema, faqSchema(faqs), breadcrumbSchema]),
         }}
       />
       <Hero />
@@ -367,16 +344,16 @@ function Hero() {
           <div>
             <Rise delay={60}>
               <h1 className="mt-6 text-[2.5rem] leading-[1.08] font-extrabold sm:text-5xl lg:text-[3.5rem]">
-                Kelola transaksi kasir Anda, kapan saja, di mana saja {" "}
-                <span className="text-gradient">cukup dari browser</span>
+                Aplikasi kasir yang tetap jalan{" "}
+                <span className="text-gradient">waktu internet mati</span>
               </h1>
             </Rise>
 
             <Rise delay={120}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-muted">
-                KaselaPOS adalah sistem kasir online untuk UMKM. Tidak perlu install, tidak perlu
-                beli mesin kasir khusus. Buka dari HP, tablet, atau laptop laporan penjualan
-                langsung terlihat.
+                KaselaPOS adalah aplikasi kasir offline berbasis web untuk warung, cafe, dan UMKM.
+                Tidak perlu install, tidak perlu beli mesin kasir khusus. Transaksi tetap tercatat
+                saat sinyal hilang dan tersinkron otomatis begitu online lagi.
               </p>
             </Rise>
 
@@ -387,7 +364,7 @@ function Hero() {
                   <ArrowRight size={18} aria-hidden="true" />
                 </ButtonLink>
                 <ButtonLink href="#harga" variant="secondary" className="px-7">
-                  Lihat Harga
+                  Lihat Harga — mulai Rp 99rb/bulan
                 </ButtonLink>
               </div>
             </Rise>
@@ -486,7 +463,7 @@ function Gallery() {
           />
         </Reveal>
 
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2">
+        <ul className="mt-14 grid gap-5 sm:grid-cols-3">
           {gallery.map((g, i) => (
             <Reveal key={g.src} delay={i * 70} as="li">
               <figure className="group h-full overflow-hidden rounded-[1.25rem] border border-white/10 bg-surface">
@@ -495,7 +472,7 @@ function Gallery() {
                     src={g.src}
                     alt={g.alt}
                     fill
-                    sizes="(min-width: 640px) 46vw, 92vw"
+                    sizes="(min-width: 640px) 31vw, 92vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                   <div
@@ -579,7 +556,7 @@ function WhyWeb() {
         </Reveal>
 
         <Reveal delay={80}>
-          <div className="mt-12 overflow-x-auto">
+          <div className="relative mt-12 overflow-x-auto">
             <table className="w-full min-w-[560px] border-separate border-spacing-0 text-left">
               <caption className="sr-only">
                 Perbandingan sistem kasir berbasis web KaselaPOS dengan aplikasi kasir desktop
@@ -717,10 +694,10 @@ function Pricing() {
           <p className="mt-10 text-center text-sm text-ink-muted">
             Butuh sistem yang benar-benar mengikuti alur bisnis Anda?{" "}
             <Link
-              href="/#layanan"
+              href="/layanan/sistem-pos"
               className="font-semibold text-brand underline decoration-brand/40 underline-offset-4 transition-colors hover:text-brand-soft"
             >
-              Lihat layanan POS custom
+              Lihat jasa pembuatan aplikasi kasir custom
             </Link>{" "}
             dengan model sekali bayar.
           </p>
@@ -785,28 +762,7 @@ function Faq() {
           <SectionHeading title="Pertanyaan yang sering diajukan" />
         </Reveal>
 
-        {/* Native <details> — keyboard-operable and expanded state announced
-            without any custom ARIA or JavaScript. */}
-        <div className="mx-auto mt-12 max-w-3xl space-y-3">
-          {faqs.map((f, i) => (
-            <Reveal key={f.q} delay={i * 50}>
-              <details className="glass group rounded-[var(--radius-card)] px-6 open:border-brand/30">
-                <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold [&::-webkit-details-marker]:hidden">
-                  {f.q}
-                  <span
-                    aria-hidden="true"
-                    className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-white/15 text-brand transition-transform duration-300 group-open:rotate-45"
-                  >
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                      <path d="M12 5v14M5 12h14" />
-                    </svg>
-                  </span>
-                </summary>
-                <p className="pb-5 leading-relaxed text-ink-muted">{f.a}</p>
-              </details>
-            </Reveal>
-          ))}
-        </div>
+        <FaqList faqs={faqs} />
       </div>
     </section>
   );

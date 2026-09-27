@@ -4,7 +4,8 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
 import { RevealController } from "@/components/reveal-controller";
-import { site } from "@/lib/site";
+import { Analytics } from "@/components/analytics";
+import { businessId, site } from "@/lib/site";
 import "./globals.css";
 
 const sora = Sora({
@@ -21,37 +22,32 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+const homeTitle = "Software House untuk UMKM di Jakarta | Ayrus Digital Teknologi";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: "Jasa Pembuatan Aplikasi Custom untuk UMKM | Ayrus Digital Teknologi",
-    template: `%s | ${site.name}`,
+    default: homeTitle,
+    // Short brand suffix: Google cuts titles around 60 characters.
+    template: "%s | Ayrus Digital",
   },
   description: site.description,
-  keywords: [
-    "jasa pembuatan aplikasi custom UMKM",
-    "aplikasi laundry custom",
-    "sistem kasir online berbasis web",
-    "software house Indonesia",
-    "aplikasi POS subscription",
-    "pembuatan website UMKM",
-  ],
   authors: [{ name: site.name }],
   creator: site.name,
   alternates: { canonical: "/" },
+  // Pages that set their own openGraph replace this whole object, so it only
+  // reaches pages that set none. twitter:title/description are deliberately
+  // left out: X falls back to each page's og:title/og:description, which stops
+  // every page without its own twitter block from showing the homepage title.
   openGraph: {
     type: "website",
     locale: site.locale,
     url: site.url,
     siteName: site.name,
-    title: "Jasa Pembuatan Aplikasi Custom untuk UMKM | Ayrus Digital Teknologi",
+    title: homeTitle,
     description: site.description,
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Jasa Pembuatan Aplikasi Custom untuk UMKM | Ayrus Digital Teknologi",
-    description: site.description,
-  },
+  twitter: { card: "summary_large_image" },
   robots: {
     index: true,
     follow: true,
@@ -70,25 +66,46 @@ export const viewport: Viewport = {
   // No maximumScale / userScalable:false — pinch-zoom must stay available.
 };
 
-const orgSchema = {
+/**
+ * ProfessionalService is a LocalBusiness subtype, which is what makes the
+ * address, phone and hours eligible for local results. Every other schema on
+ * the site points back here through `@id` instead of repeating the business.
+ */
+const businessSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "ProfessionalService",
+  "@id": businessId,
   name: site.name,
+  alternateName: "Ayrus Digital",
   url: site.url,
+  logo: `${site.url}/images/logo.png`,
+  image: `${site.url}/opengraph-image.png`,
   description: site.description,
   foundingDate: site.founded,
   email: site.email,
+  telephone: `+${site.whatsapp}`,
+  priceRange: "Rp 1 juta+",
   address: {
     "@type": "PostalAddress",
     streetAddress: site.address.street,
     addressLocality: site.address.city,
     addressRegion: site.address.region,
-    postalCode: site.address.postalCode,
     addressCountry: site.address.country,
+  },
+  areaServed: [
+    { "@type": "City", name: "Jakarta Timur" },
+    { "@type": "Country", name: "Indonesia" },
+  ],
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: "09:00",
+    closes: "18:00",
   },
   contactPoint: {
     "@type": "ContactPoint",
     telephone: `+${site.whatsapp}`,
+    url: `https://wa.me/${site.whatsapp}`,
     contactType: "sales",
     availableLanguage: ["id", "en"],
   },
@@ -106,7 +123,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
         />
       </head>
       <body>
@@ -121,6 +138,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <WhatsAppFab />
         <RevealController />
+        <Analytics />
       </body>
     </html>
   );

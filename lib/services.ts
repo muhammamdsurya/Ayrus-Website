@@ -24,6 +24,7 @@ import {
   PenTool,
   Server,
 } from "lucide-react";
+import { priceFrom } from "./pricing";
 
 /**
  * Single source of truth for the four services.
@@ -35,7 +36,10 @@ import {
 export type ServiceDetail = {
   slug: string;
   category: string;
+  /** Short label for cards, footer links and breadcrumbs. */
   title: string;
+  /** Detail-page H1 — the page's primary keyword, in the words buyers search. */
+  h1: string;
   /** One line under the H1 on the detail page. */
   tagline: string;
   icon: LucideIcon;
@@ -48,6 +52,7 @@ export type ServiceDetail = {
   meta: { label: string; sub: string };
 
   /* --- detail page --- */
+  /** Used as-is (no site-name suffix), so it can carry its own brand. */
   metaTitle: string;
   metaDescription: string;
   keywords: string[];
@@ -66,7 +71,8 @@ export const services: ServiceDetail[] = [
   {
     slug: "custom-software",
     category: "Custom Software",
-    title: "Custom Software Development",
+    title: "Aplikasi Custom",
+    h1: "Jasa Pembuatan Aplikasi Custom untuk UMKM",
     tagline:
       "Aplikasi yang dibangun dari nol mengikuti alur kerja bisnis Anda — bukan template yang dipaksakan.",
     icon: Code2,
@@ -80,19 +86,20 @@ export const services: ServiceDetail[] = [
     cardPoints: ["Analisis proses bisnis", "Fitur sesuai kebutuhan", "Hak pakai penuh"],
     meta: { label: "Sekali bayar", sub: "Estimasi 6–10 minggu" },
 
-    metaTitle: "Jasa Pembuatan Aplikasi Custom untuk UMKM",
+    metaTitle: "Jasa Pembuatan Aplikasi Custom UMKM – Sekali Bayar, Source Code Milik Anda",
     metaDescription:
-      "Jasa pembuatan software custom untuk UMKM Indonesia. Dibangun mengikuti alur bisnis Anda, sekali bayar, source code diserahkan. Estimasi 6–10 minggu.",
+      "Aplikasi web dibangun mengikuti alur bisnis Anda. Sekali bayar, source code diserahkan, garansi bug. Estimasi 6–10 minggu. Konsultasi gratis via WhatsApp.",
     keywords: [
-      "jasa pembuatan aplikasi custom UMKM",
-      "software house Indonesia",
+      "jasa pembuatan aplikasi custom",
       "jasa pembuatan software custom",
-      "aplikasi bisnis custom",
+      "jasa pembuatan aplikasi web custom",
+      "jasa bikin aplikasi bisnis",
+      "aplikasi custom sekali bayar",
     ],
-    priceFrom: "Rp 1 juta",
-    timeline: "6–10 minggu",
+    priceFrom: priceFrom("custom-software"),
+        timeline: "6–10 minggu",
     intro: [
-      "Software siap pakai memaksa Anda mengubah cara kerja supaya cocok dengan aplikasinya. Custom software bekerja sebaliknya: kami pelajari dulu bagaimana bisnis Anda benar-benar berjalan, lalu membangun sistem yang mengikuti alur itu.",
+      "Software siap pakai memaksa Anda mengubah cara kerja supaya cocok dengan aplikasinya. Jasa pembuatan aplikasi custom kami bekerja sebaliknya: kami pelajari dulu bagaimana bisnis Anda benar-benar berjalan, lalu membangun sistem yang mengikuti alur itu.",
       "Pendekatan ini paling masuk akal ketika proses Anda punya aturan khusus yang tidak ada di aplikasi jadi — misalnya skema harga bertingkat, alur approval internal, atau perhitungan komisi yang unik untuk usaha Anda.",
     ],
     forWho: [
@@ -215,7 +222,8 @@ export const services: ServiceDetail[] = [
   {
     slug: "aplikasi-keuangan",
     category: "Aplikasi Keuangan",
-    title: "Aplikasi Keuangan",
+    title: "Aplikasi Keuangan & Pembukuan",
+    h1: "Jasa Pembuatan Aplikasi Keuangan & Pembukuan Custom",
     tagline:
       "Pembukuan, arus kas, dan laporan laba rugi yang rapi tanpa perlu jadi akuntan lebih dulu.",
     icon: Calculator,
@@ -229,20 +237,21 @@ export const services: ServiceDetail[] = [
     cardPoints: ["Arus kas masuk & keluar", "Laporan laba rugi otomatis", "Rekap piutang & hutang"],
     meta: { label: "Sekali bayar", sub: "Estimasi 5–8 minggu" },
 
-    metaTitle: "Aplikasi Keuangan & Pembukuan Custom untuk UMKM",
+    metaTitle: "Jasa Pembuatan Aplikasi Keuangan & Pembukuan Custom UMKM | Ayrus",
     metaDescription:
       "Aplikasi pembukuan dan keuangan custom untuk UMKM: arus kas, laba rugi, piutang, hutang, dan laporan pajak. Sekali bayar, tanpa langganan bulanan.",
     keywords: [
-      "aplikasi keuangan UMKM",
+      "jasa pembuatan aplikasi keuangan",
       "aplikasi pembukuan custom",
-      "software akuntansi UMKM",
-      "aplikasi arus kas usaha",
+      "software akuntansi UMKM sekali bayar",
+      "aplikasi keuangan multi cabang",
+      "aplikasi piutang pengingat WhatsApp",
     ],
-    priceFrom: "Rp 1 juta",
-    timeline: "5–8 minggu",
+    priceFrom: priceFrom("aplikasi-keuangan"),
+        timeline: "5–8 minggu",
     intro: [
       "Sebagian besar UMKM tahu omzetnya, tapi tidak tahu untungnya. Uang masuk tercatat di buku, pengeluaran di catatan lain, dan piutang cuma diingat-ingat. Akhir bulan angkanya tidak pernah benar-benar cocok.",
-      "Aplikasi keuangan yang kami bangun menyatukan semuanya dalam satu tempat: kas masuk dan keluar, piutang pelanggan, hutang ke supplier, sampai laporan laba rugi yang terbentuk otomatis. Dibuat untuk pemilik usaha, bukan untuk akuntan — istilahnya sederhana dan alurnya mengikuti kebiasaan mencatat Anda.",
+      "Aplikasi keuangan dan pembukuan custom yang kami bangun menyatukan semuanya dalam satu tempat: kas masuk dan keluar, piutang pelanggan, hutang ke supplier, sampai laporan laba rugi yang terbentuk otomatis. Dibuat untuk pemilik usaha, bukan untuk akuntan — istilahnya sederhana dan alurnya mengikuti kebiasaan mencatat Anda.",
     ],
     forWho: [
       "Pembukuan masih dicampur antara buku tulis, Excel, dan ingatan",
@@ -364,7 +373,8 @@ export const services: ServiceDetail[] = [
   {
     slug: "website",
     category: "Website",
-    title: "Website Development",
+    title: "Website UMKM",
+    h1: "Jasa Pembuatan Website UMKM",
     tagline:
       "Company profile, katalog produk, sampai toko online yang cepat dan siap ditemukan di Google.",
     icon: Globe,
@@ -378,20 +388,21 @@ export const services: ServiceDetail[] = [
     cardPoints: ["SEO-ready", "Responsif di semua layar", "Kelola konten sendiri"],
     meta: { label: "Sekali bayar", sub: "Estimasi 2–4 minggu" },
 
-    metaTitle: "Jasa Pembuatan Website UMKM — Company Profile & Toko Online",
+    metaTitle: "Jasa Pembuatan Website UMKM: Company Profile & Katalog WhatsApp | Ayrus",
     metaDescription:
-      "Jasa pembuatan website untuk UMKM: company profile, katalog produk, dan toko online. Cepat, responsif, SEO-ready, dan kontennya bisa Anda kelola sendiri.",
+      "Website UMKM dengan desain khusus, bukan template: company profile, katalog produk dengan tombol pesan WhatsApp, sampai toko online. Cepat di HP dan siap ditemukan di Google.",
     keywords: [
-      "pembuatan website UMKM",
-      "jasa pembuatan company profile",
+      "jasa pembuatan website UMKM",
+      "jasa pembuatan website company profile",
+      "jasa pembuatan website katalog produk",
       "jasa pembuatan toko online",
-      "website bisnis Indonesia",
+      "website UMKM tanpa template",
     ],
-    priceFrom: "Rp 1 juta",
-    timeline: "2–4 minggu",
+    priceFrom: priceFrom("website"),
+        timeline: "2–4 minggu",
     intro: [
       "Calon pelanggan mencari Anda di Google sebelum menghubungi. Kalau yang muncul hanya akun media sosial yang jarang diurus, mereka akan ragu — apalagi untuk transaksi bernilai besar.",
-      "Kami membangun website yang cepat, tampil rapi di layar HP, dan disiapkan sejak awal supaya mudah ditemukan mesin pencari. Kontennya bisa Anda ubah sendiri lewat CMS, tanpa perlu menghubungi kami setiap kali ada perubahan harga atau produk baru.",
+      "Sebagai jasa pembuatan website UMKM, kami membangun website dengan desain khusus — bukan template — yang cepat, tampil rapi di layar HP, dan disiapkan sejak awal supaya mudah ditemukan mesin pencari. Kontennya bisa Anda ubah sendiri lewat CMS, tanpa perlu menghubungi kami setiap kali ada perubahan harga atau produk baru.",
     ],
     forWho: [
       "Bisnis Anda belum punya alamat resmi di internet selain media sosial",
@@ -513,7 +524,8 @@ export const services: ServiceDetail[] = [
   {
     slug: "sistem-pos",
     category: "Sistem POS",
-    title: "Sistem POS Custom",
+    title: "Aplikasi Kasir (POS) Custom",
+    h1: "Jasa Pembuatan Aplikasi Kasir (POS) Custom",
     tagline:
       "Sistem kasir yang menyesuaikan alur outlet Anda, terintegrasi dengan stok dan pembukuan.",
     icon: ScanBarcode,
@@ -527,20 +539,21 @@ export const services: ServiceDetail[] = [
     cardPoints: ["Integrasi printer & scanner", "Manajemen stok", "Multi-outlet"],
     meta: { label: "Sekali bayar", sub: "Estimasi 5–8 minggu" },
 
-    metaTitle: "Jasa Pembuatan Sistem POS & Kasir Custom untuk UMKM",
+    metaTitle: "Jasa Pembuatan Aplikasi Kasir (POS) Custom untuk UMKM | Ayrus",
     metaDescription:
-      "Sistem POS custom untuk UMKM: alur kasir sesuai outlet Anda, integrasi printer dan scanner, manajemen stok, dan laporan multi-outlet. Sekali bayar.",
+      "Aplikasi kasir custom yang tetap jalan saat internet mati, terhubung ke stok dan pembukuan, multi-outlet. Sekali bayar. Tanya estimasi via WhatsApp.",
     keywords: [
-      "sistem POS custom",
-      "aplikasi kasir custom",
-      "software kasir UMKM",
-      "sistem kasir multi outlet",
+      "jasa pembuatan aplikasi kasir",
+      "jasa pembuatan sistem POS custom",
+      "jasa pembuatan program kasir",
+      "aplikasi kasir multi cabang custom",
+      "aplikasi kasir custom sekali bayar",
     ],
-    priceFrom: "Rp 1 juta",
-    timeline: "5–8 minggu",
+    priceFrom: priceFrom("sistem-pos"),
+        timeline: "5–8 minggu",
     intro: [
       "Aplikasi kasir siap pakai cocok untuk usaha yang alurnya standar. Begitu Anda punya aturan sendiri — paket bundling, harga khusus pelanggan langganan, deposit di muka, atau perhitungan komisi kasir — aplikasi jadi mulai terasa memaksa.",
-      "Sistem POS custom dibangun mengikuti alur outlet Anda dan tersambung langsung ke stok serta pembukuan. Kalau kebutuhan Anda masih umum, kami akan jujur menyarankan KaselaPOS yang berlangganan — jauh lebih hemat untuk memulai.",
+      "Aplikasi kasir (POS) custom kami bangun mengikuti alur outlet Anda dan tersambung langsung ke stok serta pembukuan. Kalau kebutuhan Anda masih umum, kami akan jujur menyarankan KaselaPOS yang berlangganan — jauh lebih hemat untuk memulai.",
     ],
     forWho: [
       "Alur transaksi Anda punya aturan yang tidak ada di aplikasi kasir umum",

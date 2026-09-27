@@ -7,11 +7,15 @@ import { PortfolioGrid } from "@/components/portfolio-grid";
 import { caseCategories, caseStudies } from "@/lib/portfolio";
 import { site, waLink, waMessages } from "@/lib/site";
 
+const title = "Portofolio & Studi Kasus — Proyek UMKM yang Kami Kerjakan";
+const description =
+  "Studi kasus proyek Ayrus Digital Teknologi: aplikasi custom, aplikasi kasir (POS), aplikasi keuangan, dan website untuk UMKM Indonesia — lengkap dengan hasil terukurnya.";
+
 export const metadata: Metadata = {
-  title: "Portofolio & Studi Kasus — Proyek UMKM yang Kami Kerjakan",
-  description:
-    "Studi kasus proyek Ayrus Digital Teknologi: aplikasi custom, sistem POS, aplikasi keuangan, dan website untuk UMKM Indonesia — lengkap dengan hasil terukurnya.",
+  title,
+  description,
   alternates: { canonical: "/portofolio" },
+  openGraph: { type: "website", url: `${site.url}/portofolio`, title, description },
 };
 
 const stats = [

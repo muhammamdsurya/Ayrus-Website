@@ -1,44 +1,31 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/lib/services";
+import { solutions } from "@/lib/solutions";
 import { articles } from "@/lib/articles";
 import { caseStudies } from "@/lib/portfolio";
 import { site } from "@/lib/site";
 
+/**
+ * Served at /sitemap.xml. Google ignores changefreq/priority and only trusts
+ * lastmod when it is accurate, so lastmod is set only where a real date exists
+ * (articles) instead of stamping every URL with the build time.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  const page = (path: string, lastModified?: string) => ({
+    url: `${site.url}${path}`,
+    ...(lastModified ? { lastModified } : {}),
+  });
 
   return [
-    { url: site.url, lastModified: now, changeFrequency: "weekly", priority: 1 },
-    {
-      url: `${site.url}/produk/nectarpos`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    ...services.map((s) => ({
-      url: `${site.url}/layanan/${s.slug}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-    })),
-    {
-      url: `${site.url}/portofolio`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-    },
-    ...caseStudies.map((c) => ({
-      url: `${site.url}/portofolio/${c.slug}`,
-      lastModified: now,
-      changeFrequency: "yearly" as const,
-      priority: 0.6,
-    })),
-    { url: `${site.url}/blog`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.6 },
-    ...articles.map((a) => ({
-      url: `${site.url}/blog/${a.slug}`,
-      lastModified: new Date(a.dateTime),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    })),
+    page("/"),
+    ...services.map((s) => page(`/layanan/${s.slug}`)),
+    ...solutions.map((s) => page(`/solusi/${s.slug}`)),
+    page("/harga"),
+    page("/produk/kaselapos"),
+    page("/jasa-pembuatan-aplikasi-jakarta-timur"),
+    page("/portofolio"),
+    ...caseStudies.map((c) => page(`/portofolio/${c.slug}`)),
+    page("/blog", articles.map((a) => a.dateTime).sort().at(-1)),
+    ...articles.map((a) => page(`/blog/${a.slug}`, a.dateTime)),
   ];
 }

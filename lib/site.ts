@@ -19,24 +19,32 @@ export const site = {
   phoneDisplay: "+62 819-3276-4494",
   whatsapp: "6281932764494",
   hours: "Setiap Hari, 09.00–18.00 WIB",
+  /** Must match the Google Business Profile listing character for character. */
   address: {
     street: "Jl. Raya Condet No. 21",
-    city: "Jakarta",
-    region: "Jawa Barat",
-    postalCode: "40115",
+    city: "Jakarta Timur",
+    region: "DKI Jakarta",
     country: "ID",
   },
 } as const;
 
+/** JSON-LD `@id` of the business node declared once in app/layout.tsx. */
+export const businessId = `${site.url}/#bisnis`;
+
 /**
  * KaselaPOS lives on its own subdomain, not on this site. Menu entries and the
- * homepage CTAs point straight at the app; /produk/nectarpos stays as the
- * marketing/SEO page reached from search and the sitemap.
+ * homepage CTAs point straight at the app; /produk/kaselapos stays as the
+ * marketing/SEO page reached from search, the sitemap and in-content links.
  */
 export const kaselaposUrl = "https://kaselapos.ayrusdigital.my.id/";
 
-export function waLink(message: string) {
-  return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
+/**
+ * `source` is appended as "(dari …)" so whoever answers WhatsApp can log which
+ * page produced the chat.
+ */
+export function waLink(message: string, source?: string) {
+  const text = source ? `${message} (dari ${source})` : message;
+  return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
 }
 
 export const waMessages = {

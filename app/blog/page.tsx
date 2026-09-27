@@ -7,11 +7,15 @@ import { Eyebrow } from "@/components/ui";
 import { articles } from "@/lib/articles";
 import { site } from "@/lib/site";
 
+const title = "Artikel UMKM: Aplikasi Kasir, Pembukuan & Website";
+const description =
+  "Panduan praktis untuk pemilik UMKM: memilih aplikasi kasir, harga dan biaya pembuatan aplikasi, pembukuan digital, dan kapan sebaiknya memakai software custom.";
+
 export const metadata: Metadata = {
-  title: "Artikel — Panduan Digitalisasi untuk UMKM",
-  description:
-    "Panduan praktis seputar digitalisasi UMKM: memilih sistem kasir, pembukuan digital, dan kapan sebaiknya memakai software custom.",
+  title,
+  description,
   alternates: { canonical: "/blog" },
+  openGraph: { type: "website", url: `${site.url}/blog`, title, description },
 };
 
 export default function BlogIndex() {

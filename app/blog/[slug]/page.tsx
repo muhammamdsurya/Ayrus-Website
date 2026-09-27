@@ -7,7 +7,7 @@ import { Rise } from "@/components/rise";
 import { ButtonLink } from "@/components/ui";
 import { articles, getArticle, type Block } from "@/lib/articles";
 import { getService } from "@/lib/services";
-import { site, waLink, waMessages } from "@/lib/site";
+import { businessId, site, waLink } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -55,8 +55,8 @@ export default async function ArticlePage({ params }: Params) {
       dateModified: a.dateTime,
       inLanguage: "id-ID",
       mainEntityOfPage: { "@type": "WebPage", "@id": `${site.url}/blog/${a.slug}` },
-      author: { "@type": "Organization", name: site.name, url: site.url },
-      publisher: { "@type": "Organization", name: site.name, url: site.url },
+      author: { "@id": businessId },
+      publisher: { "@id": businessId },
     },
     {
       "@context": "https://schema.org",
@@ -182,12 +182,12 @@ export default async function ArticlePage({ params }: Params) {
                       <ArrowRight size={18} aria-hidden="true" />
                     </ButtonLink>
                     <ButtonLink
-                      href={waLink(waMessages.general)}
+                      href={waLink(a.cta.message, `artikel "${a.title}"`)}
                       external
                       variant="secondary"
                       className="px-7 whitespace-nowrap"
                     >
-                      Konsultasi Gratis
+                      {a.cta.label}
                     </ButtonLink>
                   </div>
                 </div>
@@ -238,7 +238,7 @@ function BlockView({ block: b }: { block: Block }) {
       return <h3 className="mt-8 text-xl font-bold">{b.text}</h3>;
 
     case "p":
-      return <p className="mt-5 text-[17px] leading-[1.75] text-ink-muted">{b.text}</p>;
+      return <p className="mt-5 text-[17px] leading-[1.75] text-ink-muted">{rich(b.text)}</p>;
 
     case "ul":
       return (
@@ -246,7 +246,7 @@ function BlockView({ block: b }: { block: Block }) {
           {b.items.map((it) => (
             <li key={it} className="flex gap-3 text-[17px] leading-[1.7] text-ink-muted">
               <span aria-hidden="true" className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
-              {it}
+              <span>{rich(it)}</span>
             </li>
           ))}
         </ul>
@@ -263,7 +263,7 @@ function BlockView({ block: b }: { block: Block }) {
               >
                 {i + 1}
               </span>
-              {it}
+              <span>{rich(it)}</span>
             </li>
           ))}
         </ol>
@@ -285,9 +285,27 @@ function BlockView({ block: b }: { block: Block }) {
           <Info size={20} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
           <div>
             <p className="font-display font-bold">{b.title}</p>
-            <p className="mt-1.5 leading-relaxed text-ink-muted">{b.text}</p>
+            <p className="mt-1.5 leading-relaxed text-ink-muted">{rich(b.text)}</p>
           </div>
         </aside>
       );
   }
+}
+
+/** Turns `[label](/path)` inside block text into links. */
+function rich(text: string) {
+  return text.split(/(\[[^\]]+\]\([^)]+\))/).map((part, i) => {
+    const m = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(part);
+    return m ? (
+      <Link
+        key={i}
+        href={m[2]}
+        className="font-semibold text-brand underline decoration-brand/40 underline-offset-4 transition-colors hover:text-brand-soft"
+      >
+        {m[1]}
+      </Link>
+    ) : (
+      part
+    );
+  });
 }

@@ -3,13 +3,14 @@ import Link from "next/link";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 import { nav, site, waLink, waMessages } from "@/lib/site";
 import { services } from "@/lib/services";
+import { solutions } from "@/lib/solutions";
 import { NavLink } from "./ui";
 
 
 export function Footer() {
   return (
     <footer className="border-t border-white/8 bg-bg-alt">
-      <div className="container-page grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-4 lg:py-16">
+      <div className="container-page grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-5 lg:py-16">
         <div className="lg:col-span-1">
           <Link href="/" className="inline-flex items-center gap-2.5">
             <Image
@@ -25,7 +26,7 @@ export function Footer() {
             </span>
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-muted">
-            Software house asal Indonesia yang membantu UMKM naik kelas lewat aplikasi custom, sejak {site.founded}.
+            Software house di Jakarta Timur yang membantu UMKM naik kelas lewat aplikasi custom, sejak {site.founded}.
           </p>
         </div>
 
@@ -63,6 +64,40 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/produk/kaselapos"
+                className="inline-flex min-h-9 items-center text-sm text-ink-muted transition-colors duration-200 hover:text-brand"
+              >
+                Aplikasi Kasir Online (KaselaPOS)
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/harga"
+                className="inline-flex min-h-9 items-center text-sm text-ink-muted transition-colors duration-200 hover:text-brand"
+              >
+                Daftar Harga
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        <nav aria-labelledby="footer-solutions">
+          <h2 id="footer-solutions" className="font-display text-sm font-semibold tracking-wide uppercase">
+            Solusi
+          </h2>
+          <ul className="mt-4 space-y-1">
+            {solutions.map((item) => (
+              <li key={item.slug}>
+                <Link
+                  href={`/solusi/${item.slug}`}
+                  className="inline-flex min-h-9 items-center text-sm text-ink-muted transition-colors duration-200 hover:text-brand"
+                >
+                  Aplikasi {item.shortTitle}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
 
@@ -83,9 +118,12 @@ export function Footer() {
             </li>
             <li className="flex gap-2.5">
               <MapPin size={17} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
-              <span>
+              <Link
+                href="/jasa-pembuatan-aplikasi-jakarta-timur"
+                className="transition-colors hover:text-brand"
+              >
                 {site.address.street}, {site.address.city}, {site.address.region}
-              </span>
+              </Link>
             </li>
             <li className="flex gap-2.5">
               <Clock size={17} className="mt-0.5 shrink-0 text-brand" aria-hidden="true" />
