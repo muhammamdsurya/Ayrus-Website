@@ -1,4 +1,4 @@
-# Design system — Ayrus Digital Teknologi
+# Design system — Ayrus Digital Indonesia
 
 Dark-first, purple accent, per PRD §6. Tokens live in `app/globals.css` under
 `@theme`; nothing should hardcode a hex outside that block except the per-service
@@ -22,7 +22,24 @@ card accents in `app/page.tsx`.
 | `--color-brand-ink` | `#0A0A0A` | **Text on a purple fill** |
 
 Type: **Sora** for headings (`--font-display`), **Plus Jakarta Sans** for body
-(`--font-sans`). Section rhythm is `--spacing-section` (5.5rem).
+(`--font-sans`). Section rhythm is `--spacing-section`
+(`clamp(4.5rem, 9vw, 7.5rem)`).
+
+## Layout rules (2026 redesign)
+
+- **Shape lock.** Interactive elements are pills, cards use `--radius-card`
+  (1.25rem), framed shells use `--radius-shell` (1.75rem).
+- **Double-bezel frames** (`<Bezel>`, `.bezel` / `.bezel-core`) for the cards
+  that carry weight: hero screenshots, SaaS, portfolio, testimonials, contact.
+- **Buttons** take `arrow` for the nested arrow circle; press = `scale(0.98)`.
+  No outer purple glow, only an inner top highlight.
+- **Motion** uses `--ease-spring`; reveals travel 28px over 0.8s.
+- **Headings default to left-aligned.** One eyebrow per three sections at most;
+  page heroes keep theirs, section headings do not use one.
+- **No layout family twice on the homepage** (split hero, stats strip, editorial
+  split, bento, two-up, featured+stack, timeline, quote wall, list, CTA band).
+- **Copy:** no em-dashes or en-dashes in visible text; ranges use a hyphen.
+- **Grain:** one fixed `body::after` noise layer. Never on scrolling elements.
 
 ## Contrast audit (WCAG 2.1 AA — PRD §9)
 
@@ -77,18 +94,15 @@ The failure mode of a scroll reveal is *invisible content on a lead-gen site*, s
 
 Not every section should be a card grid. The page alternates deliberately:
 
-Three card weights, deliberately distinct:
+Two card weights, deliberately distinct:
 
 | Weight | Component | Used by |
 |---|---|---|
 | Heavy | `ServiceCard`, `PortfolioGrid` card | Photo-led. Media header, category pill, divided footer. The sections that have to sell. |
 | Medium | `FeatureCard` (default) | Icon tile, `01`–`06` marker, brand hairline along the top edge. Kenapa Ayrus, service "Apa saja yang Anda dapat". |
-| Light | `FeatureCard variant="compact"` | Icon inline with the title, no marker, no top edge. NectarPOS feature grid — supporting detail, not the point of the page. |
 
 The rule is that a section's card weight should match how much of the page's
-persuasive work it is doing. A six-item grid at heavy weight reads as a wall; the
-same grid compact reads as a spec list, which is what a feature roster actually
-is.
+persuasive work it is doing. A six-item grid at heavy weight reads as a wall.
 
 `FeatureCard`'s top-edge highlight is a single gradient hairline, brightest at
 the centre and fading to nothing at the corners, so the card reads as lit from
@@ -100,9 +114,8 @@ above rather than merely outlined — depth without adding another filled surfac
   flat dark background, where blurring the backdrop is visually indistinguishable
   but forces a compositing layer per card — real cost on the mid-tier Android
   phones this audience uses.
-- **No image assets on the critical path.** The NectarPOS mockup and the service
-  card media headers are generated markup/gradients, so they cost no requests and
-  stay crisp at any DPI.
+- **No image assets on the critical path.** The homepage hero is text over CSS
+  gradients, so it costs no requests and stays crisp at any DPI.
 - **No animation library.** Framer Motion (PRD §7.1) was not needed once the hero
   moved to CSS keyframes and the rest to one shared observer; skipping it keeps
   the client bundle smaller, which the same PRD section asks for.
@@ -138,9 +151,10 @@ problem that only exists behind the icon chip.
 
 ## Navbar active state
 
-The current item is bright (`--color-ink`, semibold) against muted siblings, and
-carries `aria-current="page"`. Brightness alone would be a colour-only signal, so
-the active item also gets a brand underline (a left bar in the mobile panel).
+The navbar is a floating glass pill. The current item is bright
+(`--color-ink`, semibold) against muted siblings, and carries
+`aria-current="page"`. Brightness alone would be a colour-only signal, so the
+active item also sits on a filled chip.
 
 Two sources feed it, in priority order:
 

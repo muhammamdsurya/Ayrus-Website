@@ -5,17 +5,17 @@ import { Reveal } from "@/components/reveal";
 import { Rise } from "@/components/rise";
 import { Eyebrow } from "@/components/ui";
 import { articles } from "@/lib/articles";
-import { site } from "@/lib/site";
+import { shareImage, site } from "@/lib/site";
 
 const title = "Artikel UMKM: Aplikasi Kasir, Pembukuan & Website";
 const description =
-  "Panduan praktis untuk pemilik UMKM: memilih aplikasi kasir, harga dan biaya pembuatan aplikasi, pembukuan digital, dan kapan sebaiknya memakai software custom.";
+  "Panduan praktis dari software house Indonesia: memilih aplikasi kasir, pembukuan digital, dan kapan bisnis Anda butuh software custom.";
 
 export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/blog" },
-  openGraph: { type: "website", url: `${site.url}/blog`, title, description },
+  openGraph: { type: "website", url: `${site.url}/blog`, title, description, images: [shareImage] },
 };
 
 export default function BlogIndex() {
@@ -41,7 +41,7 @@ export default function BlogIndex() {
 
       <section className="relative overflow-hidden pt-28 pb-14 sm:pt-32 lg:pt-36">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-          <div className="grid-lines absolute inset-0 [mask-image:radial-gradient(ellipse_75%_55%_at_50%_0%,#000_20%,transparent_75%)]" />
+          <div className="hero-texture absolute inset-0 [mask-image:radial-gradient(ellipse_75%_55%_at_50%_0%,#000_20%,transparent_75%)]" />
           <div className="absolute -top-40 left-1/2 h-[420px] w-[820px] max-w-[130vw] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(203,108,230,0.28),transparent_65%)] blur-3xl" />
         </div>
 

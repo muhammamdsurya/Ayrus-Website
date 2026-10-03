@@ -19,7 +19,6 @@ import {
   RefreshCw,
   Globe,
 } from "lucide-react";
-import { priceFrom } from "./pricing";
 
 /**
  * Industry pages under /solusi/[slug]. Each one is built on a case study that
@@ -38,18 +37,12 @@ export type Solution = {
   tagline: string;
   /** Case study slug in lib/portfolio.ts used as proof. */
   caseSlug: string;
-  /** Service whose price tiers apply (lib/pricing.ts). */
-  serviceSlug: string;
   timeline: string;
   intro: string[];
   features: { icon: LucideIcon; title: string; desc: string }[];
-  /** Shown next to the KaselaPOS link, for owners not ready for custom. */
-  kaselaNote: string;
   faqs: { q: string; a: string }[];
   wa: string;
 };
-
-const pos = priceFrom("sistem-pos");
 
 export const solutions: Solution[] = [
   {
@@ -61,10 +54,9 @@ export const solutions: Solution[] = [
       "Aplikasi kasir laundry custom untuk kiloan dan satuan: timbang, status cucian, nota dan notifikasi WhatsApp, laporan tiap cabang. Terbukti menurunkan selisih kas 90%.",
     h1: "Aplikasi Laundry Multi Cabang, Dibuat Mengikuti Alur Usaha Anda",
     tagline:
-      "Dari timbang cucian, status proses, sampai nota dan pengingat ambil lewat WhatsApp — semua cabang terpantau dari satu dashboard.",
+      "Dari timbang cucian, status proses, sampai nota dan pengingat ambil lewat WhatsApp, semua cabang terpantau dari satu dashboard.",
     caseSlug: "laundry-bersih-wangi",
-    serviceSlug: "sistem-pos",
-    timeline: "5–8 minggu",
+    timeline: "5-8 minggu",
     intro: [
       "Aplikasi laundry multi cabang yang kami bangun berangkat dari satu masalah yang hampir selalu sama: setiap cabang mencatat di bukunya sendiri, pemilik merekap ulang tiap malam, dan angkanya jarang cocok dengan uang di laci.",
       "Berbeda dengan aplikasi kasir ritel, transaksi laundry belum selesai saat pelanggan membayar. Cucian masih harus ditimbang, dicuci, disetrika, lalu diambil beberapa hari kemudian. Karena itu aplikasinya kami susun mengikuti perjalanan cucian, bukan sekadar mencatat pembayaran.",
@@ -73,7 +65,7 @@ export const solutions: Solution[] = [
       {
         icon: Scale,
         title: "Timbang & hitung otomatis",
-        desc: "Harga kiloan dengan pembulatan yang bisa diatur, item satuan seperti bed cover dan jas, serta tarif ekspres — semua dalam satu nota.",
+        desc: "Harga kiloan dengan pembulatan yang bisa diatur, item satuan seperti bed cover dan jas, serta tarif ekspres, semua dalam satu nota.",
       },
       {
         icon: ListChecks,
@@ -101,13 +93,7 @@ export const solutions: Solution[] = [
         desc: "Daftar cucian yang belum diambil lebih dari tujuh hari, supaya rak tidak penuh dan pelanggan bisa diingatkan.",
       },
     ],
-    kaselaNote:
-      "Baru punya satu outlet dan alurnya masih standar? KaselaPOS bisa dipakai hari ini dengan biaya bulanan kecil.",
     faqs: [
-      {
-        q: "Berapa biaya membuat aplikasi laundry custom?",
-        a: `Mulai dari ${pos} untuk satu outlet. Untuk multi cabang dengan notifikasi WhatsApp dan laporan gabungan, kisarannya lebih tinggi tergantung jumlah cabang dan fitur. Setelah sesi konsultasi gratis kami berikan rincian per modul.`,
-      },
       {
         q: "Apakah bisa memakai timbangan dan printer nota yang sudah ada?",
         a: "Sebagian besar printer thermal 58mm dan 80mm didukung, begitu juga timbangan digital yang punya koneksi USB atau serial. Kirimkan merek dan tipenya, kami cek sebelum penawaran dibuat.",
@@ -118,7 +104,7 @@ export const solutions: Solution[] = [
       },
       {
         q: "Bisakah pelanggan mengecek status cuciannya sendiri?",
-        a: "Bisa. Pelanggan menerima tautan lewat WhatsApp untuk melihat status cuciannya tanpa perlu memasang aplikasi — telepon yang menanyakan status di Laundry Bersih Wangi turun 60%.",
+        a: "Bisa. Pelanggan menerima tautan lewat WhatsApp untuk melihat status cuciannya tanpa perlu memasang aplikasi. Telepon yang menanyakan status di Laundry Bersih Wangi turun 60%.",
       },
     ],
     wa: "Halo Ayrus, saya punya usaha laundry dan ingin konsultasi aplikasi laundry.",
@@ -135,11 +121,10 @@ export const solutions: Solution[] = [
     tagline:
       "Varian menu jadi tombol, pesanan langsung masuk antrean bar, dan kasir tetap jalan saat internet putus.",
     caseSlug: "kopi-ruang-tengah",
-    serviceSlug: "sistem-pos",
-    timeline: "5–7 minggu",
+    timeline: "5-7 minggu",
     intro: [
       "Aplikasi kasir coffee shop punya tantangan yang tidak dimiliki toko biasa: satu menu bisa punya belasan kombinasi ukuran, jenis susu, level gula, dan tambahan. Kalau semuanya diketik manual, pesanan salah saat jam ramai dan antrean memanjang.",
-      "Kedai kopi juga sering berganti staf paruh waktu. Karena itu kami merancang layar kasir yang bisa dikuasai barista baru di hari pertama — di Kopi Ruang Tengah, waktu pelatihan turun dari dua-tiga hari menjadi satu hari.",
+      "Kedai kopi juga sering berganti staf paruh waktu. Karena itu kami merancang layar kasir yang bisa dikuasai barista baru di hari pertama. Di Kopi Ruang Tengah, waktu pelatihan turun dari dua-tiga hari menjadi satu hari.",
     ],
     features: [
       {
@@ -173,13 +158,7 @@ export const solutions: Solution[] = [
         desc: "Grafik penjualan per jam membantu menyusun jadwal barista, supaya jam ramai tidak kekurangan orang.",
       },
     ],
-    kaselaNote:
-      "Kedai baru buka dengan menu sederhana? KaselaPOS sudah mendukung QRIS dan cetak struk, cukup dari tablet atau HP.",
     faqs: [
-      {
-        q: "Berapa biaya aplikasi kasir custom untuk coffee shop?",
-        a: `Mulai dari ${pos} untuk satu outlet. Biaya bertambah bila Anda butuh resep dan stok bahan, layar bar terpisah, atau beberapa cabang. Rinciannya kami berikan per modul setelah konsultasi.`,
-      },
       {
         q: "Apakah mendukung pembayaran QRIS?",
         a: "Bisa. QRIS, tunai, kartu, dan dompet digital dicatat pada transaksi yang sama, dan laporan kas dipisahkan per metode pembayaran.",
@@ -187,10 +166,6 @@ export const solutions: Solution[] = [
       {
         q: "Bisa dipakai di tablet?",
         a: "Bisa. Aplikasinya berbasis web, jadi berjalan di tablet Android, iPad, maupun laptop, dan tersambung ke printer thermal 58mm atau 80mm.",
-      },
-      {
-        q: "Kedai saya masih satu outlet. Apa perlu custom?",
-        a: "Belum tentu. Kalau menu dan alurnya masih umum, KaselaPOS jauh lebih hemat. Custom masuk akal ketika Anda butuh resep, antrean bar, atau aturan promo yang tidak ada di aplikasi siap pakai.",
       },
     ],
     wa: "Halo Ayrus, saya ingin konsultasi aplikasi kasir untuk coffee shop saya.",
@@ -207,11 +182,10 @@ export const solutions: Solution[] = [
     tagline:
       "Jual per sak, batang, atau meter dari produk yang sama, catat bon kontraktor dengan jatuh tempo, dan tampilkan katalog Anda di Google.",
     caseSlug: "maju-jaya",
-    serviceSlug: "sistem-pos",
-    timeline: "5–8 minggu",
+    timeline: "5-8 minggu",
     intro: [
-      "Aplikasi kasir toko bangunan harus mengerti hal yang tidak dikenal kasir biasa: semen dijual per sak, besi per batang, kabel per meter, keramik per dus — dan kadang produk yang sama dijual dalam dua satuan sekaligus. Ditambah lagi pelanggan kontraktor yang mengambil barang sekarang dan membayar belakangan.",
-      "Kami membangun sistem kasir, stok, dan piutang yang mengikuti cara toko material bekerja. Untuk menjangkau pembeli baru, sistem ini bisa disambungkan dengan website katalog — seperti yang kami buat untuk Toko Bangunan Maju Jaya, yang kini mendapat lebih dari 120 calon pembeli dari Google setiap bulan.",
+      "Aplikasi kasir toko bangunan harus mengerti hal yang tidak dikenal kasir biasa: semen dijual per sak, besi per batang, kabel per meter, keramik per dus, dan kadang produk yang sama dijual dalam dua satuan sekaligus. Ditambah lagi pelanggan kontraktor yang mengambil barang sekarang dan membayar belakangan.",
+      "Kami membangun sistem kasir, stok, dan piutang yang mengikuti cara toko material bekerja. Untuk menjangkau pembeli baru, sistem ini bisa disambungkan dengan website katalog, seperti yang kami buat untuk Toko Bangunan Maju Jaya, yang kini mendapat lebih dari 120 calon pembeli dari Google setiap bulan.",
     ],
     features: [
       {
@@ -245,13 +219,7 @@ export const solutions: Solution[] = [
         desc: "Katalog online yang tersambung ke data produk, dengan tombol pesan WhatsApp berisi nama barang dan jumlahnya.",
       },
     ],
-    kaselaNote:
-      "Belum butuh multi satuan dan piutang? KaselaPOS bisa dipakai hari ini untuk mencatat penjualan dan stok dasar.",
     faqs: [
-      {
-        q: "Berapa biaya aplikasi kasir untuk toko bangunan?",
-        a: `Mulai dari ${pos} untuk satu toko. Multi satuan, piutang, dan beberapa gudang menambah modul, dan website katalog dihitung terpisah. Rinciannya kami berikan setelah melihat daftar produk Anda.`,
-      },
       {
         q: "Produk saya ratusan. Harus diinput satu per satu?",
         a: "Tidak. Daftar produk, satuan, dan harga diimpor dari Excel saat serah terima, dan kami bantu merapikan datanya lebih dulu.",

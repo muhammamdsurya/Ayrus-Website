@@ -1,4 +1,4 @@
-# Ayrus Digital Teknologi — Website
+# Ayrus Digital Indonesia — Website
 
 Company profile + conversion landing page, built from `PRD_Ayrus_Digital_Teknologi_EN.md`.
 Default content language is **Bahasa Indonesia** (PRD §4.3).

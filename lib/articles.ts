@@ -50,7 +50,7 @@ export const articles: Article[] = [
     date: "28 Agustus 2026",
     dateTime: "2026-08-28",
     read: "6 menit",
-    author: { name: "Tim Ayrus", role: "Ayrus Digital Teknologi", initials: "AY" },
+    author: { name: "Tim Ayrus", role: "Ayrus Digital Indonesia", initials: "AY" },
     metaTitle: "Cara Memilih Sistem POS untuk Bisnis Laundry",
     metaDescription:
       "Panduan memilih sistem kasir untuk usaha laundry: alur order, tracking cucian, integrasi printer, laporan multi-cabang, dan biaya yang perlu diperhitungkan.",
@@ -59,7 +59,7 @@ export const articles: Article[] = [
     body: [
       {
         t: "p",
-        text: "Usaha laundry punya satu hal yang membedakannya dari toko ritel biasa: transaksi tidak selesai saat pelanggan membayar. Cucian masih harus dicuci, dikeringkan, disetrika, lalu diambil — kadang beberapa hari kemudian. Sistem kasir yang tidak memahami alur ini akan terasa merepotkan sejak minggu pertama.",
+        text: "Usaha laundry punya satu hal yang membedakannya dari toko ritel biasa: transaksi tidak selesai saat pelanggan membayar. Cucian masih harus dicuci, dikeringkan, disetrika, lalu diambil, kadang beberapa hari kemudian. Sistem kasir yang tidak memahami alur ini akan terasa merepotkan sejak minggu pertama.",
       },
       {
         t: "p",
@@ -69,7 +69,7 @@ export const articles: Article[] = [
       { t: "h2", text: "1. Apakah alurnya mengenal status cucian?" },
       {
         t: "p",
-        text: "Ini pembeda paling penting. Sistem kasir ritel hanya mengenal satu status: lunas atau belum. Laundry butuh lebih dari itu — diterima, dicuci, dikeringkan, disetrika, siap diambil, sudah diambil.",
+        text: "Ini pembeda paling penting. Sistem kasir ritel hanya mengenal satu status: lunas atau belum. Laundry butuh lebih dari itu: diterima, dicuci, dikeringkan, disetrika, siap diambil, sudah diambil.",
       },
       {
         t: "p",
@@ -92,7 +92,7 @@ export const articles: Article[] = [
       },
       {
         t: "p",
-        text: "Kalau sistem hanya mendukung satu skema, Anda akan sering menghitung manual lalu memasukkan harganya sebagai angka bebas — dan di titik itu laporan margin Anda sudah tidak bisa dipercaya.",
+        text: "Kalau sistem hanya mendukung satu skema, Anda akan sering menghitung manual lalu memasukkan harganya sebagai angka bebas, dan di titik itu laporan margin Anda sudah tidak bisa dipercaya.",
       },
 
       { t: "h2", text: "3. Apakah bisa mencetak nota dengan printer yang sudah Anda punya?" },
@@ -144,7 +144,7 @@ export const articles: Article[] = [
       },
       {
         t: "p",
-        text: "Sistem berlangganan seperti [KaselaPOS](/produk/kaselapos) biasanya paling masuk akal untuk memulai karena biaya awalnya kecil. [Sistem kasir custom](/layanan/sistem-pos) mulai menarik ketika kebutuhan Anda tidak lagi standar, atau ketika total langganan tiga tahun sudah melampaui biaya membangun sendiri.",
+        text: "Sistem berlangganan biasanya paling masuk akal untuk memulai karena biaya awalnya kecil. [Sistem kasir custom](/layanan/sistem-pos) mulai menarik ketika kebutuhan Anda tidak lagi standar, atau ketika total langganan tiga tahun sudah melampaui biaya membangun sendiri.",
       },
 
       { t: "h2", text: "Ringkasnya" },
@@ -172,7 +172,7 @@ export const articles: Article[] = [
     date: "21 Agustus 2026",
     dateTime: "2026-08-21",
     read: "5 menit",
-    author: { name: "Tim Ayrus", role: "Ayrus Digital Teknologi", initials: "AY" },
+    author: { name: "Tim Ayrus", role: "Ayrus Digital Indonesia", initials: "AY" },
     metaTitle: "Kenapa UMKM Perlu Sistem Kasir Digital",
     metaDescription:
       "Pencatatan manual terlihat gratis, tapi biaya tersembunyinya nyata: selisih kas, stok hilang, dan keputusan yang terlambat. Ini hitungan kasarnya untuk UMKM.",
@@ -186,13 +186,13 @@ export const articles: Article[] = [
     body: [
       {
         t: "p",
-        text: "Buku tulis tidak pernah error, tidak perlu listrik, dan tidak menagih biaya bulanan. Wajar kalau banyak pemilik usaha merasa pencatatan manual adalah pilihan paling hemat. Masalahnya, biaya pencatatan manual memang ada — hanya saja tidak pernah muncul sebagai tagihan.",
+        text: "Buku tulis tidak pernah error, tidak perlu listrik, dan tidak menagih biaya bulanan. Wajar kalau banyak pemilik usaha merasa pencatatan manual adalah pilihan paling hemat. Masalahnya, biaya pencatatan manual memang ada, hanya saja tidak pernah muncul sebagai tagihan.",
       },
 
       { t: "h2", text: "Biaya pertama: selisih yang tidak pernah ketemu" },
       {
         t: "p",
-        text: "Pada usaha dengan omzet Rp 100 juta per bulan, selisih kas 1–2% adalah hal yang umum ketika pencatatan dilakukan manual. Itu setara Rp 1–2 juta setiap bulan yang hilang tanpa jejak. Di salah satu [klien laundry kami](/portofolio/laundry-bersih-wangi), selisih kas turun 90% setelah pencatatan pindah ke sistem kasir digital.",
+        text: "Pada usaha dengan omzet Rp 100 juta per bulan, selisih kas 1-2% adalah hal yang umum ketika pencatatan dilakukan manual. Itu setara Rp 1-2 juta setiap bulan yang hilang tanpa jejak. Di salah satu [klien laundry kami](/portofolio/laundry-bersih-wangi), selisih kas turun 90% setelah pencatatan pindah ke sistem kasir digital.",
       },
       {
         t: "p",
@@ -202,7 +202,7 @@ export const articles: Article[] = [
       { t: "h2", text: "Biaya kedua: waktu pemilik" },
       {
         t: "p",
-        text: "Merekap penjualan harian secara manual biasanya memakan 30–60 menit setiap malam. Dalam sebulan itu sekitar 15–30 jam — waktu yang sebenarnya bisa dipakai untuk melayani pelanggan atau mengembangkan usaha.",
+        text: "Merekap penjualan harian secara manual biasanya memakan 30-60 menit setiap malam. Dalam sebulan itu sekitar 15-30 jam, waktu yang sebenarnya bisa dipakai untuk melayani pelanggan atau mengembangkan usaha.",
       },
       {
         t: "callout",
@@ -228,7 +228,7 @@ export const articles: Article[] = [
       { t: "h2", text: "Apa yang berubah setelah digital" },
       {
         t: "p",
-        text: "Perubahan terbesar bukan pada kecepatan mencatat, melainkan pada apa yang bisa Anda lihat. Ketika setiap transaksi tercatat otomatis, laporan bukan lagi pekerjaan tambahan — laporan adalah efek samping dari berjualan.",
+        text: "Perubahan terbesar bukan pada kecepatan mencatat, melainkan pada apa yang bisa Anda lihat. Ketika setiap transaksi tercatat otomatis, laporan bukan lagi pekerjaan tambahan. Laporan adalah efek samping dari berjualan.",
       },
       {
         t: "ol",
@@ -247,12 +247,12 @@ export const articles: Article[] = [
       },
       {
         t: "p",
-        text: "Tidak perlu langsung membangun sistem custom. Mulai dari sistem berlangganan seperti [KaselaPOS](/produk/kaselapos) yang bisa dipakai hari itu juga, lalu pertimbangkan sistem khusus setelah kebutuhan Anda benar-benar melampaui yang tersedia di pasaran.",
+        text: "Tidak perlu langsung membangun sistem custom. Mulai dari sistem kasir berlangganan yang bisa dipakai hari itu juga, lalu pertimbangkan sistem khusus setelah kebutuhan Anda benar-benar melampaui yang tersedia di pasaran.",
       },
     ],
     cta: {
-      label: "Coba KaselaPOS 14 Hari",
-      message: "Halo Ayrus, saya ingin mencoba KaselaPOS untuk mulai pakai kasir digital.",
+      label: "Diskusikan Kebutuhan Kasir Anda",
+      message: "Halo Ayrus, saya ingin mulai memakai kasir digital untuk usaha saya.",
     },
   },
 
@@ -265,7 +265,7 @@ export const articles: Article[] = [
     date: "14 Agustus 2026",
     dateTime: "2026-08-14",
     read: "8 menit",
-    author: { name: "Tim Ayrus", role: "Ayrus Digital Teknologi", initials: "AY" },
+    author: { name: "Tim Ayrus", role: "Ayrus Digital Indonesia", initials: "AY" },
     metaTitle: "Perbedaan Software Custom vs Software Siap Pakai",
     metaDescription:
       "Perbandingan jujur software custom dan aplikasi siap pakai untuk UMKM: biaya, kecepatan, fleksibilitas, risiko, dan titik impas antara keduanya.",
@@ -279,7 +279,7 @@ export const articles: Article[] = [
     body: [
       {
         t: "p",
-        text: "Sebagai software house yang menawarkan [jasa pembuatan aplikasi custom](/layanan/custom-software), kami punya kepentingan jelas untuk menyarankan software custom. Justru karena itu, artikel ini kami tulis sejujur mungkin: untuk sebagian besar UMKM, aplikasi siap pakai adalah pilihan yang lebih tepat — setidaknya di awal.",
+        text: "Sebagai software house yang menawarkan [jasa pembuatan aplikasi custom](/layanan/custom-software), kami punya kepentingan jelas untuk menyarankan software custom. Justru karena itu, artikel ini kami tulis sejujur mungkin: untuk sebagian besar UMKM, aplikasi siap pakai adalah pilihan yang lebih tepat, setidaknya di awal.",
       },
 
       { t: "h2", text: "Software siap pakai: cepat dan murah untuk memulai" },
@@ -309,7 +309,7 @@ export const articles: Article[] = [
       },
       {
         t: "p",
-        text: "Kalau hasilnya masih di bawah biaya membangun sistem sendiri, aplikasi siap pakai kemungkinan besar pilihan yang benar. Kalau sudah melampaui, custom mulai layak dipertimbangkan — tapi biaya bukan satu-satunya faktor.",
+        text: "Kalau hasilnya masih di bawah biaya membangun sistem sendiri, aplikasi siap pakai kemungkinan besar pilihan yang benar. Kalau sudah melampaui, custom mulai layak dipertimbangkan, tapi biaya bukan satu-satunya faktor.",
       },
 
       { t: "h2", text: "Tanda Anda sudah butuh sistem custom" },
@@ -332,7 +332,7 @@ export const articles: Article[] = [
       { t: "h2", text: "Jalan tengah yang sering paling masuk akal" },
       {
         t: "p",
-        text: "Anda tidak harus memilih salah satu untuk seluruh bisnis. Banyak klien kami memakai aplikasi siap pakai untuk kebutuhan umum seperti kasir ([KaselaPOS](/produk/kaselapos), misalnya), lalu membangun sistem khusus hanya untuk bagian yang benar-benar unik.",
+        text: "Anda tidak harus memilih salah satu untuk seluruh bisnis. Banyak klien kami memakai aplikasi siap pakai untuk kebutuhan umum seperti kasir, lalu membangun sistem khusus hanya untuk bagian yang benar-benar unik.",
       },
       {
         t: "p",
@@ -342,7 +342,7 @@ export const articles: Article[] = [
       { t: "h2", text: "Ringkasnya" },
       {
         t: "quote",
-        text: "Pilih software siap pakai sampai keterbatasannya benar-benar merugikan Anda. Saat itu terjadi, Anda sudah tahu persis fitur apa yang perlu dibangun — dan itu justru membuat proyek custom Anda jauh lebih murah.",
+        text: "Pilih software siap pakai sampai keterbatasannya benar-benar merugikan Anda. Saat itu terjadi, Anda sudah tahu persis fitur apa yang perlu dibangun, dan itu justru membuat proyek custom Anda jauh lebih murah.",
       },
     ],
     cta: {

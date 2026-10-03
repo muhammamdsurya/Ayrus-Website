@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowUpRight, CheckCircle2, Clock, Tag, Wallet } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, Clock } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { ProcessFlow } from "@/components/process-flow";
 import { FeatureCard } from "@/components/feature-card";
 import { FaqList, faqSchema } from "@/components/faq";
 import { Rise } from "@/components/rise";
-import { ButtonLink, Card, Eyebrow, SectionHeading } from "@/components/ui";
+import { Bezel, ButtonLink, Card, SectionHeading } from "@/components/ui";
+import { ServiceScreen } from "@/components/service-screens";
 import { getService, services } from "@/lib/services";
-import { getPricing } from "@/lib/pricing";
-import { businessId, site, waLink } from "@/lib/site";
+import { businessId, gmailLink, shareImage, site, waLink } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -36,13 +35,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       url,
       title: s.metaTitle,
       description: s.metaDescription,
-      images: [{ url: s.image.src, width: 1600, height: 900, alt: s.image.alt }],
+      images: [shareImage],
     },
     twitter: {
       card: "summary_large_image",
       title: s.metaTitle,
       description: s.metaDescription,
-      images: [s.image.src],
+      images: ["/twitter-image.png"],
     },
   };
 }
@@ -57,7 +56,6 @@ export default async function ServicePage({ params }: Params) {
     `Halo Ayrus, saya ingin konsultasi soal layanan ${s.title}. Boleh dijelaskan lebih lanjut?`,
     `halaman ${s.title}`,
   );
-  const tiers = getPricing(s.slug)?.tiers ?? [];
 
   const schema = [
     {
@@ -69,17 +67,6 @@ export default async function ServicePage({ params }: Params) {
       url: `${site.url}/layanan/${s.slug}`,
       areaServed: { "@type": "Country", name: "Indonesia" },
       provider: { "@id": businessId },
-      offers: tiers.map((t) => ({
-        "@type": "Offer",
-        name: t.name,
-        description: t.desc,
-        priceSpecification: {
-          "@type": "PriceSpecification",
-          priceCurrency: "IDR",
-          minPrice: t.min * 1_000_000,
-          ...(t.max === null ? {} : { maxPrice: t.max * 1_000_000 }),
-        },
-      })),
     },
     {
       "@context": "https://schema.org",
@@ -108,7 +95,7 @@ export default async function ServicePage({ params }: Params) {
       {/* --------------------------------- hero --------------------------------- */}
       <section className="relative overflow-hidden pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-20">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-          <div className="grid-lines absolute inset-0 [mask-image:radial-gradient(ellipse_75%_55%_at_50%_0%,#000_20%,transparent_75%)]" />
+          <div className="hero-texture absolute inset-0 [mask-image:radial-gradient(ellipse_75%_55%_at_50%_0%,#000_20%,transparent_75%)]" />
           <div
             className="absolute -top-40 left-1/2 h-[480px] w-[900px] max-w-[130vw] -translate-x-1/2 rounded-full blur-3xl"
             style={{
@@ -162,59 +149,38 @@ export default async function ServicePage({ params }: Params) {
               </Rise>
 
               <Rise delay={180}>
-                <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
-                  {[
-                    { icon: Wallet, k: "Mulai dari", v: s.priceFrom },
-                    { icon: Clock, k: "Estimasi", v: s.timeline },
-                    { icon: Tag, k: "Model", v: "Sekali bayar" },
-                  ].map((m) => (
-                    <div key={m.k} className="flex items-center gap-2.5">
-                      <m.icon size={18} className="shrink-0 text-brand" aria-hidden="true" />
-                      <div>
-                        <dt className="text-xs text-ink-muted">{m.k}</dt>
-                        <dd className="font-display text-sm font-bold">{m.v}</dd>
-                      </div>
-                    </div>
-                  ))}
-                </dl>
+                <div className="mt-8 flex items-center gap-2.5">
+                  <Clock size={18} className="shrink-0 text-brand" aria-hidden="true" />
+                  <dl>
+                    <dt className="text-xs text-ink-muted">Estimasi pengerjaan</dt>
+                    <dd className="font-display text-sm font-bold">{s.timeline}</dd>
+                  </dl>
+                </div>
               </Rise>
 
               <Rise delay={240}>
                 <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                  <ButtonLink href={wa} external className="px-7">
-                    Konsultasi Gratis
-                    <ArrowRight size={18} aria-hidden="true" />
+                  <ButtonLink href={wa} external className="px-7" arrow>
+                    Hubungi Kami
                   </ButtonLink>
-                  <ButtonLink href={`/harga#${s.slug}`} variant="secondary" className="px-7">
-                    Lihat Rincian Harga
+                  <ButtonLink href="/portofolio" variant="secondary" className="px-7" arrow>
+                    Lihat Karya Kami
                   </ButtonLink>
                 </div>
               </Rise>
             </div>
 
             <Rise delay={200}>
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-white/12 shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]">
-                <Image
-                  src={s.image.src}
-                  alt={s.image.alt}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 46vw, 92vw"
-                  className="object-cover"
-                />
-                {/* Light tint only — the hero photo has to stay readable. */}
+              {/* The app's home screen, same illustration as the homepage tile. */}
+              <Bezel className="shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]">
                 <div
-                  aria-hidden="true"
-                  className="absolute inset-0 opacity-20"
-                  style={{
-                    background: `linear-gradient(135deg, ${s.accent.from}, ${s.accent.to})`,
-                  }}
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent"
-                />
-              </div>
+                  role="img"
+                  aria-label={`Ilustrasi tampilan ${s.title}`}
+                  className="relative aspect-[16/10]"
+                >
+                  <ServiceScreen slug={s.slug} />
+                </div>
+              </Bezel>
             </Rise>
           </div>
         </div>
@@ -225,7 +191,7 @@ export default async function ServicePage({ params }: Params) {
         <div className="container-page grid gap-12 lg:grid-cols-[1.2fr_1fr]">
           <Reveal>
             <div>
-              <SectionHeading align="left" eyebrow="Ringkasan" title="Layanan ini untuk apa" />
+              <SectionHeading title="Layanan ini untuk apa" />
               <div className="mt-6 space-y-4">
                 {s.intro.map((p) => (
                   <p key={p.slice(0, 24)} className="text-lg leading-relaxed text-ink-muted">
@@ -263,16 +229,15 @@ export default async function ServicePage({ params }: Params) {
         <div className="container-page">
           <Reveal>
             <SectionHeading
-              eyebrow="Cakupan pekerjaan"
               title="Apa saja yang Anda dapat"
-              sub="Semua poin di bawah sudah termasuk dalam penawaran — tidak ada biaya tambahan yang muncul belakangan."
+              sub="Cakupan umum layanan ini. Detailnya kami sesuaikan dengan kebutuhan dan skala usaha Anda."
             />
           </Reveal>
 
           <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {s.includes.map((it, i) => (
               <Reveal key={it.title} delay={i * 60} as="li" className="h-full">
-                <FeatureCard icon={it.icon} title={it.title} desc={it.desc} index={i + 1} />
+                <FeatureCard icon={it.icon} title={it.title} desc={it.desc} />
               </Reveal>
             ))}
           </ul>
@@ -287,7 +252,6 @@ export default async function ServicePage({ params }: Params) {
         <div className="container-page">
           <Reveal>
             <SectionHeading
-              eyebrow="Alur pengerjaan"
               title="Enam tahap, dengan hasil yang jelas di tiap tahap"
               sub="Setiap tahap punya keluaran yang bisa Anda lihat dan setujui, jadi tidak ada bagian proses yang berjalan di balik layar."
             />
@@ -304,9 +268,8 @@ export default async function ServicePage({ params }: Params) {
         <div className="container-page">
           <Reveal>
             <SectionHeading
-              eyebrow="Persiapan"
               title="Yang kami butuhkan dari Anda"
-              sub="Tidak perlu disiapkan sempurna sejak awal — kami bantu melengkapinya di tahap discovery."
+              sub="Tidak perlu disiapkan sempurna sejak awal, kami bantu melengkapinya di tahap discovery."
             />
           </Reveal>
 
@@ -337,9 +300,6 @@ export default async function ServicePage({ params }: Params) {
       {/* --------------------------------- FAQ --------------------------------- */}
       <section className="border-t border-white/8 bg-bg-alt py-[var(--spacing-section)]">
         <div className="container-page">
-          <Reveal>
-            <SectionHeading eyebrow="FAQ" title="Pertanyaan yang sering diajukan" />
-          </Reveal>
 
           <FaqList faqs={s.faqs} />
         </div>
@@ -358,21 +318,19 @@ export default async function ServicePage({ params }: Params) {
                 }}
               />
               <div className="relative mx-auto max-w-2xl">
-                <Eyebrow>Konsultasi gratis</Eyebrow>
-                <h2 className="mt-6 text-3xl font-extrabold sm:text-4xl">
-                  Ceritakan kebutuhan Anda, kami bantu perkirakan biayanya
+                <h2 className="text-3xl font-extrabold sm:text-4xl">
+                  Ceritakan kebutuhan Anda, kami bantu petakan solusinya
                 </h2>
                 <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-                  Sesi pertama tanpa biaya dan tanpa kewajiban. Kalau ternyata kebutuhan Anda lebih
-                  cocok dengan solusi yang lebih murah, kami akan bilang apa adanya.
+                  Tidak perlu paham teknologinya dulu. Cukup ceritakan alur kerja dan kendala yang
+                  paling terasa, sisanya kami bantu susun bersama Anda.
                 </p>
                 <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
                   <ButtonLink href={wa} external className="px-7">
                     Konsultasi via WhatsApp
-                    <ArrowRight size={18} aria-hidden="true" />
                   </ButtonLink>
                   <ButtonLink
-                    href={`mailto:${site.email}?subject=Konsultasi ${s.title}`}
+                    href={gmailLink(`Konsultasi ${s.title}`)}
                     external
                     variant="secondary"
                     className="px-7"

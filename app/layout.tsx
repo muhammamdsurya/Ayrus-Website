@@ -22,7 +22,9 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
-const homeTitle = "Software House untuk UMKM di Jakarta | Ayrus Digital Teknologi";
+// Brand shows as the Google site name (og:site_name), so the title spends its
+// ~60 characters on the positioning.
+const homeTitle = "Software House Indonesia: Custom Software Sesuai Alur Bisnis";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -76,7 +78,7 @@ const businessSchema = {
   "@type": "ProfessionalService",
   "@id": businessId,
   name: site.name,
-  alternateName: "Ayrus Digital",
+  alternateName: ["Ayrus Digital", "Ayrus"],
   url: site.url,
   logo: `${site.url}/images/logo.png`,
   image: `${site.url}/opengraph-image.png`,
@@ -84,7 +86,7 @@ const businessSchema = {
   foundingDate: site.founded,
   email: site.email,
   telephone: `+${site.whatsapp}`,
-  priceRange: "Rp 1 juta+",
+  sameAs: Object.values(site.social),
   address: {
     "@type": "PostalAddress",
     streetAddress: site.address.street,
@@ -93,7 +95,7 @@ const businessSchema = {
     addressCountry: site.address.country,
   },
   areaServed: [
-    { "@type": "City", name: "Jakarta Timur" },
+    { "@type": "City", name: "Jakarta" },
     { "@type": "Country", name: "Indonesia" },
   ],
   openingHoursSpecification: {
@@ -106,7 +108,7 @@ const businessSchema = {
     "@type": "ContactPoint",
     telephone: `+${site.whatsapp}`,
     url: `https://wa.me/${site.whatsapp}`,
-    contactType: "sales",
+    contactType: "customer service",
     availableLanguage: ["id", "en"],
   },
 };

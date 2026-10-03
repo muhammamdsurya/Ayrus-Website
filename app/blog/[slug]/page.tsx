@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowUpRight, Info, Quote } from "lucide-react";
+import { ArrowUpRight, Info, Quote } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { Rise } from "@/components/rise";
 import { ButtonLink } from "@/components/ui";
 import { articles, getArticle, type Block } from "@/lib/articles";
 import { getService } from "@/lib/services";
-import { businessId, site, waLink } from "@/lib/site";
+import { businessId, shareImage, site, waLink } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -32,6 +32,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description: a.metaDescription,
       publishedTime: a.dateTime,
       authors: [a.author.name],
+      images: [shareImage],
     },
     twitter: { card: "summary_large_image", title: a.metaTitle, description: a.metaDescription },
   };
@@ -80,7 +81,7 @@ export default async function ArticlePage({ params }: Params) {
       <article>
         <header className="relative overflow-hidden pt-28 pb-10 sm:pt-32 lg:pt-36">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-            <div className="grid-lines absolute inset-0 [mask-image:radial-gradient(ellipse_70%_55%_at_50%_0%,#000_20%,transparent_75%)]" />
+            <div className="hero-texture absolute inset-0 [mask-image:radial-gradient(ellipse_70%_55%_at_50%_0%,#000_20%,transparent_75%)]" />
             <div className="absolute -top-40 left-1/2 h-[420px] w-[820px] max-w-[130vw] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(203,108,230,0.26),transparent_65%)] blur-3xl" />
           </div>
 
@@ -177,9 +178,8 @@ export default async function ArticlePage({ params }: Params) {
                     <ButtonLink
                       href={`/layanan/${related.slug}`}
                       className="px-7 whitespace-nowrap"
-                    >
+                     arrow>
                       Lihat Layanan
-                      <ArrowRight size={18} aria-hidden="true" />
                     </ButtonLink>
                     <ButtonLink
                       href={waLink(a.cta.message, `artikel "${a.title}"`)}

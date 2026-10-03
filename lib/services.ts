@@ -23,14 +23,21 @@ import {
   Landmark,
   PenTool,
   Server,
+  Blocks,
+  Bot,
+  Plug,
+  Warehouse,
+  MessageSquareText,
+  ScanText,
+  FileText,
 } from "lucide-react";
-import { priceFrom } from "./pricing";
 
 /**
- * Single source of truth for the four services.
+ * Single source of truth for the services.
  *
  * Both the homepage cards and the /layanan/[slug] detail pages read from here,
- * so a service's copy, icon, accent and photo only ever live in one place.
+ * so a service's copy, icon and accent only ever live in one place. Its
+ * illustration lives in components/service-screens.tsx, keyed by slug.
  */
 
 export type ServiceDetail = {
@@ -44,19 +51,15 @@ export type ServiceDetail = {
   tagline: string;
   icon: LucideIcon;
   accent: { from: string; to: string; text: string };
-  image: { src: string; alt: string };
 
   /* --- homepage card --- */
   cardDesc: string;
-  cardPoints: string[];
-  meta: { label: string; sub: string };
 
   /* --- detail page --- */
   /** Used as-is (no site-name suffix), so it can carry its own brand. */
   metaTitle: string;
   metaDescription: string;
   keywords: string[];
-  priceFrom: string;
   timeline: string;
   intro: string[];
   forWho: string[];
@@ -71,41 +74,36 @@ export const services: ServiceDetail[] = [
   {
     slug: "custom-software",
     category: "Custom Software",
-    title: "Aplikasi Custom",
-    h1: "Jasa Pembuatan Aplikasi Custom untuk UMKM",
+    title: "Aplikasi Web & Mobile",
+    h1: "Jasa Pembuatan Aplikasi Web, Android & iOS",
     tagline:
-      "Aplikasi yang dibangun dari nol mengikuti alur kerja bisnis Anda — bukan template yang dipaksakan.",
+      "Aplikasi custom yang dibangun dari nol mengikuti alur kerja bisnis Anda, bukan template yang dipaksakan.",
     icon: Code2,
     accent: { from: "#7C3AED", to: "#4F46E5", text: "#C4B5FD" },
-    image: {
-      src: "/images/layanan-custom-software.jpg",
-      alt: "Laptop menampilkan baris kode program di atas meja kerja",
-    },
     cardDesc:
-      "Aplikasi dibangun dari nol mengikuti alur kerja bisnis Anda — bukan template yang dipaksakan.",
-    cardPoints: ["Analisis proses bisnis", "Fitur sesuai kebutuhan", "Hak pakai penuh"],
-    meta: { label: "Sekali bayar", sub: "Estimasi 6–10 minggu" },
+      "Aplikasi web, Android, dan iOS yang dibangun dari nol mengikuti alur kerja bisnis Anda.",
 
-    metaTitle: "Jasa Pembuatan Aplikasi Custom UMKM – Sekali Bayar, Source Code Milik Anda",
+    metaTitle: "Jasa Pembuatan Aplikasi Web, Android & iOS Custom | Ayrus Digital",
     metaDescription:
-      "Aplikasi web dibangun mengikuti alur bisnis Anda. Sekali bayar, source code diserahkan, garansi bug. Estimasi 6–10 minggu. Konsultasi gratis via WhatsApp.",
+      "Jasa pembuatan aplikasi custom: aplikasi web, Android, dan iOS yang dibangun sesuai alur bisnis Anda. Source code diserahkan ke Anda. Estimasi 6-10 minggu.",
     keywords: [
-      "jasa pembuatan aplikasi custom",
+      "jasa pembuatan aplikasi",
+      "jasa pembuatan aplikasi android",
+      "jasa pembuatan aplikasi mobile",
+      "jasa pembuatan aplikasi android dan ios",
+      "jasa pembuatan aplikasi web",
       "jasa pembuatan software custom",
-      "jasa pembuatan aplikasi web custom",
-      "jasa bikin aplikasi bisnis",
-      "aplikasi custom sekali bayar",
+      "custom software sesuai alur bisnis",
     ],
-    priceFrom: priceFrom("custom-software"),
-        timeline: "6–10 minggu",
+    timeline: "6-10 minggu",
     intro: [
       "Software siap pakai memaksa Anda mengubah cara kerja supaya cocok dengan aplikasinya. Jasa pembuatan aplikasi custom kami bekerja sebaliknya: kami pelajari dulu bagaimana bisnis Anda benar-benar berjalan, lalu membangun sistem yang mengikuti alur itu.",
-      "Pendekatan ini paling masuk akal ketika proses Anda punya aturan khusus yang tidak ada di aplikasi jadi — misalnya skema harga bertingkat, alur approval internal, atau perhitungan komisi yang unik untuk usaha Anda.",
+      "Pendekatan ini paling masuk akal ketika proses Anda punya aturan khusus yang tidak ada di aplikasi jadi, misalnya skema harga bertingkat, alur approval internal, atau perhitungan komisi yang unik untuk usaha Anda.",
     ],
     forWho: [
       "Proses bisnis Anda punya aturan yang tidak tersedia di aplikasi siap pakai",
       "Anda sudah memakai beberapa aplikasi terpisah dan datanya tidak nyambung",
-      "Biaya langganan bulanan sudah lebih mahal daripada membangun sendiri",
+      "Tim Anda masih merekap data yang sama berulang kali secara manual",
       "Anda butuh sistem yang bisa dikembangkan terus tanpa izin vendor",
     ],
     includes: [
@@ -121,18 +119,18 @@ export const services: ServiceDetail[] = [
       },
       {
         icon: Server,
-        title: "Pengembangan & hosting",
-        desc: "Aplikasi web yang berjalan di server Anda sendiri atau cloud pilihan kami, lengkap dengan konfigurasi domain dan SSL.",
+        title: "Web, Android & iOS",
+        desc: "Satu sistem yang bisa dibuka dari browser maupun aplikasi di HP, lengkap dengan server, domain, dan SSL.",
       },
       {
         icon: Users,
         title: "Manajemen pengguna & hak akses",
-        desc: "Atur siapa boleh melihat dan mengubah apa, sampai level per menu — penting begitu tim Anda lebih dari beberapa orang.",
+        desc: "Atur siapa boleh melihat dan mengubah apa, sampai level per menu, penting begitu tim Anda lebih dari beberapa orang.",
       },
       {
         icon: ShieldCheck,
-        title: "Garansi bug 6 bulan",
-        desc: "Setiap bug yang muncul dari pengerjaan kami diperbaiki tanpa biaya tambahan selama enam bulan setelah rilis.",
+        title: "Source code diserahkan",
+        desc: "Setelah proyek selesai, source code beserta dokumentasinya jadi milik Anda. Bebas dikembangkan lebih lanjut tanpa terkunci pada satu vendor.",
       },
       {
         icon: BookOpen,
@@ -145,7 +143,7 @@ export const services: ServiceDetail[] = [
         step: "01",
         title: "Discovery",
         desc: "Sesi diskusi untuk memetakan alur kerja, masalah utama, dan target yang ingin dicapai. Di tahap ini kami juga menentukan fitur mana yang masuk versi pertama.",
-        deliverable: "Dokumen kebutuhan & estimasi biaya",
+        deliverable: "Dokumen kebutuhan & rencana kerja",
       },
       {
         step: "02",
@@ -174,7 +172,7 @@ export const services: ServiceDetail[] = [
       {
         step: "06",
         title: "Support",
-        desc: "Garansi bug tiga bulan. Setelahnya Anda bisa lanjut dengan paket maintenance atau mengelola sendiri — source code sudah di tangan Anda.",
+        desc: "Pendampingan setelah rilis. Selanjutnya Anda bisa tetap bekerja sama dengan kami atau mengelolanya sendiri, karena source code sudah di tangan Anda.",
         deliverable: "Source code & dokumentasi",
       },
     ],
@@ -183,9 +181,9 @@ export const services: ServiceDetail[] = [
         title: "Dari sisi bisnis",
         items: [
           "Satu penanggung jawab dari pihak Anda yang bisa mengambil keputusan",
-          "Gambaran alur kerja saat ini — cukup diceritakan, tidak perlu dokumen formal",
+          "Gambaran alur kerja saat ini, cukup diceritakan, tidak perlu dokumen formal",
           "Contoh dokumen yang dipakai sehari-hari (nota, laporan, form)",
-          "Waktu sekitar 2–3 jam per minggu untuk review dan demo progres",
+          "Waktu sekitar 2-3 jam per minggu untuk review dan demo progres",
         ],
       },
       {
@@ -201,19 +199,15 @@ export const services: ServiceDetail[] = [
     faqs: [
       {
         q: "Berapa lama pengerjaannya?",
-        a: "Umumnya 6–10 minggu untuk versi pertama, tergantung jumlah modul. Setelah sesi discovery kami berikan estimasi yang lebih pasti beserta rinciannya per modul.",
+        a: "Umumnya 6-10 minggu untuk versi pertama, tergantung jumlah modul. Setelah sesi discovery kami berikan estimasi yang lebih pasti beserta rinciannya per modul.",
       },
       {
         q: "Apakah source code benar-benar jadi milik saya?",
-        a: "Ya. Setelah pelunasan, seluruh source code beserta dokumentasinya diserahkan ke Anda. Anda bebas mengembangkannya sendiri atau dengan pihak lain — tidak ada kunci vendor.",
+        a: "Ya. Setelah proyek selesai, seluruh source code beserta dokumentasinya diserahkan ke Anda. Anda bebas mengembangkannya sendiri atau dengan pihak lain, tanpa kunci vendor.",
       },
       {
         q: "Bagaimana kalau di tengah jalan saya ingin menambah fitur?",
-        a: "Bisa. Penambahan di luar kesepakatan awal dihitung terpisah dan kami sampaikan estimasinya lebih dulu sebelum dikerjakan, jadi tidak ada biaya yang muncul mendadak.",
-      },
-      {
-        q: "Apakah pembayarannya harus lunas di awal?",
-        a: "Tidak. Umumnya dibagi tiga termin: di awal sebagai tanda jadi, saat desain disetujui, dan saat aplikasi selesai diserahkan.",
+        a: "Bisa. Penambahan di luar kesepakatan awal kami diskusikan lebih dulu, termasuk dampaknya ke jadwal, sebelum mulai dikerjakan, jadi tidak ada kejutan di tengah jalan.",
       },
     ],
   },
@@ -228,30 +222,22 @@ export const services: ServiceDetail[] = [
       "Pembukuan, arus kas, dan laporan laba rugi yang rapi tanpa perlu jadi akuntan lebih dulu.",
     icon: Calculator,
     accent: { from: "#CB6CE6", to: "#8E4FE0", text: "#E9B8F5" },
-    image: {
-      src: "/images/layanan-keuangan.jpg",
-      alt: "Laptop menampilkan grafik laporan keuangan di layar",
-    },
     cardDesc:
       "Catat kas masuk dan keluar, pantau piutang, dan lihat laba rugi usaha Anda tanpa perlu Excel manual.",
-    cardPoints: ["Arus kas masuk & keluar", "Laporan laba rugi otomatis", "Rekap piutang & hutang"],
-    meta: { label: "Sekali bayar", sub: "Estimasi 5–8 minggu" },
 
-    metaTitle: "Jasa Pembuatan Aplikasi Keuangan & Pembukuan Custom UMKM | Ayrus",
+    metaTitle: "Jasa Pembuatan Aplikasi Keuangan & Pembukuan | Ayrus Digital",
     metaDescription:
-      "Aplikasi pembukuan dan keuangan custom untuk UMKM: arus kas, laba rugi, piutang, hutang, dan laporan pajak. Sekali bayar, tanpa langganan bulanan.",
+      "Aplikasi pembukuan dan keuangan custom untuk UMKM: arus kas, laba rugi, piutang, hutang, dan laporan pajak. Dibuat untuk pemilik usaha, bukan untuk akuntan.",
     keywords: [
       "jasa pembuatan aplikasi keuangan",
       "aplikasi pembukuan custom",
-      "software akuntansi UMKM sekali bayar",
       "aplikasi keuangan multi cabang",
       "aplikasi piutang pengingat WhatsApp",
     ],
-    priceFrom: priceFrom("aplikasi-keuangan"),
-        timeline: "5–8 minggu",
+    timeline: "5-8 minggu",
     intro: [
       "Sebagian besar UMKM tahu omzetnya, tapi tidak tahu untungnya. Uang masuk tercatat di buku, pengeluaran di catatan lain, dan piutang cuma diingat-ingat. Akhir bulan angkanya tidak pernah benar-benar cocok.",
-      "Aplikasi keuangan dan pembukuan custom yang kami bangun menyatukan semuanya dalam satu tempat: kas masuk dan keluar, piutang pelanggan, hutang ke supplier, sampai laporan laba rugi yang terbentuk otomatis. Dibuat untuk pemilik usaha, bukan untuk akuntan — istilahnya sederhana dan alurnya mengikuti kebiasaan mencatat Anda.",
+      "Aplikasi keuangan dan pembukuan custom yang kami bangun menyatukan semuanya dalam satu tempat: kas masuk dan keluar, piutang pelanggan, hutang ke supplier, sampai laporan laba rugi yang terbentuk otomatis. Dibuat untuk pemilik usaha, bukan untuk akuntan, istilahnya sederhana dan alurnya mengikuti kebiasaan mencatat Anda.",
     ],
     forWho: [
       "Pembukuan masih dicampur antara buku tulis, Excel, dan ingatan",
@@ -268,7 +254,7 @@ export const services: ServiceDetail[] = [
       {
         icon: PieChart,
         title: "Laporan laba rugi",
-        desc: "Laba rugi, arus kas, dan neraca sederhana terbentuk otomatis dari transaksi harian — tidak perlu menyusun ulang di Excel.",
+        desc: "Laba rugi, arus kas, dan neraca sederhana terbentuk otomatis dari transaksi harian, tidak perlu menyusun ulang di Excel.",
       },
       {
         icon: Receipt,
@@ -360,7 +346,7 @@ export const services: ServiceDetail[] = [
       },
       {
         q: "Apa bedanya dengan aplikasi pembukuan yang sudah ada di pasaran?",
-        a: "Aplikasi jadi cocok kalau kebutuhan Anda standar, dan biasanya lebih murah untuk memulai. Custom masuk akal ketika Anda punya perhitungan khusus — misalnya bagi hasil dengan mitra, harga bertingkat, atau format laporan yang diminta pemberi kredit.",
+        a: "Aplikasi jadi cocok kalau kebutuhan Anda standar, dan biasanya lebih murah untuk memulai. Custom masuk akal ketika Anda punya perhitungan khusus, misalnya bagi hasil dengan mitra, harga bertingkat, atau format laporan yang diminta pemberi kredit.",
       },
       {
         q: "Apakah data keuangan saya aman?",
@@ -373,36 +359,32 @@ export const services: ServiceDetail[] = [
   {
     slug: "website",
     category: "Website",
-    title: "Website UMKM",
-    h1: "Jasa Pembuatan Website UMKM",
+    title: "Website Bisnis",
+    h1: "Jasa Pembuatan Website Company Profile & Toko Online",
     tagline:
       "Company profile, katalog produk, sampai toko online yang cepat dan siap ditemukan di Google.",
     icon: Globe,
     accent: { from: "#4F46E5", to: "#6366F1", text: "#A5B4FC" },
-    image: {
-      src: "/images/layanan-website.jpg",
-      alt: "Laptop menampilkan halaman produk sebuah toko online",
-    },
     cardDesc:
       "Company profile, katalog produk, sampai toko online yang cepat dan siap ditemukan di Google.",
-    cardPoints: ["SEO-ready", "Responsif di semua layar", "Kelola konten sendiri"],
-    meta: { label: "Sekali bayar", sub: "Estimasi 2–4 minggu" },
 
-    metaTitle: "Jasa Pembuatan Website UMKM: Company Profile & Katalog WhatsApp | Ayrus",
+    metaTitle: "Jasa Pembuatan Website Company Profile & Toko Online | Ayrus Digital",
     metaDescription:
       "Website UMKM dengan desain khusus, bukan template: company profile, katalog produk dengan tombol pesan WhatsApp, sampai toko online. Cepat di HP dan siap ditemukan di Google.",
     keywords: [
-      "jasa pembuatan website UMKM",
+      "jasa pembuatan website",
       "jasa pembuatan website company profile",
+      "jasa pembuatan website perusahaan",
+      "jasa pembuatan website profesional",
+      "jasa pembuatan website UMKM",
       "jasa pembuatan website katalog produk",
       "jasa pembuatan toko online",
       "website UMKM tanpa template",
     ],
-    priceFrom: priceFrom("website"),
-        timeline: "2–4 minggu",
+    timeline: "2-4 minggu",
     intro: [
-      "Calon pelanggan mencari Anda di Google sebelum menghubungi. Kalau yang muncul hanya akun media sosial yang jarang diurus, mereka akan ragu — apalagi untuk transaksi bernilai besar.",
-      "Sebagai jasa pembuatan website UMKM, kami membangun website dengan desain khusus — bukan template — yang cepat, tampil rapi di layar HP, dan disiapkan sejak awal supaya mudah ditemukan mesin pencari. Kontennya bisa Anda ubah sendiri lewat CMS, tanpa perlu menghubungi kami setiap kali ada perubahan harga atau produk baru.",
+      "Calon pelanggan mencari Anda di Google sebelum menghubungi. Kalau yang muncul hanya akun media sosial yang jarang diurus, mereka akan ragu, apalagi untuk transaksi bernilai besar.",
+      "Sebagai jasa pembuatan website UMKM, kami membangun website dengan desain khusus, bukan template, yang cepat, tampil rapi di layar HP, dan disiapkan sejak awal supaya mudah ditemukan mesin pencari. Kontennya bisa Anda ubah sendiri lewat CMS, tanpa perlu menghubungi kami setiap kali ada perubahan harga atau produk baru.",
     ],
     forWho: [
       "Bisnis Anda belum punya alamat resmi di internet selain media sosial",
@@ -414,7 +396,7 @@ export const services: ServiceDetail[] = [
       {
         icon: Layers,
         title: "Desain khusus, bukan template",
-        desc: "Tampilan disusun mengikuti identitas merek Anda — warna, logo, dan gaya foto — bukan tema jadi yang dipakai ratusan situs lain.",
+        desc: "Tampilan disusun mengikuti identitas merek Anda (warna, logo, dan gaya foto), bukan tema jadi yang dipakai ratusan situs lain.",
       },
       {
         icon: Smartphone,
@@ -429,7 +411,7 @@ export const services: ServiceDetail[] = [
       {
         icon: Gauge,
         title: "Skor performa tinggi",
-        desc: "Gambar dioptimasi otomatis dan halaman dirender statis, supaya waktu muat tetap di bawah 2,5 detik — salah satu faktor peringkat Google.",
+        desc: "Gambar dioptimasi otomatis dan halaman dirender statis, supaya waktu muat tetap di bawah 2,5 detik, salah satu faktor peringkat Google.",
       },
       {
         icon: BookOpen,
@@ -476,7 +458,7 @@ export const services: ServiceDetail[] = [
       {
         step: "06",
         title: "Support",
-        desc: "Garansi bug tiga bulan dan pendampingan saat Anda mengisi konten pertama kali.",
+        desc: "Pendampingan saat Anda mengisi dan memperbarui konten untuk pertama kali.",
         deliverable: "Source code & panduan CMS",
       },
     ],
@@ -503,15 +485,11 @@ export const services: ServiceDetail[] = [
     faqs: [
       {
         q: "Berapa lama sampai website saya muncul di halaman pertama Google?",
-        a: "Struktur SEO-nya kami siapkan sejak hari pertama, tapi peringkat tetap butuh waktu. Untuk kata kunci lokal biasanya mulai terlihat dalam 3–6 bulan, dan itu pun perlu didukung konten yang terbit rutin.",
+        a: "Struktur SEO-nya kami siapkan sejak hari pertama, tapi peringkat tetap butuh waktu. Untuk kata kunci lokal biasanya mulai terlihat dalam 3-6 bulan, dan itu pun perlu didukung konten yang terbit rutin.",
       },
       {
         q: "Apakah saya bisa menambah halaman atau artikel sendiri?",
         a: "Bisa. Halaman, artikel, dan produk dikelola lewat CMS. Kami berikan pelatihan singkat dan panduan tertulis dalam Bahasa Indonesia saat serah terima.",
-      },
-      {
-        q: "Apakah biaya hosting dan domain sudah termasuk?",
-        a: "Tahun pertama kami sertakan. Setelah itu perpanjangannya dibayar langsung ke penyedia — biasanya di kisaran ratusan ribu per tahun, dan Anda tetap pemilik akunnya.",
       },
       {
         q: "Bisakah website ini menerima pembayaran online?",
@@ -530,30 +508,23 @@ export const services: ServiceDetail[] = [
       "Sistem kasir yang menyesuaikan alur outlet Anda, terintegrasi dengan stok dan pembukuan.",
     icon: ScanBarcode,
     accent: { from: "#C026D3", to: "#9333EA", text: "#F5D0FE" },
-    image: {
-      src: "/images/layanan-pos.jpg",
-      alt: "Kasir melayani pelanggan menggunakan sistem POS berbasis tablet di sebuah toko",
-    },
     cardDesc:
       "Sistem kasir yang menyesuaikan alur outlet Anda, terintegrasi dengan stok dan akuntansi.",
-    cardPoints: ["Integrasi printer & scanner", "Manajemen stok", "Multi-outlet"],
-    meta: { label: "Sekali bayar", sub: "Estimasi 5–8 minggu" },
 
-    metaTitle: "Jasa Pembuatan Aplikasi Kasir (POS) Custom untuk UMKM | Ayrus",
+    metaTitle: "Jasa Pembuatan Aplikasi Kasir (POS) Custom | Ayrus Digital",
     metaDescription:
-      "Aplikasi kasir custom yang tetap jalan saat internet mati, terhubung ke stok dan pembukuan, multi-outlet. Sekali bayar. Tanya estimasi via WhatsApp.",
+      "Aplikasi kasir custom yang tetap jalan saat internet mati, terhubung ke stok dan pembukuan, multi-outlet, dan mengikuti alur outlet Anda.",
     keywords: [
       "jasa pembuatan aplikasi kasir",
-      "jasa pembuatan sistem POS custom",
+      "jasa pembuatan aplikasi kasir android",
+      "jasa pembuatan aplikasi pos custom",
       "jasa pembuatan program kasir",
       "aplikasi kasir multi cabang custom",
-      "aplikasi kasir custom sekali bayar",
     ],
-    priceFrom: priceFrom("sistem-pos"),
-        timeline: "5–8 minggu",
+    timeline: "5-8 minggu",
     intro: [
-      "Aplikasi kasir siap pakai cocok untuk usaha yang alurnya standar. Begitu Anda punya aturan sendiri — paket bundling, harga khusus pelanggan langganan, deposit di muka, atau perhitungan komisi kasir — aplikasi jadi mulai terasa memaksa.",
-      "Aplikasi kasir (POS) custom kami bangun mengikuti alur outlet Anda dan tersambung langsung ke stok serta pembukuan. Kalau kebutuhan Anda masih umum, kami akan jujur menyarankan KaselaPOS yang berlangganan — jauh lebih hemat untuk memulai.",
+      "Aplikasi kasir siap pakai cocok untuk usaha yang alurnya standar. Begitu Anda punya aturan sendiri (paket bundling, harga khusus pelanggan langganan, deposit di muka, atau perhitungan komisi kasir), aplikasi jadi mulai terasa memaksa.",
+      "Aplikasi kasir (POS) custom kami bangun mengikuti alur outlet Anda dan tersambung langsung ke stok serta pembukuan.",
     ],
     forWho: [
       "Alur transaksi Anda punya aturan yang tidak ada di aplikasi kasir umum",
@@ -585,7 +556,7 @@ export const services: ServiceDetail[] = [
       {
         icon: PieChart,
         title: "Laporan penjualan",
-        desc: "Omzet per jam, produk terlaris, performa kasir, sampai margin per produk — semuanya real-time tanpa menunggu tutup buku.",
+        desc: "Omzet per jam, produk terlaris, performa kasir, sampai margin per produk, semuanya real-time tanpa menunggu tutup buku.",
       },
       {
         icon: Users,
@@ -597,7 +568,7 @@ export const services: ServiceDetail[] = [
       {
         step: "01",
         title: "Discovery",
-        desc: "Kami amati langsung alur transaksi di outlet Anda — dari pelanggan datang sampai struk tercetak — untuk menemukan langkah yang bisa dipangkas.",
+        desc: "Kami amati langsung alur transaksi di outlet Anda, dari pelanggan datang sampai struk tercetak, untuk menemukan langkah yang bisa dipangkas.",
         deliverable: "Peta alur kasir & daftar fitur",
       },
       {
@@ -653,20 +624,301 @@ export const services: ServiceDetail[] = [
     ],
     faqs: [
       {
-        q: "Kapan sebaiknya memilih POS custom dan kapan KaselaPOS?",
-        a: "Kalau kebutuhan Anda masih umum — catat penjualan, kelola stok, lihat laporan. KaselaPOS jauh lebih hemat dan bisa dipakai hari ini juga. POS custom masuk akal ketika ada aturan khusus yang tidak bisa diakomodasi sistem siap pakai.",
-      },
-      {
         q: "Apakah tetap bisa dipakai saat internet mati?",
         a: "Ya. Transaksi tetap tercatat di perangkat dan otomatis tersinkronisasi begitu koneksi kembali. Bagian ini selalu kami uji sebelum rilis karena paling krusial di outlet.",
       },
       {
         q: "Apakah printer dan scanner saya sekarang bisa dipakai?",
-        a: "Sebagian besar printer thermal 58mm dan 80mm serta scanner USB standar didukung. Kirimkan merek dan tipenya lebih dulu, akan kami cek sebelum penawaran dibuat.",
+        a: "Sebagian besar printer thermal 58mm dan 80mm serta scanner USB standar didukung. Kirimkan merek dan tipenya lebih dulu, akan kami cek di tahap discovery.",
       },
       {
         q: "Bisakah tersambung dengan aplikasi keuangan yang kami pakai?",
         a: "Bisa, selama aplikasi tersebut punya API atau mendukung impor file. Bila Anda juga membangun aplikasi keuangan bersama kami, keduanya bisa dirancang menyatu sejak awal.",
+      },
+    ],
+  },
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "erp",
+    category: "ERP",
+    title: "Sistem ERP",
+    h1: "Jasa Pembuatan Sistem ERP Custom",
+    tagline:
+      "Penjualan, stok, pembelian, keuangan, dan SDM dalam satu sistem yang mengikuti alur kerja perusahaan Anda.",
+    icon: Blocks,
+    accent: { from: "#8E4FE0", to: "#5B21B6", text: "#D8B4FE" },
+    cardDesc: "Penjualan, stok, pembelian, keuangan, dan SDM dalam satu sistem yang saling terhubung.",
+
+    metaTitle: "Jasa Pembuatan Sistem ERP Custom untuk Perusahaan | Ayrus Digital",
+    metaDescription:
+      "Jasa ERP custom: penjualan, gudang, pembelian, keuangan, dan SDM dalam satu sistem sesuai alur bisnis Anda. Dibangun bertahap per modul, source code milik Anda.",
+    keywords: [
+      "jasa erp",
+      "jasa erp custom",
+      "jasa pembuatan sistem erp",
+      "jasa erp indonesia",
+      "software erp custom",
+    ],
+    timeline: "10-16 minggu",
+    intro: [
+      "Begitu usaha tumbuh, data mulai tercecer: penjualan di satu aplikasi, stok di spreadsheet, keuangan di aplikasi lain. Setiap divisi bekerja dengan angka versinya sendiri, dan laporan bulanan butuh berhari-hari untuk dicocokkan.",
+      "Sistem ERP custom menyatukan semuanya. Pesanan yang masuk langsung mengurangi stok, membuat faktur, dan tercatat di keuangan, dengan alur persetujuan yang mengikuti struktur perusahaan Anda. Kami membangunnya bertahap per modul, jadi tim bisa mulai memakai bagian yang paling mendesak lebih dulu.",
+    ],
+    forWho: [
+      "Data penjualan, stok, dan keuangan masih tersebar di beberapa aplikasi",
+      "Anda punya beberapa cabang atau gudang yang sulit dipantau",
+      "ERP siap pakai terlalu kaku atau biaya lisensinya terus naik",
+      "Laporan untuk manajemen selalu terlambat karena harus direkap manual",
+    ],
+    includes: [
+      {
+        icon: ShoppingCart,
+        title: "Penjualan & pembelian",
+        desc: "Penawaran, pesanan, faktur, dan purchase order dengan alur persetujuan sesuai struktur perusahaan.",
+      },
+      {
+        icon: Warehouse,
+        title: "Gudang & stok multi-lokasi",
+        desc: "Stok per gudang, transfer antar lokasi, stok opname, dan peringatan stok minimum.",
+      },
+      {
+        icon: Landmark,
+        title: "Keuangan & akuntansi",
+        desc: "Jurnal otomatis dari setiap transaksi, hutang piutang, dan laporan laba rugi per cabang.",
+      },
+      {
+        icon: Users,
+        title: "SDM & penggajian",
+        desc: "Data karyawan, absensi, cuti, dan penggajian yang terhubung ke pembukuan.",
+      },
+      {
+        icon: PieChart,
+        title: "Dashboard manajemen",
+        desc: "Ringkasan seluruh divisi secara real-time, bisa dilihat per cabang atau gabungan.",
+      },
+      {
+        icon: Plug,
+        title: "Integrasi sistem",
+        desc: "Tersambung ke aplikasi kasir, marketplace, payment gateway, atau sistem lain yang sudah dipakai.",
+      },
+    ],
+    workflow: [
+      {
+        step: "01",
+        title: "Discovery",
+        desc: "Kami petakan proses lintas divisi, dari pesanan masuk sampai laporan keuangan, lalu tentukan modul mana yang dibangun lebih dulu.",
+        deliverable: "Peta proses & prioritas modul",
+      },
+      {
+        step: "02",
+        title: "Design",
+        desc: "Alur kerja, hak akses per peran, dan tampilan setiap modul disetujui sebelum pengembangan dimulai.",
+        deliverable: "Desain alur & UI per modul",
+      },
+      {
+        step: "03",
+        title: "Development",
+        desc: "Dibangun bertahap per modul dengan demo berkala, supaya tim bisa mencoba dan memberi masukan sejak awal.",
+        deliverable: "Modul pertama di staging",
+      },
+      {
+        step: "04",
+        title: "Testing",
+        desc: "Uji coba bersama perwakilan setiap divisi memakai data nyata, termasuk skenario antar modul.",
+        deliverable: "Hasil UAT & perbaikan",
+      },
+      {
+        step: "05",
+        title: "Deployment",
+        desc: "Migrasi data lama, rilis bertahap per divisi, dan pelatihan untuk setiap pengguna.",
+        deliverable: "Sistem live + migrasi data",
+      },
+      {
+        step: "06",
+        title: "Support",
+        desc: "Pendampingan setelah rilis dan pengembangan modul berikutnya sesuai kebutuhan.",
+        deliverable: "Source code & dokumentasi",
+      },
+    ],
+    requirements: [
+      {
+        title: "Dari sisi bisnis",
+        items: [
+          "Penanggung jawab dari setiap divisi yang akan memakai sistem",
+          "Gambaran alur kerja dan struktur persetujuan saat ini",
+          "Contoh dokumen: faktur, PO, laporan stok, dan laporan keuangan",
+          "Daftar cabang, gudang, dan jumlah pengguna",
+        ],
+      },
+      {
+        title: "Dari sisi teknis",
+        items: [
+          "Data lama dalam format Excel/CSV atau akses ke sistem lama",
+          "Daftar aplikasi lain yang perlu diintegrasikan",
+          "Kebutuhan akses dari HP untuk tim lapangan, bila ada",
+          "Keputusan hosting: server sendiri atau cloud",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Apakah semua modul harus dibangun sekaligus?",
+        a: "Tidak. Kami mulai dari modul yang paling mendesak, biasanya penjualan dan stok, lalu menambah modul lain bertahap. Tim Anda sudah bisa memakai sistemnya sebelum semua modul selesai.",
+      },
+      {
+        q: "Bisa terhubung dengan aplikasi yang sudah kami pakai?",
+        a: "Bisa. ERP dapat disambungkan ke aplikasi kasir, marketplace, payment gateway, atau sistem lain lewat API maupun impor data terjadwal.",
+      },
+      {
+        q: "Apakah bisa diakses dari HP?",
+        a: "Bisa. Sistem berbasis web sehingga bisa dibuka dari browser HP, dan untuk tim lapangan kami bisa buatkan aplikasi Android atau iOS.",
+      },
+      {
+        q: "Siapa pemilik data dan source code-nya?",
+        a: "Anda. Data tersimpan di server pilihan Anda, dan source code beserta dokumentasinya diserahkan saat proyek selesai.",
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  {
+    slug: "ai-automation",
+    category: "AI Automation",
+    title: "AI Automation",
+    h1: "Jasa AI Automation & Chatbot WhatsApp untuk Bisnis",
+    tagline:
+      "Pekerjaan berulang dikerjakan AI: membalas chat pelanggan, membaca dokumen, sampai menyusun laporan, langsung dari sistem Anda.",
+    icon: Bot,
+    accent: { from: "#C026D3", to: "#7C3AED", text: "#F0ABFC" },
+    cardDesc: "Chatbot WhatsApp, pembacaan dokumen otomatis, dan alur kerja AI yang terhubung ke sistem Anda.",
+
+    metaTitle: "Jasa AI Automation & Chatbot WhatsApp untuk Bisnis | Ayrus Digital",
+    metaDescription:
+      "Jasa AI automation: chatbot WhatsApp yang menjawab dari data bisnis Anda, pembacaan dokumen otomatis, dan alur kerja AI yang terhubung ke sistem yang sudah ada.",
+    keywords: [
+      "jasa ai automation",
+      "jasa chatbot whatsapp",
+      "jasa chatbot ai",
+      "jasa pembuatan chatbot ai",
+      "jasa ai agent",
+    ],
+    timeline: "4-8 minggu",
+    intro: [
+      "Banyak jam kerja habis untuk pekerjaan yang sama setiap hari: menjawab pertanyaan pelanggan yang itu-itu saja, memindahkan data dari nota ke sistem, atau menyusun laporan dari beberapa sumber.",
+      "Kami membangun otomasi berbasis AI yang terhubung ke data bisnis Anda. Chatbot bisa menjawab status pesanan dari sistem, dokumen dibaca dan dicatat otomatis, dan pekerjaan yang butuh keputusan manusia tetap diteruskan ke tim Anda.",
+    ],
+    forWho: [
+      "Admin kewalahan membalas chat WhatsApp dengan pertanyaan yang berulang",
+      "Tim masih mengetik ulang data dari nota, invoice, atau formulir",
+      "Laporan rutin disusun manual dari beberapa sumber data",
+      "Anda ingin memakai AI tapi datanya harus tetap aman dan terkendali",
+    ],
+    includes: [
+      {
+        icon: MessageSquareText,
+        title: "Chatbot WhatsApp & web",
+        desc: "Menjawab pertanyaan pelanggan dalam Bahasa Indonesia, mengambil jawaban dari data dan dokumen bisnis Anda.",
+      },
+      {
+        icon: ScanText,
+        title: "Pembacaan dokumen otomatis",
+        desc: "Nota, invoice, dan formulir dibaca AI lalu dicatat ke sistem tanpa diketik ulang.",
+      },
+      {
+        icon: FileText,
+        title: "Ringkasan & laporan",
+        desc: "Laporan harian atau mingguan disusun otomatis dan dikirim ke WhatsApp atau email Anda.",
+      },
+      {
+        icon: Workflow,
+        title: "Alur kerja otomatis",
+        desc: "Rangkaian tugas berjalan sendiri: dari pesan masuk, cek data, sampai membuat tiket atau pesanan.",
+      },
+      {
+        icon: Plug,
+        title: "Terhubung ke sistem Anda",
+        desc: "Bekerja dengan aplikasi yang sudah ada, dari kasir dan ERP sampai spreadsheet.",
+      },
+      {
+        icon: ShieldCheck,
+        title: "Kendali di tangan Anda",
+        desc: "Batasan jawaban, eskalasi ke manusia, dan log setiap percakapan untuk ditinjau.",
+      },
+    ],
+    workflow: [
+      {
+        step: "01",
+        title: "Discovery",
+        desc: "Kami cari pekerjaan berulang yang paling banyak memakan waktu dan paling aman untuk diotomasi lebih dulu.",
+        deliverable: "Daftar proses & prioritas otomasi",
+      },
+      {
+        step: "02",
+        title: "Design",
+        desc: "Alur percakapan, sumber data, dan aturan kapan AI harus meneruskan ke tim Anda disusun bersama.",
+        deliverable: "Rancangan alur & batasan AI",
+      },
+      {
+        step: "03",
+        title: "Development",
+        desc: "Otomasi dibangun dan disambungkan ke WhatsApp, dokumen, serta sistem yang sudah Anda pakai.",
+        deliverable: "Prototipe yang bisa dicoba",
+      },
+      {
+        step: "04",
+        title: "Testing",
+        desc: "Diuji dengan percakapan dan dokumen nyata, lalu jawabannya disempurnakan sampai akurat.",
+        deliverable: "Hasil uji & penyempurnaan",
+      },
+      {
+        step: "05",
+        title: "Deployment",
+        desc: "Dirilis bertahap, dimulai dari sebagian percakapan, sambil dipantau bersama tim Anda.",
+        deliverable: "Otomasi live + dashboard log",
+      },
+      {
+        step: "06",
+        title: "Support",
+        desc: "Pemantauan dan penyesuaian berkala seiring bertambahnya pertanyaan dan data baru.",
+        deliverable: "Dokumentasi & panduan admin",
+      },
+    ],
+    requirements: [
+      {
+        title: "Dari sisi bisnis",
+        items: [
+          "Contoh pertanyaan pelanggan yang paling sering masuk",
+          "Dokumen rujukan: daftar produk, harga, kebijakan, dan FAQ",
+          "Aturan kapan percakapan harus diteruskan ke admin",
+          "Penanggung jawab yang meninjau hasil di minggu-minggu awal",
+        ],
+      },
+      {
+        title: "Dari sisi teknis",
+        items: [
+          "Nomor WhatsApp Business yang akan dipakai",
+          "Akses ke sistem atau spreadsheet yang menjadi sumber data",
+          "Contoh dokumen yang akan dibaca otomatis",
+          "Kebijakan internal soal data yang boleh dan tidak boleh dipakai AI",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Bagaimana kalau AI salah menjawab?",
+        a: "AI hanya menjawab dari data dan dokumen yang Anda tentukan. Pertanyaan di luar itu, atau yang butuh keputusan, diteruskan ke tim Anda. Setiap percakapan juga tercatat untuk ditinjau.",
+      },
+      {
+        q: "Apakah data bisnis kami aman?",
+        a: "Akses data dibatasi sesuai kebutuhan otomasi, dan aturan soal data yang boleh dipakai kami sepakati di awal bersama Anda.",
+      },
+      {
+        q: "Apakah harus mengganti sistem yang sudah ada?",
+        a: "Tidak. Otomasi kami sambungkan ke aplikasi yang sudah Anda pakai, mulai dari WhatsApp, spreadsheet, aplikasi kasir, sampai ERP.",
+      },
+      {
+        q: "Apakah bisa berbahasa Indonesia?",
+        a: "Bisa. Chatbot memahami dan membalas dalam Bahasa Indonesia, termasuk gaya bahasa sehari-hari yang biasa dipakai pelanggan.",
       },
     ],
   },

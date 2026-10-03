@@ -3,24 +3,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { nav, navSections, site, waLink, waMessages } from "@/lib/site";
 import { ButtonLink, NavLink } from "./ui";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [section, setSection] = useState<string | null>(null);
   const pathname = usePathname();
   const toggleRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   /* Scroll-spy for the homepage anchor items. Only runs on "/" — on any other
      route the active item comes from the pathname instead. If the observer
@@ -73,7 +64,6 @@ export function Navbar() {
   useEffect(() => setOpen(false), [pathname]);
 
   const isActive = (item: (typeof nav)[number]) => {
-    if ("external" in item) return false;
     const match = "match" in item ? item.match : undefined;
     if (match && (pathname === match || pathname.startsWith(`${match}/`))) return true;
     const sec = "section" in item ? item.section : undefined;
@@ -81,18 +71,13 @@ export function Navbar() {
   };
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ${
-        scrolled || open
-          ? "border-b border-white/8 bg-bg/85 backdrop-blur-xl"
-          : "border-b border-transparent"
-      }`}
-    >
-      <div className="container-page flex h-[72px] items-center justify-between gap-4">
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4 sm:pt-4">
+      {/* Floating glass pill, detached from the top edge. */}
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 rounded-full border border-white/10 bg-bg/70 pr-2 pl-4 shadow-[0_20px_50px_-24px_rgba(0,0,0,0.9),inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur-xl sm:pl-5">
         <Link
           href="/"
-          className="flex shrink-0 items-center gap-2.5 rounded-lg py-2"
-          aria-label={`${site.name} — beranda`}
+          className="flex shrink-0 items-center gap-2.5 rounded-full py-2"
+          aria-label={`${site.name}, beranda`}
         >
           <Logo />
           <span className="font-display text-[17px] font-bold tracking-tight">
@@ -101,30 +86,23 @@ export function Navbar() {
         </Link>
 
         <nav aria-label="Navigasi utama" className="hidden lg:block">
-          <ul className="flex items-center gap-1">
+          <ul className="flex items-center gap-0.5">
             {nav.map((item) => {
               const active = isActive(item);
               return (
                 <li key={item.href}>
+                  {/* Active item gets a filled chip and heavier weight, so it is
+                      not signalled by brightness alone. */}
                   <NavLink
                     href={item.href}
-                    external={"external" in item}
                     aria-current={active ? "page" : undefined}
-                    className={`relative inline-flex min-h-11 items-center rounded-full px-4 text-[15px] transition-colors duration-200 ${
+                    className={`inline-flex min-h-10 items-center rounded-full px-4 text-[15px] transition-[background-color,color] duration-300 ease-spring ${
                       active
-                        ? "font-semibold text-ink"
-                        : "font-medium text-ink-muted hover:text-ink"
+                        ? "bg-white/[0.08] font-semibold text-ink"
+                        : "font-medium text-ink-muted hover:bg-white/[0.04] hover:text-ink"
                     }`}
                   >
                     {item.label}
-                    {/* Underline so the active item is not signalled by
-                        brightness alone. */}
-                    <span
-                      aria-hidden="true"
-                      className={`absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full bg-brand transition-opacity duration-200 ${
-                        active ? "opacity-100" : "opacity-0"
-                      }`}
-                    />
                   </NavLink>
                 </li>
               );
@@ -132,9 +110,9 @@ export function Navbar() {
           </ul>
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <ButtonLink href={waLink(waMessages.general)} external className="px-5">
-            Konsultasi Gratis
+        <div className="hidden lg:block">
+          <ButtonLink href={waLink(waMessages.general)} external className="min-h-11 px-5">
+            Hubungi Kami
           </ButtonLink>
         </div>
 
@@ -145,38 +123,44 @@ export function Navbar() {
           aria-expanded={open}
           aria-controls="menu-mobile"
           aria-label={open ? "Tutup menu navigasi" : "Buka menu navigasi"}
-          className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-white/15 text-ink transition-colors duration-200 hover:bg-white/8 lg:hidden"
+          className="relative grid h-12 w-12 cursor-pointer place-items-center rounded-full bg-white/[0.06] text-ink transition-colors duration-300 hover:bg-white/[0.1] lg:hidden"
         >
-          {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+          {/* Two bars that rotate into an X rather than swapping icons. */}
+          <span aria-hidden="true" className="relative block h-4 w-5">
+            <span
+              className={`absolute top-1/2 left-0 -mt-px h-0.5 w-5 rounded-full bg-current transition-transform duration-300 ease-spring ${
+                open ? "rotate-45" : "-translate-y-[5px]"
+              }`}
+            />
+            <span
+              className={`absolute top-1/2 left-0 -mt-px h-0.5 w-5 rounded-full bg-current transition-transform duration-300 ease-spring ${
+                open ? "-rotate-45" : "translate-y-[5px]"
+              }`}
+            />
+          </span>
         </button>
       </div>
 
-      <div
-        id="menu-mobile"
-        hidden={!open}
-        className="border-t border-white/8 bg-bg/95 backdrop-blur-xl lg:hidden"
-      >
-        <nav aria-label="Navigasi utama (mobile)" className="container-page py-4">
+      <div id="menu-mobile" hidden={!open} className="mx-auto mt-2 max-w-6xl lg:hidden">
+        <nav
+          aria-label="Navigasi utama (mobile)"
+          className="rounded-[var(--radius-shell)] border border-white/10 bg-bg/95 p-3 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.95)] backdrop-blur-xl"
+        >
           <ul className="flex flex-col">
-            {nav.map((item) => {
+            {nav.map((item, i) => {
               const active = isActive(item);
               return (
-                <li key={item.href}>
+                // .rise replays each time the panel is un-hidden, so links
+                // cascade in one after another.
+                <li key={item.href} className="rise" style={{ "--rise-delay": `${i * 45}ms` } as CSSProperties}>
                   <NavLink
                     href={item.href}
-                    external={"external" in item}
                     aria-current={active ? "page" : undefined}
                     onClick={() => setOpen(false)}
-                    className={`flex min-h-12 items-center gap-2.5 border-b border-white/6 text-[15px] transition-colors duration-200 ${
-                      active ? "font-semibold text-ink" : "font-medium text-ink-muted hover:text-ink"
+                    className={`flex min-h-13 items-center rounded-2xl px-4 font-display text-xl transition-colors duration-200 ${
+                      active ? "bg-white/[0.07] font-semibold text-ink" : "font-medium text-ink-muted hover:text-ink"
                     }`}
                   >
-                    <span
-                      aria-hidden="true"
-                      className={`h-4 w-0.5 rounded-full bg-brand transition-opacity duration-200 ${
-                        active ? "opacity-100" : "opacity-0"
-                      }`}
-                    />
                     {item.label}
                   </NavLink>
                 </li>
@@ -186,10 +170,11 @@ export function Navbar() {
           <ButtonLink
             href={waLink(waMessages.general)}
             external
-            className="mt-5 w-full"
+            arrow
+            className="mt-3 w-full"
             onClick={() => setOpen(false)}
           >
-            Konsultasi Gratis
+            Hubungi Kami
           </ButtonLink>
         </nav>
       </div>

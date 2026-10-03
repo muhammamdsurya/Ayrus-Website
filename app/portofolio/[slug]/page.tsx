@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  ArrowRight,
   ArrowUpRight,
   Building2,
   CalendarDays,
@@ -13,10 +11,11 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { Rise } from "@/components/rise";
-import { ButtonLink, Card, SectionHeading } from "@/components/ui";
+import { Bezel, ButtonLink, Card, SectionHeading } from "@/components/ui";
+import { CaseScreen } from "@/components/case-screens";
 import { caseStudies, getCaseStudy } from "@/lib/portfolio";
 import { getService } from "@/lib/services";
-import { site, waLink } from "@/lib/site";
+import { shareImage, site, waLink } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -38,13 +37,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       url: `${site.url}/portofolio/${c.slug}`,
       title: c.metaTitle,
       description: c.metaDescription,
-      images: [{ url: c.image.src, width: 1600, height: 900, alt: c.image.alt }],
+      images: [shareImage],
     },
     twitter: {
       card: "summary_large_image",
       title: c.metaTitle,
       description: c.metaDescription,
-      images: [c.image.src],
+      images: ["/twitter-image.png"],
     },
   };
 }
@@ -67,7 +66,7 @@ export default async function CaseStudyPage({ params }: Params) {
       headline: c.title,
       description: c.metaDescription,
       inLanguage: "id-ID",
-      image: `${site.url}${c.image.src}`,
+      image: `${site.url}${shareImage.url}`,
       mainEntityOfPage: { "@type": "WebPage", "@id": `${site.url}/portofolio/${c.slug}` },
       author: { "@type": "Organization", name: site.name, url: site.url },
       publisher: { "@type": "Organization", name: site.name, url: site.url },
@@ -77,7 +76,7 @@ export default async function CaseStudyPage({ params }: Params) {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Beranda", item: site.url },
-        { "@type": "ListItem", position: 2, name: "Portofolio", item: `${site.url}/portofolio` },
+        { "@type": "ListItem", position: 2, name: "Karya Kami", item: `${site.url}/portofolio` },
         {
           "@type": "ListItem",
           position: 3,
@@ -98,7 +97,7 @@ export default async function CaseStudyPage({ params }: Params) {
       {/* --------------------------------- hero --------------------------------- */}
       <section className="relative overflow-hidden pt-28 pb-14 sm:pt-32 lg:pt-36">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-          <div className="grid-lines absolute inset-0 [mask-image:radial-gradient(ellipse_75%_55%_at_50%_0%,#000_20%,transparent_75%)]" />
+          <div className="hero-texture absolute inset-0 [mask-image:radial-gradient(ellipse_75%_55%_at_50%_0%,#000_20%,transparent_75%)]" />
           <div className="absolute -top-40 left-1/2 h-[440px] w-[860px] max-w-[130vw] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(203,108,230,0.26),transparent_65%)] blur-3xl" />
         </div>
 
@@ -113,7 +112,7 @@ export default async function CaseStudyPage({ params }: Params) {
               <li aria-hidden="true">/</li>
               <li>
                 <Link href="/portofolio" className="transition-colors hover:text-brand">
-                  Portofolio
+                  Karya Kami
                 </Link>
               </li>
               <li aria-hidden="true">/</li>
@@ -164,20 +163,11 @@ export default async function CaseStudyPage({ params }: Params) {
             </div>
 
             <Rise delay={200}>
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-white/12 shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]">
-                <Image
-                  src={c.image.src}
-                  alt={c.image.alt}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 46vw, 92vw"
-                  className="object-cover"
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent"
-                />
-              </div>
+              <Bezel className="shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]">
+                <div role="img" aria-label={`Ilustrasi aplikasi untuk ${c.client}`} className="relative aspect-[16/10]">
+                  <CaseScreen slug={c.slug} />
+                </div>
+              </Bezel>
             </Rise>
           </div>
         </div>
@@ -190,7 +180,7 @@ export default async function CaseStudyPage({ params }: Params) {
       >
         <div className="container-page">
           <Reveal>
-            <SectionHeading align="left" eyebrow="Hasil" title="Dampak setelah sistem berjalan" id="hasil" />
+            <SectionHeading title="Dampak setelah sistem berjalan" id="hasil" />
           </Reveal>
           <dl className="mt-12 grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
             {c.outcomes.map((o, i) => (
@@ -217,7 +207,7 @@ export default async function CaseStudyPage({ params }: Params) {
         <div className="container-page grid gap-12 lg:grid-cols-[1.25fr_1fr]">
           <Reveal>
             <div>
-              <SectionHeading align="left" eyebrow="Tantangan" title="Masalah yang dihadapi" />
+              <SectionHeading title="Masalah yang dihadapi" />
               <div className="mt-6 space-y-4">
                 {c.challenge.map((p) => (
                   <p key={p.slice(0, 24)} className="text-lg leading-relaxed text-ink-muted">
@@ -280,7 +270,6 @@ export default async function CaseStudyPage({ params }: Params) {
         <div className="container-page">
           <Reveal>
             <SectionHeading
-              eyebrow="Solusi"
               title="Apa yang kami bangun"
               sub="Setiap bagian di bawah menjawab satu hambatan yang muncul di tahap discovery."
             />
@@ -344,13 +333,12 @@ export default async function CaseStudyPage({ params }: Params) {
                   Kendala Anda mirip dengan {c.client}?
                 </h2>
                 <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-                  Sesi konsultasi pertama gratis. Kami bantu petakan masalahnya dulu sebelum bicara
-                  soal biaya.
+                  Ceritakan kendala Anda. Kami bantu petakan masalahnya lebih dulu, lalu susun solusi
+                  yang paling masuk akal untuk usaha Anda.
                 </p>
                 <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                  <ButtonLink href={wa} external className="px-7">
+                  <ButtonLink href={wa} external className="px-7" arrow>
                     Konsultasi via WhatsApp
-                    <ArrowRight size={18} aria-hidden="true" />
                   </ButtonLink>
                   <ButtonLink href="/portofolio" variant="secondary" className="px-7">
                     Lihat Studi Kasus Lain

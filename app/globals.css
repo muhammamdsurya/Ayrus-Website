@@ -30,13 +30,17 @@
   --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 
-  /* Rhythm — density 5/10 (standard) */
-  --spacing-section: 5.5rem;
+  /* Rhythm — airy marketing density; scales down on phones */
+  --spacing-section: clamp(4.5rem, 9vw, 7.5rem);
 
-  --radius-card: 1rem;
+  /* Shape lock: interactive = pill, cards = 1.25rem, framed shells = 1.75rem */
+  --radius-card: 1.25rem;
+  --radius-shell: 1.75rem;
   --radius-pill: 999px;
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Heavier, spring-like settle for hover and reveal motion */
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @layer base {
@@ -61,8 +65,25 @@
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
     text-wrap: balance;
+  }
+
+  h1, h2 {
+    letter-spacing: -0.035em;
+  }
+
+  /* Film grain over the whole page breaks the flat digital black. Fixed and
+     pointer-events-none, so it is composited once and never repaints on
+     scroll. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   p {
@@ -99,13 +120,6 @@
     .container-page { padding-inline: 2.5rem; }
   }
 
-  .text-gradient {
-    background: linear-gradient(100deg, #f5f5f5 0%, var(--color-brand-soft) 45%, var(--color-brand) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
   /* Glassmorphism card — opaque enough to keep 4.5:1 body text.
      Deliberately no backdrop-filter: these cards sit on a flat dark
      background, where blurring the backdrop is visually indistinguishable
@@ -121,15 +135,28 @@
     border: 1px solid rgba(203, 108, 230, 0.3);
   }
 
-  .grid-lines {
-    background-image:
-      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: 64px 64px;
+  /* Faint dot matrix behind page heroes: texture, not a crosshair grid. */
+  .hero-texture {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1.2px);
+    background-size: 22px 22px;
   }
 
-  .glow-brand {
-    box-shadow: 0 0 0 1px rgba(203, 108, 230, 0.28), 0 18px 60px -18px rgba(203, 108, 230, 0.55);
+  /* Double-bezel frame: an outer tray holding an inner plate, with concentric
+     radii, so key cards read as machined objects rather than flat boxes. */
+  .bezel {
+    border-radius: var(--radius-shell);
+    padding: 0.375rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .bezel-core {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    border-radius: calc(var(--radius-shell) - 0.375rem);
+    background: var(--color-surface);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
   }
 }
 
@@ -140,12 +167,12 @@
    LCP out past the 2.5s budget.
    ============================================================ */
 @keyframes rise {
-  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
   to   { opacity: 1; transform: none; }
 }
 
 .rise {
-  animation: rise 0.55s var(--ease-out-soft) both;
+  animation: rise 0.8s var(--ease-spring) both;
   animation-delay: var(--rise-delay, 0ms);
 }
 
@@ -161,10 +188,10 @@
    ============================================================ */
 .reveal {
   opacity: 0;
-  transform: translate3d(0, 16px, 0);
+  transform: translate3d(0, 28px, 0);
   transition:
-    opacity 0.5s var(--ease-out-soft),
-    transform 0.5s var(--ease-out-soft);
+    opacity 0.8s var(--ease-spring),
+    transform 0.8s var(--ease-spring);
   transition-delay: var(--reveal-delay, 0ms);
   /* Promoted while pending and released once revealed. Without this the layer
      is created at the moment the transition starts, which lands the paint in

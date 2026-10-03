@@ -7,18 +7,23 @@
  */
 
 export const site = {
-  name: "Ayrus Digital Teknologi",
+  name: "Ayrus Digital Indonesia",
   shortName: "Ayrus",
   url: "https://ayrusdigital.my.id",
   locale: "id_ID",
   founded: "2021",
-  tagline: "Software house untuk UMKM Indonesia",
+  tagline: "Software house Indonesia",
   description:
-    "Ayrus Digital Teknologi membangun aplikasi custom untuk UMKM Indonesia — aplikasi laundry, website bisnis, dan sistem POS. Berdiri sejak 2021.",
-  email: "muhammadsurya2812@gmail.com",
+    "Ayrus Digital Indonesia adalah software house yang membangun custom software sesuai alur bisnis: aplikasi web, Android & iOS, ERP, AI automation, dan website company profile.",
+  email: "ayrusdigitalindonesia@gmail.com",
   phoneDisplay: "+62 819-3276-4494",
   whatsapp: "6281932764494",
-  hours: "Setiap Hari, 09.00–18.00 WIB",
+  hours: "Setiap hari, 09.00-18.00 WIB",
+  social: {
+    instagram: "https://www.instagram.com/ayrusdigital",
+    facebook: "https://www.facebook.com/people/Ayrus-Digital-Indonesia/61594778053714/",
+    tiktok: "https://www.tiktok.com/@ayrusdigital",
+  },
   /** Must match the Google Business Profile listing character for character. */
   address: {
     street: "Jl. Raya Condet No. 21",
@@ -28,15 +33,36 @@ export const site = {
   },
 } as const;
 
+/**
+ * Site-wide share image (app/opengraph-image.png). A page that sets its own
+ * `openGraph` block no longer inherits the root file image, so pages without
+ * a specific picture spread this in explicitly.
+ */
+export const shareImage = { url: "/opengraph-image.png", width: 1200, height: 630, alt: site.name };
+
 /** JSON-LD `@id` of the business node declared once in app/layout.tsx. */
 export const businessId = `${site.url}/#bisnis`;
 
 /**
- * KaselaPOS lives on its own subdomain, not on this site. Menu entries and the
- * homepage CTAs point straight at the app; /produk/kaselapos stays as the
- * marketing/SEO page reached from search, the sitemap and in-content links.
+ * Ayrus' own SaaS products. Each lives on its own subdomain, which owns its
+ * pricing and sign-up; this site only introduces them (homepage #saas, footer).
  */
-export const kaselaposUrl = "https://kaselapos.ayrusdigital.my.id/";
+export const saasProducts = [
+  {
+    name: "KaselaPOS",
+    category: "Aplikasi kasir online",
+    url: "https://kaselapos.ayrusdigital.my.id/",
+    image: "/images/saas-kaselapos.webp",
+    desc: "Sistem kasir berbasis browser untuk UMKM: catat penjualan, kelola stok, dan pantau laporan dari HP, tablet, atau laptop tanpa instalasi.",
+  },
+  {
+    name: "AutoJobs",
+    category: "Otomasi lamaran kerja",
+    url: "https://autojobs.ayrusdigital.my.id/",
+    image: "/images/saas-autojobs.webp",
+    desc: "Cari lowongan di JobStreet, Glints, dan LinkedIn dalam satu pencarian, lalu kirim lamaran otomatis dari satu profil dan CV.",
+  },
+] as const;
 
 /**
  * `source` is appended as "(dari …)" so whoever answers WhatsApp can log which
@@ -47,24 +73,32 @@ export function waLink(message: string, source?: string) {
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
 }
 
+/**
+ * Gmail web compose with the address (and optional subject) prefilled.
+ * Used instead of `mailto:`, which does nothing on machines with no default
+ * mail app and so reads as a dead link.
+ */
+export function gmailLink(subject?: string) {
+  const q = new URLSearchParams({ view: "cm", fs: "1", to: site.email });
+  if (subject) q.set("su", subject);
+  return `https://mail.google.com/mail/?${q}`;
+}
+
 export const waMessages = {
-  general: "Halo Ayrus, saya ingin konsultasi gratis soal kebutuhan aplikasi bisnis saya.",
+  general: "Halo Ayrus, saya ingin bertanya soal kebutuhan aplikasi bisnis saya.",
   custom: "Halo Ayrus, saya ingin konsultasi soal pembuatan aplikasi custom.",
-  nectarpos: "Halo Ayrus, saya ingin mencoba demo KaselaPOS untuk usaha saya.",
 } as const;
 
 /**
  * `section` marks a homepage anchor the navbar scroll-spies.
  * `match` marks a route prefix that should light the same item up
  * (e.g. /layanan/website keeps "Layanan" active).
- * `external` marks an off-site destination: rendered as a plain anchor that
- * opens in a new tab, and never marked `aria-current` since it leaves the site.
  */
 export const nav = [
-  { label: "Layanan", href: "/#layanan", section: "layanan", match: "/layanan" },
-  { label: "KaselaPOS", href: kaselaposUrl, external: true },
-  { label: "Portofolio", href: "/#portofolio", section: "portofolio", match: "/portofolio" },
   { label: "Tentang Kami", href: "/#tentang", section: "tentang" },
+  { label: "Layanan", href: "/#layanan", section: "layanan", match: "/layanan" },
+  { label: "SaaS", href: "/#saas", section: "saas" },
+  { label: "Karya Kami", href: "/#portofolio", section: "portofolio", match: "/portofolio" },
   { label: "Artikel", href: "/blog", match: "/blog" },
 ] as const;
 

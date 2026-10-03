@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, ArrowUpRight, Clock, Quote, Tag, Wallet } from "lucide-react";
+import { ArrowUpRight, Clock, Quote } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { Rise } from "@/components/rise";
 import { FeatureCard } from "@/components/feature-card";
 import { FaqList, faqSchema } from "@/components/faq";
-import { PriceTiers } from "@/components/price-tiers";
-import { ButtonLink, Card, Eyebrow, SectionHeading } from "@/components/ui";
+import { Bezel, ButtonLink, Card, Eyebrow, SectionHeading } from "@/components/ui";
+import { CaseScreen } from "@/components/case-screens";
 import { getSolution, solutions } from "@/lib/solutions";
 import { getCaseStudy } from "@/lib/portfolio";
-import { getPricing, priceFrom } from "@/lib/pricing";
-import { businessId, site, waLink } from "@/lib/site";
+import { businessId, shareImage, site, waLink } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -35,7 +33,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       url: `${site.url}/solusi/${s.slug}`,
       title: s.metaTitle,
       description: s.metaDescription,
-      images: c ? [{ url: c.image.src, alt: c.image.alt }] : undefined,
+      images: [shareImage],
     },
   };
 }
@@ -44,11 +42,9 @@ export default async function SolutionPage({ params }: Params) {
   const { slug } = await params;
   const s = getSolution(slug);
   const c = s && getCaseStudy(s.caseSlug);
-  const pricing = s && getPricing(s.serviceSlug);
-  if (!s || !c || !pricing) notFound();
+  if (!s || !c) notFound();
 
-  const source = `halaman solusi ${s.industry.toLowerCase()}`;
-  const wa = waLink(s.wa, source);
+  const wa = waLink(s.wa, `halaman solusi ${s.industry.toLowerCase()}`);
   const url = `${site.url}/solusi/${s.slug}`;
 
   const schema = [
@@ -83,7 +79,7 @@ export default async function SolutionPage({ params }: Params) {
       {/* --------------------------------- hero --------------------------------- */}
       <section className="relative overflow-hidden pt-28 pb-16 sm:pt-32 lg:pt-36 lg:pb-20">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-          <div className="grid-lines absolute inset-0 [mask-image:radial-gradient(ellipse_75%_55%_at_50%_0%,#000_20%,transparent_75%)]" />
+          <div className="hero-texture absolute inset-0 [mask-image:radial-gradient(ellipse_75%_55%_at_50%_0%,#000_20%,transparent_75%)]" />
           <div className="absolute -top-40 left-1/2 h-[480px] w-[900px] max-w-[130vw] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(203,108,230,0.28),transparent_65%)] blur-3xl" />
         </div>
 
@@ -119,51 +115,33 @@ export default async function SolutionPage({ params }: Params) {
               </Rise>
 
               <Rise delay={180}>
-                <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-4">
-                  {[
-                    { icon: Wallet, k: "Mulai dari", v: priceFrom(s.serviceSlug) },
-                    { icon: Clock, k: "Estimasi", v: s.timeline },
-                    { icon: Tag, k: "Model", v: "Sekali bayar" },
-                  ].map((m) => (
-                    <div key={m.k} className="flex items-center gap-2.5">
-                      <m.icon size={18} className="shrink-0 text-brand" aria-hidden="true" />
-                      <div>
-                        <dt className="text-xs text-ink-muted">{m.k}</dt>
-                        <dd className="font-display text-sm font-bold">{m.v}</dd>
-                      </div>
-                    </div>
-                  ))}
-                </dl>
+                <div className="mt-8 flex items-center gap-2.5">
+                  <Clock size={18} className="shrink-0 text-brand" aria-hidden="true" />
+                  <dl>
+                    <dt className="text-xs text-ink-muted">Estimasi pengerjaan</dt>
+                    <dd className="font-display text-sm font-bold">{s.timeline}</dd>
+                  </dl>
+                </div>
               </Rise>
 
               <Rise delay={240}>
                 <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                  <ButtonLink href={wa} external className="px-7">
+                  <ButtonLink href={wa} external className="px-7" arrow>
                     Konsultasi via WhatsApp
-                    <ArrowRight size={18} aria-hidden="true" />
                   </ButtonLink>
-                  <ButtonLink href="#harga" variant="secondary" className="px-7">
-                    Lihat Harga
+                  <ButtonLink href={`/portofolio/${c.slug}`} variant="secondary" className="px-7" arrow>
+                    Lihat Studi Kasus
                   </ButtonLink>
                 </div>
               </Rise>
             </div>
 
             <Rise delay={200}>
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[1.5rem] border border-white/12 shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]">
-                <Image
-                  src={c.image.src}
-                  alt={c.image.alt}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 46vw, 92vw"
-                  className="object-cover"
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent"
-                />
-              </div>
+              <Bezel className="shadow-[0_40px_120px_-40px_rgba(0,0,0,0.9)]">
+                <div role="img" aria-label={`Ilustrasi aplikasi untuk ${c.client}`} className="relative aspect-[16/10]">
+                  <CaseScreen slug={c.slug} />
+                </div>
+              </Bezel>
             </Rise>
           </div>
         </div>
@@ -233,68 +211,28 @@ export default async function SolutionPage({ params }: Params) {
         <div className="container-page">
           <Reveal>
             <SectionHeading
-              eyebrow="Fitur"
               title={`Dibangun untuk alur kerja ${s.industry.toLowerCase()}`}
             />
           </Reveal>
           <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {s.features.map((f, i) => (
               <Reveal key={f.title} delay={i * 60} as="li" className="h-full">
-                <FeatureCard icon={f.icon} title={f.title} desc={f.desc} index={i + 1} />
+                <FeatureCard icon={f.icon} title={f.title} desc={f.desc} />
               </Reveal>
             ))}
           </ul>
         </div>
       </section>
 
-      {/* --------------------------------- pricing --------------------------------- */}
-      <section
-        id="harga"
-        className="scroll-mt-24 border-y border-white/8 bg-bg-alt py-[var(--spacing-section)]"
-      >
-        <div className="container-page">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Harga"
-              title="Kisaran biaya, sekali bayar"
-              sub="Harga akhir tergantung jumlah outlet dan modul. Setelah konsultasi gratis, kami kirim rincian per modul."
-            />
-          </Reveal>
-          <PriceTiers pricing={pricing} source={source} />
-          <Reveal delay={120}>
-            <p className="mt-10 text-center text-ink-muted">
-              {s.kaselaNote}{" "}
-              <Link
-                href="/produk/kaselapos"
-                className="font-semibold text-brand underline decoration-brand/40 underline-offset-4 transition-colors hover:text-brand-soft"
-              >
-                Lihat KaselaPOS
-              </Link>
-              {" · "}
-              <Link
-                href="/harga"
-                className="font-semibold text-brand underline decoration-brand/40 underline-offset-4 transition-colors hover:text-brand-soft"
-              >
-                Semua daftar harga
-              </Link>
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ----------------------------------- FAQ ----------------------------------- */}
-      <section className="py-[var(--spacing-section)]">
+      <section className="border-t border-white/8 bg-bg-alt py-[var(--spacing-section)]">
         <div className="container-page">
-          <Reveal>
-            <SectionHeading eyebrow="FAQ" title="Pertanyaan yang sering diajukan" />
-          </Reveal>
           <FaqList faqs={s.faqs} />
 
           <Reveal delay={80}>
-            <div className="mt-14 text-center">
+            <div className="mt-14">
               <ButtonLink href={wa} external className="px-7">
                 Konsultasi Aplikasi {s.industry}
-                <ArrowRight size={18} aria-hidden="true" />
               </ButtonLink>
             </div>
           </Reveal>

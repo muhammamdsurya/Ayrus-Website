@@ -18,7 +18,6 @@ export type CaseStudy = {
   year: string;
   duration: string;
   serviceSlug: string;
-  image: { src: string; alt: string };
 
   metaTitle: string;
   metaDescription: string;
@@ -41,11 +40,7 @@ export const caseStudies: CaseStudy[] = [
     year: "2025",
     duration: "8 minggu",
     serviceSlug: "custom-software",
-    image: {
-      src: "/images/laundry.webp",
-      alt: "Petugas laundry memasukkan cucian ke dalam mesin cuci di sebuah gerai",
-    },
-    metaTitle: "Studi Kasus: Sistem Laundry Multi-Cabang — Laundry Bersih Wangi",
+    metaTitle: "Studi Kasus: Sistem Laundry Multi-Cabang - Laundry Bersih Wangi",
     metaDescription:
       "Bagaimana Ayrus membangun sistem manajemen laundry multi-cabang yang menurunkan selisih kas hingga 90% dan memangkas waktu tutup buku harian.",
     challenge: [
@@ -97,11 +92,7 @@ export const caseStudies: CaseStudy[] = [
     year: "2025",
     duration: "6 minggu",
     serviceSlug: "sistem-pos",
-    image: {
-      src: "/images/pos-kafe.jpg",
-      alt: "Barista mencatat pesanan lewat tablet kasir di meja bar kedai kopi",
-    },
-    metaTitle: "Studi Kasus: Sistem Kasir Kedai Kopi — Kopi Ruang Tengah",
+    metaTitle: "Studi Kasus: Sistem Kasir Kedai Kopi - Kopi Ruang Tengah",
     metaDescription:
       "Bagaimana Ayrus merancang antarmuka kasir yang memangkas waktu pelatihan staf baru dari beberapa hari menjadi satu hari di sebuah kedai kopi.",
     challenge: [
@@ -153,11 +144,7 @@ export const caseStudies: CaseStudy[] = [
     year: "2024",
     duration: "4 minggu",
     serviceSlug: "website",
-    image: {
-      src: "/images/kontraktor.webp",
-      alt: "Rak berisi berbagai material dan perkakas di dalam toko bangunan",
-    },
-    metaTitle: "Studi Kasus: Website Katalog Toko Bangunan — Maju Jaya",
+    metaTitle: "Studi Kasus: Website Katalog Toko Bangunan - Maju Jaya",
     metaDescription:
       "Bagaimana katalog online yang dioptimasi untuk pencarian lokal membawa lebih dari 120 lead organik per bulan bagi sebuah toko material bangunan.",
     challenge: [
@@ -209,10 +196,6 @@ export const caseStudies: CaseStudy[] = [
     year: "2025",
     duration: "7 minggu",
     serviceSlug: "sistem-pos",
-    image: {
-      src: "/images/pharmacy.webp",
-      alt: "Interior apotek modern dengan rak obat tertata rapi",
-    },
     metaTitle: "Studi Kasus: Sistem Kasir Apotek dengan Kontrol Kedaluwarsa",
     metaDescription:
       "Bagaimana sistem kasir dengan pelacakan nomor batch dan tanggal kedaluwarsa menurunkan kerugian stok apotek hingga 75%.",
@@ -258,11 +241,7 @@ export const caseStudies: CaseStudy[] = [
     year: "2026",
     duration: "9 minggu",
     serviceSlug: "custom-software",
-    image: {
-      src: "/images/services.webp",
-      alt: "Teknisi bengkel memeriksa mesin mobil menggunakan alat diagnostik",
-    },
-    metaTitle: "Studi Kasus: Sistem Antrean & Servis Bengkel — Bengkel Karya",
+    metaTitle: "Studi Kasus: Sistem Antrean & Servis Bengkel - Bengkel Karya",
     metaDescription:
       "Bagaimana sistem work order dengan pelacakan progres yang bisa dibuka pelanggan menurunkan telepon masuk hingga 70% di sebuah bengkel mobil.",
     challenge: [
@@ -307,11 +286,7 @@ export const caseStudies: CaseStudy[] = [
     year: "2026",
     duration: "7 minggu",
     serviceSlug: "aplikasi-keuangan",
-    image: {
-      src: "/images/warung.webp",
-      alt: "Pemilik warung memasak pesanan di dapur rumah makan",
-    },
-    metaTitle: "Studi Kasus: Aplikasi Pembukuan Katering — Dapur Nusantara",
+    metaTitle: "Studi Kasus: Aplikasi Pembukuan Katering - Dapur Nusantara",
     metaDescription:
       "Bagaimana aplikasi pembukuan dengan perhitungan harga pokok per menu membantu sebuah usaha katering menaikkan margin sebesar 12 poin persen.",
     challenge: [
