@@ -4,7 +4,6 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
 import { RevealController } from "@/components/reveal-controller";
-import { Analytics } from "@/components/analytics";
 import { businessId, site } from "@/lib/site";
 import "./globals.css";
 
@@ -161,7 +160,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Footer />
         <WhatsAppFab />
         <RevealController />
-        <Analytics />
       </body>
     </html>
   );
