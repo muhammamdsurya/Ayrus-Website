@@ -22,6 +22,8 @@ const jakarta = Plus_Jakarta_Sans({
   display: "swap",
 });
 
+const gtmId = "GTM-PWFZMJC5";
+
 // Brand shows as the Google site name (og:site_name), so the title spends its
 // ~60 characters on the positioning.
 const homeTitle = "Software House Indonesia: Custom Software Sesuai Alur Bisnis";
@@ -117,6 +119,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id" className={`${sora.variable} ${jakarta.variable}`}>
       <head>
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${gtmId}');`,
+          }}
+        />
         {/* Without JS the IntersectionObserver never runs, so scroll-revealed
             sections would stay at opacity 0. This restores them for no-JS
             visitors and non-executing crawlers. */}
@@ -129,6 +141,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
         <a
           href="#konten-utama"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-brand focus:px-5 focus:py-3 focus:font-semibold focus:text-brand-ink"
