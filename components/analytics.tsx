@@ -1,9 +1,9 @@
 import Script from "next/script";
 
-const id = process.env.NEXT_PUBLIC_GA_ID;
+const id = "G-GT06TEGP3P";
 
 /**
- * GA4, inert until NEXT_PUBLIC_GA_ID is set. Every tap on a wa.me link fires
+ * GA4. Every tap on a wa.me link fires
  * `whatsapp_click` with the page path — mark it as a key event in GA4 to see
  * which pages (and so which keywords) produce chats.
  *
@@ -11,7 +11,6 @@ const id = process.env.NEXT_PUBLIC_GA_ID;
  * gtag.js itself finishes loading lazily.
  */
 export function Analytics() {
-  if (!id) return null;
   return (
     <>
       <Script id="ga-init" strategy="afterInteractive">
