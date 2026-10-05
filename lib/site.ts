@@ -16,8 +16,8 @@ export const site = {
   description:
     "Ayrus Digital Indonesia adalah software house yang membangun custom software sesuai alur bisnis: aplikasi web, Android & iOS, ERP, AI automation, dan website company profile.",
   email: "ayrusdigitalindonesia@gmail.com",
-  phoneDisplay: "+62 819-3276-4494",
-  whatsapp: "6281932764494",
+  phoneDisplay: "+62 851-3976-3390",
+  whatsapp: "6285139763390",
   hours: "Setiap hari, 09.00-18.00 WIB",
   social: {
     instagram: "https://www.instagram.com/ayrusdigital",
