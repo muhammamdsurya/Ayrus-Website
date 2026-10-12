@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { A, H2, LegalHeader, P, Toc, UL } from "@/components/legal";
 import { gmailLink, shareImage, site } from "@/lib/site";
 
 const title = "Kebijakan Privasi";
 const description =
-  "Kebijakan privasi Ayrus Digital Indonesia: data apa yang kami kumpulkan, cara kami memakai YouTube API Services, serta cara menghapus data dan mencabut akses.";
+  "Kebijakan privasi Ayrus Digital Indonesia: data apa yang kami kumpulkan, cara kami memakai YouTube API Services dan TikTok API, serta cara menghapus data dan mencabut akses.";
 const updated = "12 Oktober 2026";
 const fullAddress = `${site.address.street}, ${site.address.city}, ${site.address.region}, Indonesia`;
 
@@ -15,45 +15,11 @@ export const metadata: Metadata = {
   openGraph: { type: "website", url: `${site.url}/kebijakan-privasi`, title, description, images: [shareImage] },
 };
 
-const ext = "font-semibold text-brand underline decoration-brand/40 underline-offset-4 transition-colors hover:text-brand-soft";
-
-function A({ href, children }: { href: string; children: React.ReactNode }) {
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={ext}>
-      {children}
-    </a>
-  );
-}
-
-function H2({ id, children }: { id: string; children: React.ReactNode }) {
-  return (
-    <h2 id={id} className="mt-12 scroll-mt-28 text-2xl font-extrabold sm:text-[1.75rem]">
-      {children}
-    </h2>
-  );
-}
-
-function P({ children }: { children: React.ReactNode }) {
-  return <p className="mt-5 text-[17px] leading-[1.75] text-ink-muted">{children}</p>;
-}
-
-function UL({ items }: { items: React.ReactNode[] }) {
-  return (
-    <ul className="mt-5 space-y-3">
-      {items.map((it, i) => (
-        <li key={i} className="flex gap-3 text-[17px] leading-[1.7] text-ink-muted">
-          <span aria-hidden="true" className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" />
-          <span>{it}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 const toc = [
   ["ringkasan", "Ringkasan"],
   ["data-dikumpulkan", "Data yang kami kumpulkan"],
   ["youtube", "Penggunaan YouTube API Services"],
+  ["tiktok", "Penggunaan TikTok API"],
   ["penggunaan", "Cara kami menggunakan data"],
   ["berbagi", "Berbagi data dengan pihak lain"],
   ["penyimpanan", "Penyimpanan dan keamanan"],
@@ -67,61 +33,31 @@ const toc = [
 export default function PrivacyPolicy() {
   return (
     <>
-      <header className="relative overflow-hidden pt-28 pb-10 sm:pt-32 lg:pt-36">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-          <div className="hero-texture absolute inset-0 [mask-image:radial-gradient(ellipse_70%_55%_at_50%_0%,#000_20%,transparent_75%)]" />
-          <div className="absolute -top-40 left-1/2 h-[420px] w-[820px] max-w-[130vw] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(203,108,230,0.26),transparent_65%)] blur-3xl" />
-        </div>
-        <div className="container-page">
-          <nav aria-label="Breadcrumb" className="mb-8">
-            <ol className="flex flex-wrap items-center gap-2 text-sm text-ink-muted">
-              <li>
-                <Link href="/" className="transition-colors hover:text-brand">
-                  Beranda
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <span aria-current="page" className="text-ink">
-                  Kebijakan Privasi
-                </span>
-              </li>
-            </ol>
-          </nav>
-          <div className="mx-auto max-w-3xl">
-            <h1 className="text-[2.1rem] leading-[1.14] font-extrabold sm:text-[2.75rem]">Kebijakan Privasi</h1>
-            <p className="mt-5 text-lg leading-relaxed text-ink-muted">
-              Halaman ini menjelaskan bagaimana {site.name} mengumpulkan, menggunakan, menyimpan, dan menghapus
-              data, termasuk data yang kami akses melalui YouTube API Services.
-            </p>
-            <p className="mt-4 text-sm text-ink-muted">Terakhir diperbarui: {updated}</p>
-          </div>
-        </div>
-      </header>
+      <LegalHeader
+        title={title}
+        updated={updated}
+        lead={
+          <>
+            Halaman ini menjelaskan bagaimana {site.name} mengumpulkan, menggunakan, menyimpan, dan menghapus data,
+            termasuk data yang kami akses melalui YouTube API Services dan TikTok API.
+          </>
+        }
+      />
 
       <div className="container-page pb-[var(--spacing-section)]">
         <article className="mx-auto max-w-3xl">
-          <nav aria-label="Daftar isi" className="glass rounded-[var(--radius-card)] p-6">
-            <p className="font-display text-sm font-semibold tracking-wide uppercase">Daftar isi</p>
-            <ol className="mt-4 grid gap-1.5 text-[15px] text-ink-muted sm:grid-cols-2">
-              {toc.map(([id, label], i) => (
-                <li key={id}>
-                  <a href={`#${id}`} className="transition-colors hover:text-brand">
-                    {i + 1}. {label}
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </nav>
+          <Toc items={toc} />
 
           <H2 id="ringkasan">1. Ringkasan</H2>
           <P>
             {site.name} (&quot;Ayrus&quot;, &quot;kami&quot;) adalah software house yang beralamat di {fullAddress}.
             Kebijakan ini berlaku untuk website {site.url.replace("https://", "")} dan untuk alat internal kami yang
-            mengunggah video ke channel YouTube milik kami sendiri menggunakan YouTube API Services.
+            memublikasikan video ke channel YouTube dan akun TikTok milik kami sendiri menggunakan YouTube API Services dan
+            TikTok API.
           </P>
           <P>
-            Dengan menggunakan website atau layanan kami, Anda menyetujui praktik yang dijelaskan dalam kebijakan ini.
+            Dengan menggunakan website atau layanan kami, Anda menyetujui praktik yang dijelaskan dalam kebijakan ini
+            serta <A href="/syarat-ketentuan">Syarat dan Ketentuan</A> kami.
           </P>
 
           <H2 id="data-dikumpulkan">2. Data yang kami kumpulkan</H2>
@@ -140,6 +76,10 @@ export default function PrivacyPolicy() {
                 <strong className="text-ink">Data akun YouTube milik Ayrus sendiri</strong>: token otorisasi OAuth,
                 ID channel, serta metadata video yang kami unggah (judul, deskripsi, tag, status privasi, dan status
                 pemrosesan). Lihat bagian 3.
+              </>,
+              <>
+                <strong className="text-ink">Data akun TikTok milik Ayrus sendiri</strong>: token akses, open ID, nama
+                tampilan, foto profil, serta status publikasi video yang kami unggah. Lihat bagian 4.
               </>,
             ]}
           />
@@ -177,18 +117,51 @@ export default function PrivacyPolicy() {
             ]}
           />
 
-          <H2 id="penggunaan">4. Cara kami menggunakan data</H2>
+          <H2 id="tiktok">4. Penggunaan TikTok API</H2>
+          <P>
+            Kami menggunakan <strong className="text-ink">TikTok for Developers</strong> (Login Kit dan Content
+            Posting API) untuk memublikasikan video buatan kami sendiri ke akun TikTok resmi kami,{" "}
+            <A href={site.social.tiktok}>@ayrusdigital</A>. Penggunaan TikTok tunduk pada{" "}
+            <A href="https://www.tiktok.com/legal/page/row/terms-of-service/id">Ketentuan Layanan TikTok</A> dan{" "}
+            <A href="https://www.tiktok.com/legal/page/row/privacy-policy/id">Kebijakan Privasi TikTok</A>.
+          </P>
+          <UL
+            items={[
+              <>
+                Alat ini bersifat internal: hanya dipakai oleh tim Ayrus dan hanya terhubung ke satu akun TikTok milik
+                kami. Tidak ada pengguna luar yang login atau menghubungkan akun TikTok mereka.
+              </>,
+              <>
+                Data yang diakses dari TikTok hanya data akun kami sendiri: open ID, nama tampilan, dan foto profil
+                (untuk memastikan akun yang benar), opsi privasi postingan, serta status publikasi video yang kami
+                unggah.
+              </>,
+              <>
+                Kami <strong className="text-ink">tidak</strong> mengakses, mengumpulkan, atau menyimpan data pengguna
+                TikTok lain, termasuk komentar, pengikut, pesan, atau data penonton.
+              </>,
+              <>
+                Kami tidak mengunduh atau mendistribusikan ulang konten TikTok, dan tidak menjual atau membagikan data
+                TikTok kepada pihak ketiga.
+              </>,
+              <>
+                Setiap video baru dipublikasikan setelah disetujui oleh pemilik bisnis.
+              </>,
+            ]}
+          />
+
+          <H2 id="penggunaan">5. Cara kami menggunakan data</H2>
           <UL
             items={[
               "Menjawab pertanyaan dan menyiapkan penawaran yang Anda minta.",
-              "Mengunggah dan mengelola video di channel YouTube milik Ayrus.",
+              "Mengunggah dan mengelola video di channel YouTube dan akun TikTok milik Ayrus.",
               "Memahami performa website secara agregat supaya kontennya bisa kami perbaiki.",
               "Memenuhi kewajiban hukum yang berlaku di Indonesia.",
             ]}
           />
           <P>Kami tidak menjual data pribadi dan tidak memakainya untuk iklan yang dipersonalisasi.</P>
 
-          <H2 id="berbagi">5. Berbagi data dengan pihak lain</H2>
+          <H2 id="berbagi">6. Berbagi data dengan pihak lain</H2>
           <P>Data hanya dibagikan sejauh diperlukan untuk menjalankan layanan:</P>
           <UL
             items={[
@@ -198,23 +171,27 @@ export default function PrivacyPolicy() {
                 Google</A>.
               </>,
               <>
+                <strong className="text-ink">TikTok</strong> sebagai penyedia platform, sesuai{" "}
+                <A href="https://www.tiktok.com/legal/page/row/privacy-policy/id">Kebijakan Privasi TikTok</A>.
+              </>,
+              <>
                 <strong className="text-ink">Vercel</strong> sebagai penyedia hosting website.
               </>,
               "Otoritas yang berwenang, apabila diwajibkan oleh hukum.",
             ]}
           />
 
-          <H2 id="penyimpanan">6. Penyimpanan dan keamanan</H2>
+          <H2 id="penyimpanan">7. Penyimpanan dan keamanan</H2>
           <UL
             items={[
-              "Token OAuth YouTube disimpan di server kami dengan akses terbatas hanya untuk tim Ayrus, dan diperbarui otomatis oleh sistem Google.",
-              "Metadata video kami simpan selama video tersebut masih ada di channel kami. File video lokal dihapus dari server setelah unggahan berhasil.",
+              "Token akses YouTube dan TikTok disimpan di server kami dengan akses terbatas hanya untuk tim Ayrus, dan diperbarui otomatis sesuai masa berlakunya.",
+              "Metadata video kami simpan selama video tersebut masih ada di channel atau akun kami. File video lokal dihapus dari server setelah unggahan berhasil.",
               "Data kontak dari konsultasi disimpan selama masih diperlukan untuk komunikasi dan proyek, lalu dihapus bila tidak lagi dibutuhkan.",
               "Kami menerapkan langkah keamanan yang wajar, termasuk koneksi terenkripsi (HTTPS) dan pembatasan akses server.",
             ]}
           />
 
-          <H2 id="penghapusan">7. Penghapusan data dan pencabutan akses</H2>
+          <H2 id="penghapusan">8. Penghapusan data dan pencabutan akses</H2>
           <P>Anda dapat meminta penghapusan data kapan saja:</P>
           <UL
             items={[
@@ -232,33 +209,41 @@ export default function PrivacyPolicy() {
                 . Setelah akses dicabut, alat kami tidak lagi dapat menggunakan YouTube API atas nama akun tersebut.
               </>,
               <>
-                Bila akses dicabut, token dan data yang kami peroleh melalui YouTube API Services kami hapus paling
+                Akses aplikasi ke akun TikTok dapat dicabut di aplikasi TikTok melalui Profil → Menu → Pengaturan dan
+                privasi → Keamanan dan izin → Izin aplikasi dan layanan → pilih aplikasi → Hapus akses (panduan:{" "}
+                <A href="https://support.tiktok.com/id/account-and-privacy/account-privacy-settings/third-party-apps">
+                  Pusat Bantuan TikTok
+                </A>
+                ).
+              </>,
+              <>
+                Bila akses dicabut, token dan data yang kami peroleh melalui YouTube API Services atau TikTok API kami hapus paling
                 lambat 7 hari setelahnya.
               </>,
             ]}
           />
 
-          <H2 id="cookie">8. Cookie dan analitik website</H2>
+          <H2 id="cookie">9. Cookie dan analitik website</H2>
           <P>
             Website ini memakai cookie dari Google Analytics dan Google Tag Manager untuk mengukur kunjungan secara
             agregat. Anda dapat menolak atau menghapus cookie melalui pengaturan browser, atau memasang{" "}
             <A href="https://tools.google.com/dlpage/gaoptout">Google Analytics Opt-out Add-on</A>.
           </P>
 
-          <H2 id="hak">9. Hak Anda</H2>
+          <H2 id="hak">10. Hak Anda</H2>
           <P>
             Sesuai Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi, Anda berhak meminta akses,
             koreksi, dan penghapusan data pribadi Anda, serta menarik persetujuan pemrosesan data. Hubungi kami
             melalui kontak di bawah untuk menggunakan hak tersebut.
           </P>
 
-          <H2 id="perubahan">10. Perubahan kebijakan</H2>
+          <H2 id="perubahan">11. Perubahan kebijakan</H2>
           <P>
             Kebijakan ini dapat kami perbarui sewaktu-waktu. Tanggal &quot;Terakhir diperbarui&quot; di bagian atas
             halaman akan selalu menunjukkan versi terbaru.
           </P>
 
-          <H2 id="kontak">11. Kontak</H2>
+          <H2 id="kontak">12. Kontak</H2>
           <P>Pertanyaan atau permintaan terkait privasi dapat dikirim ke:</P>
           <UL
             items={[
