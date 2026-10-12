@@ -171,6 +171,11 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {site.name}. Seluruh hak cipta dilindungi.
           </p>
+          <p className="mt-2">
+            <Link href="/kebijakan-privasi" className="transition-colors hover:text-brand">
+              Kebijakan Privasi
+            </Link>
+          </p>
         </div>
       </div>
     </footer>

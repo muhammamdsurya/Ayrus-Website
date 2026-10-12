@@ -25,5 +25,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...caseStudies.map((c) => page(`/portofolio/${c.slug}`)),
     page("/blog", articles.map((a) => a.dateTime).sort().at(-1)),
     ...articles.map((a) => page(`/blog/${a.slug}`, a.dateTime)),
+    page("/kebijakan-privasi"),
   ];
 }
