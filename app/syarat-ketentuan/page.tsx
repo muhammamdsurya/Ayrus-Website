@@ -57,7 +57,7 @@ export default function Terms() {
 
           <H2 id="penyelenggara">2. Penyelenggara</H2>
           <P>
-            Website dan layanan ini diselenggarakan oleh {site.name} (nama usaha Ayrus Digital Teknologi), usaha
+            Website dan layanan ini diselenggarakan oleh {site.name}, usaha
             perorangan milik Muhammad Surya Rusfauzi, beralamat di {fullAddress}. Dalam dokumen ini disebut
             &quot;kami&quot;. Pengunjung dan pengguna layanan disebut &quot;Anda&quot;.
           </P>
