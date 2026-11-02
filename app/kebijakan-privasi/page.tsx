@@ -4,8 +4,8 @@ import { gmailLink, shareImage, site } from "@/lib/site";
 
 const title = "Kebijakan Privasi";
 const description =
-  "Kebijakan privasi Ayrus Digital Indonesia: data apa yang kami kumpulkan, cara kami memakai YouTube API Services dan TikTok API, serta cara menghapus data dan mencabut akses.";
-const updated = "12 Oktober 2026";
+  "Kebijakan privasi Ayrus Digital Indonesia: data apa yang kami kumpulkan, cara kami memakai YouTube API Services, TikTok API, dan Meta API (Facebook, Instagram, Threads), serta cara menghapus data dan mencabut akses.";
+const updated = "2 November 2026";
 const fullAddress = `${site.address.street}, ${site.address.city}, ${site.address.region}, Indonesia`;
 
 export const metadata: Metadata = {
@@ -20,6 +20,7 @@ const toc = [
   ["data-dikumpulkan", "Data yang kami kumpulkan"],
   ["youtube", "Penggunaan YouTube API Services"],
   ["tiktok", "Penggunaan TikTok API"],
+  ["meta", "Penggunaan Meta API (Facebook, Instagram, Threads)"],
   ["penggunaan", "Cara kami menggunakan data"],
   ["berbagi", "Berbagi data dengan pihak lain"],
   ["penyimpanan", "Penyimpanan dan keamanan"],
@@ -80,6 +81,11 @@ export default function PrivacyPolicy() {
               <>
                 <strong className="text-ink">Data akun TikTok milik Ayrus sendiri</strong>: token akses, open ID, nama
                 tampilan, foto profil, serta status publikasi video yang kami unggah. Lihat bagian 4.
+              </>,
+              <>
+                <strong className="text-ink">Data akun Facebook Page, Instagram, dan Threads milik Ayrus sendiri</strong>:
+                token akses, ID akun dan username, serta postingan dan statistik postingan kami (views, likes, komentar,
+                share, followers). Lihat bagian 5.
               </>,
             ]}
           />
@@ -150,18 +156,50 @@ export default function PrivacyPolicy() {
             ]}
           />
 
-          <H2 id="penggunaan">5. Cara kami menggunakan data</H2>
+          <H2 id="meta">5. Penggunaan Meta API (Facebook, Instagram, Threads)</H2>
+          <P>
+            Kami menggunakan <strong className="text-ink">Meta Graph API</strong> dan{" "}
+            <strong className="text-ink">Threads API</strong> untuk memublikasikan konten buatan kami sendiri dan membaca
+            statistiknya di Facebook Page, Instagram, dan Threads resmi kami (@ayrusdigital). Penggunaan layanan Meta
+            tunduk pada <A href="https://www.facebook.com/terms">Ketentuan Meta</A> dan{" "}
+            <A href="https://www.facebook.com/privacy/policy">Kebijakan Privasi Meta</A>.
+          </P>
+          <UL
+            items={[
+              <>
+                Alat ini bersifat internal: hanya dipakai oleh tim Ayrus dan hanya terhubung ke akun milik kami. Tidak ada
+                pengguna luar yang login atau menghubungkan akun Facebook, Instagram, atau Threads mereka.
+              </>,
+              <>
+                Data yang diakses hanya data akun kami sendiri: ID akun, username, postingan kami, dan statistik agregat
+                postingan serta akun (views, likes, komentar/balasan, share/repost, jumlah followers).
+              </>,
+              <>
+                Kami <strong className="text-ink">tidak</strong> mengumpulkan atau menyimpan data pribadi pengguna lain,
+                termasuk isi komentar, daftar pengikut, atau pesan.
+              </>,
+              <>
+                Kami tidak menjual atau membagikan data dari Meta kepada pihak ketiga, selain penyedia layanan di bagian 7
+                yang memprosesnya atas nama kami.
+              </>,
+              <>
+                Setiap konten baru dipublikasikan setelah disetujui oleh pemilik bisnis.
+              </>,
+            ]}
+          />
+
+          <H2 id="penggunaan">6. Cara kami menggunakan data</H2>
           <UL
             items={[
               "Menjawab pertanyaan dan menyiapkan penawaran yang Anda minta.",
-              "Mengunggah dan mengelola video di channel YouTube dan akun TikTok milik Ayrus.",
+              "Mengunggah dan mengelola konten di channel YouTube, akun TikTok, Facebook Page, Instagram, dan Threads milik Ayrus, serta memantau statistiknya.",
               "Memahami performa website secara agregat supaya kontennya bisa kami perbaiki.",
               "Memenuhi kewajiban hukum yang berlaku di Indonesia.",
             ]}
           />
           <P>Kami tidak menjual data pribadi dan tidak memakainya untuk iklan yang dipersonalisasi.</P>
 
-          <H2 id="berbagi">6. Berbagi data dengan pihak lain</H2>
+          <H2 id="berbagi">7. Berbagi data dengan pihak lain</H2>
           <P>Data hanya dibagikan sejauh diperlukan untuk menjalankan layanan:</P>
           <UL
             items={[
@@ -175,23 +213,33 @@ export default function PrivacyPolicy() {
                 <A href="https://www.tiktok.com/legal/page/row/privacy-policy/id">Kebijakan Privasi TikTok</A>.
               </>,
               <>
+                <strong className="text-ink">Meta Platforms</strong> (Facebook, Instagram, Threads) sebagai penyedia
+                platform, sesuai <A href="https://www.facebook.com/privacy/policy">Kebijakan Privasi Meta</A>.
+              </>,
+              <>
                 <strong className="text-ink">Vercel</strong> sebagai penyedia hosting website.
+              </>,
+              <>
+                Penyedia layanan yang memproses data atas nama kami untuk dashboard konten internal:{" "}
+                <strong className="text-ink">Supabase</strong> (database),{" "}
+                <strong className="text-ink">Rumahweb Indonesia</strong> (server), dan{" "}
+                <strong className="text-ink">Anthropic</strong> (asisten AI yang membaca statistik postingan).
               </>,
               "Otoritas yang berwenang, apabila diwajibkan oleh hukum.",
             ]}
           />
 
-          <H2 id="penyimpanan">7. Penyimpanan dan keamanan</H2>
+          <H2 id="penyimpanan">8. Penyimpanan dan keamanan</H2>
           <UL
             items={[
-              "Token akses YouTube dan TikTok disimpan di server kami dengan akses terbatas hanya untuk tim Ayrus, dan diperbarui otomatis sesuai masa berlakunya.",
+              "Token akses YouTube, TikTok, dan Meta (Facebook, Instagram, Threads) disimpan di server kami dengan akses terbatas hanya untuk tim Ayrus, dan diperbarui otomatis sesuai masa berlakunya.",
               "Metadata video kami simpan selama video tersebut masih ada di channel atau akun kami. File video lokal dihapus dari server setelah unggahan berhasil.",
               "Data kontak dari konsultasi disimpan selama masih diperlukan untuk komunikasi dan proyek, lalu dihapus bila tidak lagi dibutuhkan.",
               "Kami menerapkan langkah keamanan yang wajar, termasuk koneksi terenkripsi (HTTPS) dan pembatasan akses server.",
             ]}
           />
 
-          <H2 id="penghapusan">8. Penghapusan data dan pencabutan akses</H2>
+          <H2 id="penghapusan">9. Penghapusan data dan pencabutan akses</H2>
           <P>Anda dapat meminta penghapusan data kapan saja:</P>
           <UL
             items={[
@@ -217,33 +265,38 @@ export default function PrivacyPolicy() {
                 ).
               </>,
               <>
-                Bila akses dicabut, token dan data yang kami peroleh melalui YouTube API Services atau TikTok API kami hapus paling
-                lambat 7 hari setelahnya.
+                Akses aplikasi ke akun Threads dapat dicabut di Threads melalui Pengaturan → Akun → Izin situs web; untuk
+                Facebook dan Instagram melalui Pengaturan → Aplikasi dan situs web (panduan:{" "}
+                <A href="https://www.facebook.com/help/218345114850283">Pusat Bantuan Facebook</A>).
+              </>,
+              <>
+                Bila akses dicabut, token dan data yang kami peroleh melalui YouTube API Services, TikTok API, atau Meta API
+                kami hapus paling lambat 7 hari setelahnya.
               </>,
             ]}
           />
 
-          <H2 id="cookie">9. Cookie dan analitik website</H2>
+          <H2 id="cookie">10. Cookie dan analitik website</H2>
           <P>
             Website ini memakai cookie dari Google Analytics dan Google Tag Manager untuk mengukur kunjungan secara
             agregat. Anda dapat menolak atau menghapus cookie melalui pengaturan browser, atau memasang{" "}
             <A href="https://tools.google.com/dlpage/gaoptout">Google Analytics Opt-out Add-on</A>.
           </P>
 
-          <H2 id="hak">10. Hak Anda</H2>
+          <H2 id="hak">11. Hak Anda</H2>
           <P>
             Sesuai Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi, Anda berhak meminta akses,
             koreksi, dan penghapusan data pribadi Anda, serta menarik persetujuan pemrosesan data. Hubungi kami
             melalui kontak di bawah untuk menggunakan hak tersebut.
           </P>
 
-          <H2 id="perubahan">11. Perubahan kebijakan</H2>
+          <H2 id="perubahan">12. Perubahan kebijakan</H2>
           <P>
             Kebijakan ini dapat kami perbarui sewaktu-waktu. Tanggal &quot;Terakhir diperbarui&quot; di bagian atas
             halaman akan selalu menunjukkan versi terbaru.
           </P>
 
-          <H2 id="kontak">12. Kontak</H2>
+          <H2 id="kontak">13. Kontak</H2>
           <P>Pertanyaan atau permintaan terkait privasi dapat dikirim ke:</P>
           <UL
             items={[
