@@ -42,6 +42,350 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "biaya-bikin-website-company-profile",
+    category: "Panduan",
+    title: "Berapa Biaya Bikin Website Company Profile? Ini Rinciannya",
+    excerpt:
+      "Rincian komponen biaya bikin website company profile: domain, server, desain, CMS, sampai biaya tahunan yang sering terlupa.",
+    date: "2 November 2026",
+    dateTime: "2026-11-02",
+    read: "7 menit",
+    author: { name: "Tim Ayrus", role: "Ayrus Digital Indonesia", initials: "AY" },
+    metaTitle: "Berapa Biaya Bikin Website Company Profile? Ini Rinciannya",
+    metaDescription:
+      "Biaya bikin website company profile terdiri dari domain, server, desain, pengembangan, CMS, dan perawatan. Pahami tiap komponennya sebelum minta penawaran.",
+    keywords: [
+      "biaya bikin website company profile",
+      "biaya pembuatan website perusahaan",
+      "harga website company profile",
+      "jasa pembuatan website company profile",
+    ],
+    relatedService: "website",
+    body: [
+      {
+        t: "p",
+        text: "Pertanyaan pertama yang hampir selalu muncul saat bisnis ingin punya situs resmi: berapa biaya bikin website company profile? Jawaban jujurnya, rentangnya lebar sekali, dari ratusan ribu sampai puluhan juta rupiah. Penyebabnya bukan karena ada yang curang, tetapi karena isi paketnya sangat berbeda.",
+      },
+      {
+        t: "p",
+        text: "Artikel ini membedah komponen biayanya satu per satu, supaya Anda bisa membandingkan penawaran dengan adil. Kalau ingin langsung melihat apa saja yang termasuk dalam paket kami, buka halaman [jasa pembuatan website company profile](/layanan/website).",
+      },
+
+      { t: "h2", text: "1. Domain: alamat website Anda" },
+      {
+        t: "p",
+        text: "Domain adalah nama alamat seperti namausaha.com atau namausaha.co.id. Biayanya dibayar per tahun dan berbeda tiap ekstensi. Domain .co.id biasanya butuh dokumen legal usaha, sedangkan .com bisa didaftarkan siapa saja.",
+      },
+      {
+        t: "callout",
+        title: "Pastikan domain atas nama Anda",
+        text: "Minta domain didaftarkan atas nama usaha Anda, bukan atas nama vendor. Kalau suatu hari Anda pindah vendor, domain tetap milik Anda dan tidak perlu ditebus.",
+      },
+
+      { t: "h2", text: "2. Server atau hosting: tempat website disimpan" },
+      {
+        t: "p",
+        text: "Website perlu disimpan di server agar bisa diakses 24 jam. Biayanya juga rutin, bulanan atau tahunan. Hosting murah sering cukup untuk company profile sederhana, tetapi perhatikan kecepatannya: halaman yang lambat dimuat di HP membuat pengunjung pergi sebelum membaca apa pun.",
+      },
+
+      { t: "h2", text: "3. Desain: template atau dibuat khusus" },
+      {
+        t: "p",
+        text: "Inilah pembeda harga terbesar. Website berbasis template murah dan cepat jadi, tetapi tampilannya mirip dengan ratusan situs lain. Desain khusus disusun mengikuti identitas merek Anda, sehingga butuh waktu dan biaya lebih.",
+      },
+      {
+        t: "ul",
+        items: [
+          "Template: biaya rendah, jadi dalam hitungan hari, tampilan generik",
+          "Template yang dimodifikasi: jalan tengah, tetap dibatasi struktur tema",
+          "Desain khusus: sesuai merek, lebih mudah dibedakan dari pesaing, biaya dan waktu lebih besar",
+        ],
+      },
+
+      { t: "h2", text: "4. Jumlah halaman dan fitur" },
+      {
+        t: "p",
+        text: "Company profile standar biasanya berisi beranda, tentang kami, layanan, portofolio, dan kontak. Setiap tambahan seperti katalog produk, blog, formulir pemesanan, multi-bahasa, atau pembayaran online akan menambah biaya pengembangan.",
+      },
+
+      { t: "h2", text: "5. CMS: bisa diubah sendiri atau tidak" },
+      {
+        t: "p",
+        text: "Tanyakan apakah Anda bisa mengubah teks, foto, dan harga sendiri. Tanpa CMS, setiap perubahan kecil harus lewat vendor, dan biaya revisi kecil inilah yang diam-diam membengkak dalam setahun.",
+      },
+
+      { t: "h2", text: "6. SEO dasar: supaya ditemukan di Google" },
+      {
+        t: "p",
+        text: "Website yang tidak disiapkan untuk mesin pencari hanya akan dikunjungi orang yang sudah tahu alamatnya. SEO on-page dasar mencakup struktur heading, meta title dan description, sitemap, schema markup, dan kecepatan halaman. Tanyakan apakah ini termasuk paket atau dihitung terpisah.",
+      },
+
+      { t: "h2", text: "7. Biaya tahunan yang sering terlupa" },
+      {
+        t: "p",
+        text: "Harga pembuatan hanya biaya awal. Untuk menghitung total biaya, jumlahkan juga biaya yang datang setiap tahun:",
+      },
+      {
+        t: "ul",
+        items: [
+          "Perpanjangan domain",
+          "Perpanjangan server atau hosting",
+          "Sertifikat SSL, kalau tidak sudah termasuk di server",
+          "Perawatan, pembaruan keamanan, dan cadangan data",
+        ],
+      },
+
+      { t: "h2", text: "Cara membandingkan penawaran dengan adil" },
+      {
+        t: "p",
+        text: "Saat menerima dua penawaran dengan harga jauh berbeda, cek daftar berikut sebelum memutuskan:",
+      },
+      {
+        t: "ol",
+        items: [
+          "Apakah desainnya khusus atau template?",
+          "Berapa halaman yang termasuk, dan berapa biaya halaman tambahan?",
+          "Apakah ada CMS dan pelatihan memakainya?",
+          "Apakah domain terdaftar atas nama Anda?",
+          "Berapa biaya tahunan setelah tahun pertama?",
+          "Apakah source code dan akses akun diserahkan ke Anda?",
+        ],
+      },
+      {
+        t: "p",
+        text: "Website katalog [Toko Bangunan Maju Jaya](/portofolio/maju-jaya) kami selesaikan dalam 4 minggu dan sekarang mendatangkan lebih dari 120 lead organik per bulan. Angka seperti itu datang dari kombinasi desain, kecepatan, dan SEO, bukan dari harga paling murah.",
+      },
+
+      { t: "h2", text: "Ringkasnya" },
+      {
+        t: "quote",
+        text: "Jangan bandingkan harga sebelum membandingkan isi paketnya. Website termurah bisa jadi yang paling mahal kalau tiap perubahan harus dibayar dan tidak ada yang menemukannya di Google.",
+      },
+    ],
+    cta: {
+      label: "Minta Rincian Biaya Website",
+      message: "Halo Ayrus, saya ingin tahu rincian biaya bikin website company profile untuk usaha saya.",
+    },
+  },
+
+  {
+    slug: "chatbot-whatsapp-untuk-bisnis",
+    category: "AI Automation",
+    title: "Chatbot WhatsApp untuk Bisnis: Kapan Perlu dan Apa Untungnya",
+    excerpt:
+      "Tanda bisnis Anda sudah butuh chatbot WhatsApp, apa yang bisa dan tidak bisa dikerjakannya, dan cara menghitung untung-ruginya.",
+    date: "2 November 2026",
+    dateTime: "2026-11-02",
+    read: "7 menit",
+    author: { name: "Tim Ayrus", role: "Ayrus Digital Indonesia", initials: "AY" },
+    metaTitle: "Chatbot WhatsApp untuk Bisnis: Kapan Perlu dan Apa Untungnya",
+    metaDescription:
+      "Panduan chatbot WhatsApp untuk bisnis: tanda Anda sudah butuh, pekerjaan yang bisa diotomasi, batasannya, dan cara menghitung penghematannya.",
+    keywords: [
+      "chatbot whatsapp bisnis",
+      "chatbot whatsapp untuk bisnis",
+      "jasa chatbot whatsapp",
+      "chatbot AI WhatsApp",
+    ],
+    relatedService: "ai-automation",
+    body: [
+      {
+        t: "p",
+        text: "Bagi banyak UMKM di Indonesia, WhatsApp adalah kasir, layanan pelanggan, dan kanal penjualan sekaligus. Masalahnya, semakin ramai usaha Anda, semakin banyak waktu admin habis untuk menjawab pertanyaan yang sama. Di titik inilah chatbot WhatsApp untuk bisnis mulai layak dipertimbangkan.",
+      },
+      {
+        t: "p",
+        text: "Artikel ini membahas kapan chatbot benar-benar perlu, apa yang bisa dikerjakannya, dan di mana batasnya. Kalau Anda sudah yakin butuh, lihat cara kerja [jasa chatbot WhatsApp dan AI automation](/layanan/ai-automation) kami.",
+      },
+
+      { t: "h2", text: "Tanda Anda sudah butuh chatbot" },
+      {
+        t: "ul",
+        items: [
+          "Sebagian besar chat masuk menanyakan hal yang sama: harga, jam buka, lokasi, status pesanan",
+          "Chat di luar jam kerja baru dibalas besok pagi, dan sebagian calon pembeli sudah pindah ke pesaing",
+          "Admin menyalin data dari chat ke spreadsheet atau sistem secara manual",
+          "Anda menambah admin hanya untuk mengimbangi volume chat, bukan untuk pekerjaan yang butuh keputusan",
+        ],
+      },
+      {
+        t: "p",
+        text: "Kalau chat masuk Anda masih sedikit dan tiap percakapan unik, chatbot belum tentu perlu. Balasan cepat dari WhatsApp Business biasa sering sudah cukup.",
+      },
+
+      { t: "h2", text: "Apa yang bisa dikerjakan chatbot WhatsApp" },
+      {
+        t: "p",
+        text: "Chatbot modern berbasis AI berbeda dengan bot menu lama yang meminta pelanggan mengetik angka 1, 2, atau 3. Chatbot AI memahami pertanyaan dalam bahasa sehari-hari dan menjawab dari data bisnis Anda.",
+      },
+      {
+        t: "ul",
+        items: [
+          "Menjawab pertanyaan umum dari daftar produk, harga, dan kebijakan Anda",
+          "Mengecek status pesanan langsung dari sistem kasir atau spreadsheet",
+          "Mencatat pesanan atau janji temu ke sistem tanpa diketik ulang",
+          "Meneruskan percakapan ke admin saat pertanyaannya butuh keputusan manusia",
+          "Mengirim ringkasan percakapan harian ke pemilik usaha",
+        ],
+      },
+
+      { t: "h2", text: "Yang sebaiknya tidak diserahkan ke chatbot" },
+      {
+        t: "p",
+        text: "Chatbot bukan pengganti tim Anda sepenuhnya. Negosiasi harga, komplain yang emosional, dan keputusan yang menyangkut uang atau pengecualian aturan sebaiknya tetap ditangani manusia.",
+      },
+      {
+        t: "callout",
+        title: "Kunci chatbot yang aman",
+        text: "Batasi chatbot agar hanya menjawab dari data yang Anda tentukan, dan pastikan ada aturan jelas kapan percakapan diteruskan ke admin. Chatbot yang mengarang jawaban lebih merugikan daripada tidak punya chatbot sama sekali.",
+      },
+
+      { t: "h2", text: "Cara menghitung untung-ruginya" },
+      {
+        t: "p",
+        text: "Sebelum memutuskan, lakukan hitungan sederhana selama satu minggu:",
+      },
+      {
+        t: "ol",
+        items: [
+          "Hitung jumlah chat masuk per hari",
+          "Tandai berapa persen yang berupa pertanyaan berulang",
+          "Catat berapa menit rata-rata admin menghabiskan waktu per chat",
+          "Kalikan untuk mendapat total jam kerja per bulan yang bisa dihemat",
+          "Hitung juga chat di luar jam kerja yang tidak terbalas, karena itu calon penjualan yang hilang",
+        ],
+      },
+      {
+        t: "p",
+        text: "Kalau jam kerja yang bisa dihemat setara dengan sebagian besar beban satu admin, atau banyak calon pembeli hilang karena telat dibalas, investasi chatbot biasanya kembali dengan cepat.",
+      },
+
+      { t: "h2", text: "Mulai dari yang kecil" },
+      {
+        t: "p",
+        text: "Chatbot terbaik tidak dirilis untuk semua percakapan sekaligus. Mulailah dari satu jenis pertanyaan yang paling sering muncul, misalnya status pesanan, pantau hasilnya beberapa minggu, lalu perluas. Cara ini menekan risiko dan membuat tim Anda ikut percaya pada sistemnya.",
+      },
+
+      { t: "h2", text: "Ringkasnya" },
+      {
+        t: "quote",
+        text: "Chatbot WhatsApp layak dipakai saat pertanyaan berulang mulai memakan waktu tim Anda. Biarkan bot menjawab yang itu-itu saja, dan biarkan tim Anda fokus ke percakapan yang menghasilkan penjualan.",
+      },
+    ],
+    cta: {
+      label: "Konsultasi Chatbot WhatsApp",
+      message: "Halo Ayrus, saya ingin konsultasi chatbot WhatsApp untuk bisnis saya.",
+    },
+  },
+
+  {
+    slug: "cara-bisnis-muncul-di-google-maps-dan-pencarian-lokal",
+    category: "Panduan",
+    title: "Cara Bisnis Muncul di Google Maps dan Pencarian Lokal",
+    excerpt:
+      "Langkah praktis agar usaha Anda muncul saat calon pelanggan mencari di Google Maps dan pencarian lokal, dari Google Business Profile sampai website.",
+    date: "2 November 2026",
+    dateTime: "2026-11-02",
+    read: "8 menit",
+    author: { name: "Tim Ayrus", role: "Ayrus Digital Indonesia", initials: "AY" },
+    metaTitle: "Cara Bisnis Muncul di Google Maps dan Pencarian Lokal",
+    metaDescription:
+      "Cara agar bisnis muncul di Google Maps dan pencarian lokal: optimasi Google Business Profile, ulasan, konsistensi alamat, dan website yang siap SEO lokal.",
+    keywords: [
+      "cara bisnis muncul di google maps",
+      "SEO lokal",
+      "google business profile",
+      "jasa website Jakarta",
+    ],
+    relatedService: "website",
+    body: [
+      {
+        t: "p",
+        text: "Saat orang mengetik \"toko bangunan terdekat\" atau \"laundry di Condet\", Google menampilkan peta dengan tiga usaha teratas sebelum hasil lainnya. Kalau bisnis Anda tidak muncul di sana, sebagian besar calon pelanggan lokal tidak akan pernah tahu Anda ada. Kabar baiknya, cara bisnis muncul di Google Maps bisa dipelajari dan dikerjakan bertahap.",
+      },
+      {
+        t: "p",
+        text: "Berikut langkah-langkahnya, dari yang gratis dan bisa Anda kerjakan hari ini sampai yang butuh [website bisnis yang siap SEO lokal](/layanan/website).",
+      },
+
+      { t: "h2", text: "1. Klaim dan lengkapi Google Business Profile" },
+      {
+        t: "p",
+        text: "Google Business Profile (dulu Google My Business) adalah kartu nama usaha Anda di Google Maps. Klaim gratis, lalu lengkapi semuanya:",
+      },
+      {
+        t: "ul",
+        items: [
+          "Nama usaha persis seperti papan nama, tanpa tambahan kata kunci",
+          "Kategori utama yang paling spesifik, misalnya \"Toko Bahan Bangunan\", bukan sekadar \"Toko\"",
+          "Alamat, nomor WhatsApp, jam buka, dan tautan website",
+          "Foto asli toko, produk, dan tim, diperbarui berkala",
+          "Daftar produk atau layanan beserta deskripsinya",
+        ],
+      },
+
+      { t: "h2", text: "2. Pastikan alamat dan nomor sama di mana-mana" },
+      {
+        t: "p",
+        text: "Google mencocokkan informasi usaha Anda dari berbagai sumber: profil Google, website, media sosial, dan direktori online. Kalau alamat atau nomor telepon berbeda-beda, Google ragu informasi mana yang benar. Tulis alamat dengan format yang persis sama di semua tempat.",
+      },
+
+      { t: "h2", text: "3. Kumpulkan ulasan secara rutin" },
+      {
+        t: "p",
+        text: "Jumlah dan kualitas ulasan adalah salah satu faktor peringkat lokal yang paling berpengaruh. Minta ulasan dari pelanggan yang puas, misalnya lewat tautan di nota atau pesan terima kasih di WhatsApp. Balas setiap ulasan, termasuk yang negatif, dengan sopan dan spesifik.",
+      },
+      {
+        t: "callout",
+        title: "Jangan beli ulasan",
+        text: "Ulasan palsu melanggar kebijakan Google dan bisa membuat profil Anda diturunkan atau ditangguhkan. Sepuluh ulasan asli lebih berharga daripada seratus ulasan beli.",
+      },
+
+      { t: "h2", text: "4. Punya website yang mendukung pencarian lokal" },
+      {
+        t: "p",
+        text: "Profil Google yang terhubung ke website yang baik cenderung lebih dipercaya. Website membantu Google memahami apa yang Anda jual dan di mana Anda melayani pelanggan. Hal yang perlu ada:",
+      },
+      {
+        t: "ul",
+        items: [
+          "Halaman terpisah untuk tiap layanan atau kategori produk utama",
+          "Nama kota atau area layanan di judul dan isi halaman secara wajar",
+          "Alamat dan nomor yang sama persis dengan Google Business Profile",
+          "Schema markup LocalBusiness supaya data usaha terbaca mesin pencari",
+          "Halaman yang cepat dibuka di HP",
+        ],
+      },
+      {
+        t: "p",
+        text: "Contohnya [Toko Bangunan Maju Jaya](/portofolio/maju-jaya). Sebelumnya mereka tidak punya kanal online sama sekali. Setelah katalog online dengan halaman per kategori produk dan SEO lokal, tokonya masuk tiga besar untuk 8 kata kunci lokal dan mendapat lebih dari 120 lead organik per bulan.",
+      },
+
+      { t: "h2", text: "5. Unggah konten secara konsisten" },
+      {
+        t: "p",
+        text: "Google Business Profile punya fitur postingan untuk promo, produk baru, dan kabar usaha. Website juga sebaiknya diisi artikel yang menjawab pertanyaan calon pelanggan. Aktivitas yang rutin memberi sinyal bahwa usaha Anda masih aktif dan relevan.",
+      },
+
+      { t: "h2", text: "Berapa lama sampai hasilnya terlihat?" },
+      {
+        t: "p",
+        text: "Perubahan di Google Business Profile bisa terlihat dalam hitungan hari sampai minggu. Untuk peringkat kata kunci lokal di pencarian biasa, umumnya butuh 3-6 bulan, dan hasilnya bergantung pada persaingan di area Anda serta konsistensi konten.",
+      },
+
+      { t: "h2", text: "Ringkasnya" },
+      {
+        t: "quote",
+        text: "Muncul di Google Maps bukan soal trik, melainkan soal informasi yang lengkap, konsisten, dan dipercaya pelanggan. Mulai dari profil Google hari ini, lalu perkuat dengan website yang siap ditemukan.",
+      },
+    ],
+    cta: {
+      label: "Konsultasi SEO Lokal",
+      message: "Halo Ayrus, saya ingin usaha saya muncul di Google Maps dan pencarian lokal.",
+    },
+  },
+
+  {
     slug: "cara-memilih-sistem-pos-untuk-bisnis-laundry",
     category: "Panduan",
     title: "Cara Memilih Sistem POS untuk Bisnis Laundry",
