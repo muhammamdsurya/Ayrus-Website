@@ -15,7 +15,7 @@ import { Bezel, ButtonLink, Card, SectionHeading } from "@/components/ui";
 import { CaseScreen } from "@/components/case-screens";
 import { caseStudies, getCaseStudy } from "@/lib/portfolio";
 import { getService } from "@/lib/services";
-import { shareImage, site, waLink } from "@/lib/site";
+import { shareImage, site, waLink, businessId } from "@/lib/site";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -68,8 +68,8 @@ export default async function CaseStudyPage({ params }: Params) {
       inLanguage: "id-ID",
       image: `${site.url}${shareImage.url}`,
       mainEntityOfPage: { "@type": "WebPage", "@id": `${site.url}/portofolio/${c.slug}` },
-      author: { "@type": "Organization", name: site.name, url: site.url },
-      publisher: { "@type": "Organization", name: site.name, url: site.url },
+      author: { "@id": businessId },
+      publisher: { "@id": businessId },
     },
     {
       "@context": "https://schema.org",

@@ -4,7 +4,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { WhatsAppFab } from "@/components/whatsapp-fab";
 import { RevealController } from "@/components/reveal-controller";
-import { businessId, site } from "@/lib/site";
+import { businessId, site, saasProducts } from "@/lib/site";
 import "./globals.css";
 
 const sora = Sora({
@@ -112,6 +112,34 @@ const businessSchema = {
     contactType: "customer service",
     availableLanguage: ["id", "en"],
   },
+  knowsAbout: [
+    "Pembuatan aplikasi web",
+    "Pembuatan aplikasi Android dan iOS",
+    "Aplikasi kasir (POS)",
+    "Aplikasi keuangan dan pembukuan",
+    "Sistem ERP",
+    "AI automation",
+    "Website company profile",
+  ],
+  owns: saasProducts.map((p) => ({
+    "@type": "SoftwareApplication",
+    name: p.name,
+    applicationCategory: "BusinessApplication",
+    url: p.url,
+    description: p.desc,
+  })),
+};
+
+/** WebSite node: names the site and ties it to the business as publisher. */
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${site.url}/#website`,
+  name: site.name,
+  alternateName: "Ayrus Digital",
+  url: site.url,
+  inLanguage: "id-ID",
+  publisher: { "@id": businessId },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -136,7 +164,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </noscript>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([businessSchema, websiteSchema]) }}
         />
       </head>
       <body>
