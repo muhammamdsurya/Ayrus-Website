@@ -259,6 +259,10 @@ export const articles: Article[] = [
         t: "p",
         text: "Kalau jam kerja yang bisa dihemat setara dengan sebagian besar beban satu admin, atau banyak calon pembeli hilang karena telat dibalas, investasi chatbot biasanya kembali dengan cepat.",
       },
+      {
+        t: "p",
+        text: "Pertanyaan status adalah titik awal yang paling mudah diotomasi. Di [Bengkel Karya](/portofolio/bengkel-karya), pelanggan dulu menelepon berkali-kali menanyakan progres servis. Setelah progres servis bisa dipantau sendiri lewat tautan yang dikirim ke WhatsApp, telepon yang menanyakan progres turun 70%. Prinsipnya sama dengan chatbot: jawaban untuk pertanyaan berulang diambil langsung dari sistem, bukan dari admin.",
+      },
 
       { t: "h2", text: "Mulai dari yang kecil" },
       {
